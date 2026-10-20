@@ -45,6 +45,16 @@
     if (s.normalize) { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
     return s;
   }
+  /* V3 pixel art : une image réelle par application, discipline et poche. Aucun texte n'est inclus dans les visuels. */
+  function pixelImg(src, cls) {
+    return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" decoding="async" draggable="false">';
+  }
+  function appArt(a, cls) { return pixelImg('assets/apps/' + a.id + '.webp', cls || 'pixel-app-image'); }
+  function discIcon(id) { return pixelImg('assets/disciplines/' + id + '.png', 'pixel-small-icon'); }
+  function typeIcon(id) { return pixelImg('assets/categories/' + id + '.png', 'pixel-small-icon'); }
+  function uiIcon(id, cls) { return pixelImg('assets/icons/' + id + '.png', cls || 'pixel-small-icon'); }
+  function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
+
   function urlOf(a) { return (state.urls && state.urls[a.id]) || a.url || ''; }
   function isFav(id) { return state.favs.indexOf(id) > -1; }
   function worldApps(n) { return APPS.filter(function (a) { return a.niveaux.indexOf(n) > -1; }); }
@@ -222,7 +232,7 @@
     });
     html += '</div>';
     var allp=progress(APPS);
-    html += '<div class="adventure-callout"><span class="callout-icon" aria-hidden="true">🎒</span><div>' +
+    html += '<div class="adventure-callout"><span class="callout-icon" aria-hidden="true">' + uiIcon('bag', 'pixel-callout-icon') + '</span><div>' +
       '<strong>Ton aventure commence ici !</strong><p>'+allp.seen+' application(s) ouvertes sur '+allp.total+' disponibles. Les découvertes correspondent aux applis lancées, pas à des exercices terminés.</p></div>' +
       '<button class="btn primary" data-act="bag">Explorer mon sac →</button></div>';
     $('view').innerHTML = html;
@@ -248,7 +258,7 @@
     var fav = isFav(a.id) ? '<span class="tag fav" aria-label="dans tes raccourcis">★</span>' : '';
     return '<button type="button" class="slot" data-act="item" data-id="' + a.id + '" style="' + discStyle(a) + '" aria-label="' +
       esc(a.nom + ', ' + d.nom) + '">' +
-      '<span class="slot-art" aria-hidden="true"><span class="slot-stars">✦ · ✦</span><span class="slot-ico">' + a.emoji + '</span></span>' +
+      '<span class="slot-art" aria-hidden="true">' + appArt(a, 'pixel-poster') + '</span>' +
       fav + tag + '<span class="slot-card-info"><span class="slot-name">' + esc(a.nom) + '</span>' +
       '<span class="slot-sub">' + esc(d.nom) + ' · ' + esc(a.duree) + '</span></span></button>';
   }
@@ -274,7 +284,7 @@
       TYPES.forEach(function (t) {
         var part = sortApps(list.filter(function (a) { return a.type === t.id; }));
         if (!part.length) { return; }
-        html += '<h3 class="sec-h"><span aria-hidden="true">' + t.emoji + '</span>' + esc(t.nom) + ' <small>' + esc(t.desc) + '</small></h3>';
+        html += '<h3 class="sec-h">' + typeIcon(t.id) + esc(t.nom) + ' <small>' + esc(t.desc) + '</small></h3>';
         html += '<div class="grid">' + part.map(slotHTML).join('') + '</div>';
       });
     } else {
@@ -301,19 +311,19 @@
     var q = questFor(n);
     if (q) {
       var done = !!state.seen[q.id];
-      html += '<div class="quest"><span class="quest-ico" aria-hidden="true">📜</span><div class="quest-txt">' +
+      html += '<div class="quest"><span class="quest-ico" aria-hidden="true">' + uiIcon('quest', 'pixel-quest-icon') + '</span><div class="quest-txt">' +
         '<div class="quest-k">' + (done ? 'Application du jour déjà ouverte ✓' : 'Application à découvrir aujourd’hui') + '</div>' +
-        '<div class="quest-t">' + (done ? 'Tu as déjà ouvert ' : 'Découvre ') + q.emoji + ' ' + esc(q.nom) + '</div></div>' +
+        '<div class="quest-t">' + (done ? 'Tu as déjà ouvert ' : 'Découvre ') + esc(q.nom) + '</div></div>' +
         '<button class="btn primary" data-act="item" data-id="' + q.id + '">Voir l’objet</button></div>';
     }
 
     html += '<div class="pockets" role="tablist" aria-label="Poches du sac">';
-    html += '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="' + (ui.pocket === 'tout') + '">🎒 Tout le sac <span class="n">' + all.length + '</span></button>';
+    html += '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="' + (ui.pocket === 'tout') + '">' + uiIcon('bag') + ' Tout le sac <span class="n">' + all.length + '</span></button>';
     TYPES.forEach(function (t) {
       var c = all.filter(function (a) { return a.type === t.id; }).length;
       if (!c) { return; }
       html += '<button class="pocket" role="tab" data-act="pocket" data-p="' + t.id + '" aria-selected="' + (ui.pocket === t.id) + '">' +
-        t.emoji + ' ' + esc(t.nom) + ' <span class="n">' + c + '</span></button>';
+        typeIcon(t.id) + ' ' + esc(t.nom) + ' <span class="n">' + c + '</span></button>';
     });
     html += '</div>';
 
@@ -324,7 +334,7 @@
     DISCS.forEach(function (d) {
       if (!all.some(function (a) { return a.disc === d.id; })) { return; }
       html += '<button class="chip" data-act="disc" data-d="' + d.id + '" aria-pressed="' + (ui.disc === d.id) + '">' +
-        '<span class="dot" style="background:' + d.c + '"></span>' + esc(d.nom) + '</button>';
+        discIcon(d.id) + esc(d.nom) + '</button>';
     });
     html += '</div></div>';
 
@@ -341,9 +351,9 @@
     for (var i = 0; i < MAXFAV; i++) {
       var id = state.favs[i], a = id ? byId[id] : null;
       if (a && urlOf(a)) {
-        html += '<a class="hb-slot lnk" href="' + esc(urlOf(a)) + '" target="_blank" rel="noopener" data-act="launch" data-id="' + a.id + '" title="Lancer ' + esc(a.nom) + '" aria-label="Lancer ' + esc(a.nom) + '">' + a.emoji + '</a>';
+        html += '<a class="hb-slot lnk" href="' + esc(urlOf(a)) + '" target="_blank" rel="noopener" data-act="launch" data-id="' + a.id + '" title="Lancer ' + esc(a.nom) + '" aria-label="Lancer ' + esc(a.nom) + '">' + appArt(a, 'pixel-shortcut-art') + '</a>';
       } else if (a) {
-        html += '<button class="hb-slot" data-act="item" data-id="' + a.id + '" title="' + esc(a.nom) + '" aria-label="' + esc(a.nom) + '">' + a.emoji + '</button>';
+        html += '<button class="hb-slot" data-act="item" data-id="' + a.id + '" title="' + esc(a.nom) + '" aria-label="' + esc(a.nom) + '">' + appArt(a, 'pixel-shortcut-art') + '</button>';
       } else {
         html += '<button class="hb-slot empty-s" data-act="hot-empty" aria-label="Emplacement libre">＋</button>';
       }
@@ -381,8 +391,8 @@
   function renderQuests() {
     var n=state.classe || 6, q=questFor(n), w=worldByN[n];
     var html='<div class="page-intro"><span class="eyebrow">JOURNAL DE L’AVENTURIER</span>' +
-      '<h1 class="h1">📜 Mes quêtes</h1><p class="lede">Chaque jour, une application à explorer dans ton monde. Une application ouverte n’est pas un exercice validé.</p></div>';
-    html+='<div class="journal-card"><div class="journal-icon">✦</div><div class="journal-body">' +
+      '<h1 class="h1">Mes quêtes</h1><p class="lede">Chaque jour, une application à explorer dans ton monde. Une application ouverte n’est pas un exercice validé.</p></div>';
+    html+='<div class="journal-card"><div class="journal-icon">' + uiIcon('quest', 'pixel-journal-icon') + '</div><div class="journal-body">' +
       '<span class="eyebrow">DÉCOUVERTE DU JOUR · '+n+'e</span><h2>'+esc(w.nom)+'</h2>';
     if(q){
       html+='<p>' + (state.seen[q.id] ? 'Tu as déjà ouvert cette application :' : 'Ta suggestion pour aujourd’hui :') + '</p>' +
@@ -434,9 +444,9 @@
     var a = byId[id]; if (!a) { return; }
     var d = discById[a.disc], t = typeById[a.type], url = urlOf(a);
     var html = '<button class="close-x" data-act="close" aria-label="Fermer">✕</button>';
-    html += '<div class="sheet-head"><div class="sheet-ico" style="' + discStyle(a) + '" aria-hidden="true">' + a.emoji + '</div><div><h3>' + esc(a.nom) + '</h3>' +
-      '<div class="pills"><span class="pill" style="box-shadow:inset 0 0 0 2px ' + d.c + '">' + d.emoji + ' ' + esc(d.nom) + '</span>' +
-      '<span class="pill">' + t.emoji + ' ' + esc(t.nom) + '</span><span class="pill">⏱ ' + esc(a.duree) + '</span></div></div></div>';
+    html += '<div class="sheet-head"><div class="sheet-ico pixel-sheet-art" style="' + discStyle(a) + '" aria-hidden="true">' + appArt(a, 'pixel-modal-poster') + '</div><div><h3>' + esc(a.nom) + '</h3>' +
+      '<div class="pills"><span class="pill" style="box-shadow:inset 0 0 0 2px ' + d.c + '">' + discIcon(d.id) + ' ' + esc(d.nom) + '</span>' +
+      '<span class="pill">' + typeIcon(t.id) + ' ' + esc(t.nom) + '</span><span class="pill">⏱ ' + esc(a.duree) + '</span></div></div></div>';
     html += '<p>' + esc(a.desc) + '</p>';
     html += '<div class="lvls"><span>Pour les classes de</span>';
     [6, 5, 4, 3].forEach(function (n) { html += '<span class="lvl' + (a.niveaux.indexOf(n) > -1 ? ' on' : '') + '">' + n + 'e</span>'; });
@@ -456,7 +466,7 @@
     var h = '<div class="class-pick">';
     WORLDS.forEach(function (w) {
       h += '<button data-act="setclass" data-n="' + w.n + '" class="' + (state.classe === w.n ? 'on' : '') + '">' +
-        '<span class="e" aria-hidden="true">' + w.emoji + '</span><span class="l">' + w.n + 'e</span><span class="s">' + esc(w.nom) + '</span></button>';
+        '<span class="e" aria-hidden="true">' + worldIcon(w.n) + '</span><span class="l">' + w.n + 'e</span><span class="s">' + esc(w.nom) + '</span></button>';
     });
     return h + '</div>';
   }
@@ -487,7 +497,7 @@
     html += '<p>Colle l’adresse de chaque appli. « Tester ici » enregistre les liens sur cet appareil seulement. Pour que tous les élèves les voient, génère le catalogue et remplace le bloc <code>catalogue</code> du fichier.</p>';
     html += '<div class="prof-list">';
     sortApps(APPS).forEach(function (a) {
-      html += '<div class="prof-item"><label for="u-' + a.id + '">' + a.emoji + ' ' + esc(a.nom) + '</label>' +
+      html += '<div class="prof-item"><label for="u-' + a.id + '">' + appArt(a, 'pixel-prof-art') + ' ' + esc(a.nom) + '</label>' +
         '<input id="u-' + a.id + '" data-id="' + a.id + '" type="url" placeholder="https://brot2you.github.io/…" value="' + esc(urlOf(a)) + '"></div>';
     });
     html += '</div><div class="actions"><button class="btn" data-act="prof-save">Tester ici</button><button class="btn primary" data-act="prof-json">Générer le catalogue</button></div>';
