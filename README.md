@@ -1,4 +1,4 @@
-# Sac’Ados — Pixel Kingdom Deluxe | Étape 2.1 — menu RPG restauré
+# Sac’Ados — Pixel Kingdom Deluxe | Étape 2.2 — menu RPG restauré et détouré
 
 Refonte fonctionnelle et visuelle du fichier `index(7).html` fourni : le même catalogue, les mêmes réglages et la même clé de sauvegarde locale `sacados_v1` sont utilisés.
 
@@ -57,3 +57,10 @@ La carte est intégrée à partir de la grande illustration réalisée à l'éta
 - Sur téléphone, des boutons RPG natifs avec icônes extraites de ce même visuel assurent la lisibilité.
 - Les six raccourcis ont été déplacés vers le bouton « Raccourcis » dans l’en-tête, afin de ne plus masquer la navigation.
 - Les liens et sauvegardes `sacados_v1` sont inchangés.
+
+
+## Correctif V2.2 — détourage de la barre
+
+- Le menu desktop est désormais une image PNG **avec canal alpha réel**, détourée à partir du visuel original (aucun ciel/océan rectangulaire aux extrémités).
+- Le contour extérieur conserve son cadre et ses couleurs pixel art ; une petite marge inférieure révèle entièrement la bordure et son ombre.
+- Les zones cliquables, leurs noms accessibles, la navigation mobile, les sauvegardes et les fonctionnalités ne sont pas modifiées.
