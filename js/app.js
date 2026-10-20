@@ -13,7 +13,7 @@
   TYPES.forEach(function (t) { typeById[t.id] = t; });
   WORLDS.forEach(function (w) { worldByN[w.n] = w; });
 
-  var ui = { view: 'map', world: null, pocket: 'tout', disc: 'tout', query: '' };
+  var ui = { view: 'map', world: null, pocket: 'tout', disc: 'tout', query: '', preview: 'arena' };
   var state = load();
 
   function load() {
@@ -49,10 +49,10 @@
   function pixelImg(src, cls) {
     return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" decoding="async" draggable="false">';
   }
-  function appArt(a, cls) { return pixelImg('assets/apps/' + a.id + '.webp', cls || 'pixel-app-image'); }
-  function discIcon(id) { return pixelImg('assets/disciplines/' + id + '.png', 'pixel-small-icon'); }
-  function typeIcon(id) { return pixelImg('assets/categories/' + id + '.png', 'pixel-small-icon'); }
-  function uiIcon(id, cls) { return pixelImg('assets/icons/' + id + '.png', cls || 'pixel-small-icon'); }
+  function appArt(a, cls) { return pixelImg('assets/premium/covers/' + a.id + '.webp', cls || 'pixel-app-image'); }
+  function discIcon(id) { return pixelImg('assets/premium/icons/' + id + '.webp', 'pixel-small-icon'); }
+  function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '.webp', 'pixel-small-icon'); }
+  function uiIcon(id, cls) { return pixelImg('assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
 
   function urlOf(a) { return (state.urls && state.urls[a.id]) || a.url || ''; }
@@ -202,40 +202,70 @@
   function worldArtwork(n) {
     return {6:'prairie',5:'desert',4:'forest',3:'mountain'}[n] || 'prairie';
   }
+  /* V4: illustrated dashboard, with independently clickable real HTML controls. */
+  function featuredCard(id) {
+    var a = byId[id] || byId.arena, d = discById[a.disc], url = urlOf(a);
+    var poster = id === 'arena' ? '<img src="assets/premium/decor/arena-hero.webp" alt="" class="v4-feature-art">' : appArt(a,'v4-feature-art');
+    return '<div class="v4-feature">' +
+      '<div class="v4-feature-image">' + poster + '</div>' +
+      '<div class="v4-feature-copy"><div class="v4-feature-top"><span class="v4-medal" aria-hidden="true">✦</span><div>' +
+      '<h3>' + esc(a.nom) + '</h3><span class="v4-feature-meta">' + esc(d.nom) + ' · '+a.niveaux.map(function(n){return n+'e';}).join(' · ') + '</span></div></div>' +
+      '<p class="v4-feature-text">' + esc(a.desc) + '</p>' +
+      (url ? '<a class="v4-launch" href="' + esc(url) + '" target="_blank" rel="noopener" data-act="launch" data-id="'+a.id+'">▶ &nbsp; LANCER L’APPLICATION</a>' :
+      '<button class="v4-launch" disabled>LIEN À VENIR</button>') +
+      '<div class="v4-feature-actions"><button type="button" data-act="quickfav" data-id="'+a.id+'">' + (isFav(a.id)?'★ Dans mes favoris':'☆ Mettre en favori') + '</button>' +
+      '<button type="button" data-act="item" data-id="'+a.id+'">ⓘ &nbsp; Voir les détails</button></div></div></div>';
+  }
+  function v4Card(a) {
+    return '<button type="button" class="v4-game-card'+(ui.preview===a.id?' selected':'')+'" data-act="preview" data-id="'+a.id+'" aria-label="Prévisualiser '+esc(a.nom)+'" aria-pressed="'+(ui.preview===a.id)+'">'+
+      '<span class="v4-game-picture">'+appArt(a,'v4-game-art')+'<span class="v4-card-star" aria-hidden="true">★</span></span>'+
+      '<strong>'+esc(a.nom)+'</strong><span class="v4-game-pill">'+esc(discById[a.disc].nom)+'</span></button>';
+  }
+  function v4InventoryPreview() {
+    var sample=['arena','books','geopins','mochi','survival','mtm','dinobuddy','cogni'];
+    var html='<aside class="v4-inventory" aria-label="Mon sac d’aventurier"><div class="v4-inventory-banner">'+
+      '<h2>MON SAC D’AVENTURIER</h2></div><div class="v4-inventory-body">'+
+      '<div class="v4-filter-preview" aria-label="Accéder aux matières">';
+    [['Tout','tout'],['Anglais','anglais'],['Français','francais'],['Maths','maths'],['Histoire','histoire'],['Géographie','geo']].forEach(function(x,i){
+      html+='<button type="button" class="v4-filter-short'+(i===0?' active':'')+'" data-act="preview-disc" data-d="'+x[1]+'">'+x[0]+'</button>';
+    });
+    html+='</div><button type="button" data-act="bag" class="v4-search-preview" aria-label="Ouvrir le sac et rechercher une application">⌕ &nbsp; Rechercher une application…</button>';
+    html+='<div class="v4-preview-grid">'+sample.filter(function(id){return !!byId[id];}).map(function(id){return v4Card(byId[id]);}).join('')+'</div>'+
+      '<div id="v4Feature">'+featuredCard(ui.preview)+'</div></div></aside>';
+    return html;
+  }
+  function v4Subjects() {
+    var cls=state.classe || 6;
+    var html='<section class="v4-subjects" aria-label="Choisis ta discipline"><div class="v4-scroll-title">Choisis ta discipline !</div><div class="v4-subject-grid">';
+    DISCS.forEach(function(d){
+      html+='<button type="button" class="v4-subject" data-act="go-disc" data-d="'+d.id+'" style="--disc-color:'+d.c+'">'+
+        discIcon(d.id)+'<span>'+esc(d.nom)+'</span></button>';
+    });
+    return html+'</div></section>';
+  }
+  function v4Extras() {
+    var n=state.classe||6,q=questFor(n), all=progress(APPS);
+    var qtxt=q ? esc(q.nom) : 'Explore une application de ton sac';
+    return '<div class="v4-extra-row">'+v4Subjects()+
+      '<section class="v4-sidequest"><div class="v4-scroll-title">Quête du jour</div><div class="v4-parchment"><p>'+qtxt+'</p>'+
+      '<div class="v4-progress"><span style="width:'+(q&&state.seen[q.id]?'100':'0')+'%"></span></div>'+
+      '<button type="button" data-act="quests">★ &nbsp; Voir ma quête →</button></div></section>'+
+      '<section class="v4-tracker"><div class="v4-scroll-title">Mes découvertes</div><div class="v4-parchment"><p><strong>'+all.seen+' / '+all.total+'</strong> applications ouvertes</p>'+
+      '<div class="v4-progress"><span style="width:'+pct(all)+'%"></span></div>'+
+      '<button type="button" data-act="discoveries">Découvrir mon album →</button></div></section></div>';
+  }
   function renderMap() {
-    var html = '<div class="page-intro"><span class="eyebrow">✦ PIXEL KINGDOM DELUXE ✦</span>' +
-      '<h1 class="h1">Bienvenue au Royaume de Sac’Ados</h1>' +
-      '<p class="lede">Quatre mondes à explorer, des applications à découvrir. Choisis ton île pour ouvrir ton sac !</p></div>';
-    html += '<section class="kingdom-map" aria-label="Carte interactive des quatre mondes">' +
-      '<img src="assets/worlds/kingdom-map.webp" width="1536" height="875" alt="Paysage en pixel art : prairie, désert, forêt enchantée et montagnes, reliés par un port central." loading="eager" decoding="async">';
+    var html='<div class="v4-hub"><div class="v4-worldside"><section class="v4-map-panel" aria-label="Carte interactive des quatre mondes">'+
+      '<img src="assets/worlds/kingdom-map.webp" alt="Carte illustrée des quatre mondes Sac’Ados : prairie, désert, forêt et royaume enneigé" width="1536" height="875">';
     WORLDS.forEach(function(w){
-      var p = progress(worldApps(w.n));
-      html += '<button type="button" class="map-hit hit-'+w.n+'" data-act="world" data-n="'+w.n+'"' +
-        ' aria-label="Entrer en '+w.n+'e : '+esc(w.nom)+'. '+p.seen+' applications ouvertes sur '+p.total+' disponibles."' +
-        ' title="Ouvrir '+esc(w.nom)+'"><span class="sr">Ouvrir '+esc(w.nom)+'</span></button>';
+      var pr=progress(worldApps(w.n));
+      html+='<button type="button" class="map-hit hit-'+w.n+'" data-act="world" data-n="'+w.n+'" aria-label="Ouvrir le monde '+w.n+'e, '+esc(w.nom)+', '+pr.seen+' sur '+pr.total+' applications ouvertes"><span class="sr">Entrer en '+w.n+'e</span></button>';
     });
-    html += '</section>';
-    html += '<div class="map-hint"><span aria-hidden="true">✧</span> Clique sur une île de la carte, ou utilise les cartes ci-dessous.</div>';
-    html += '<div class="section-line"><div><span class="eyebrow">CHOISIS TON AVENTURE</span><h2>Les quatre mondes</h2></div>' +
-      '<span class="chapter-count">4 DESTINATIONS</span></div>';
-    html += '<div class="world-deck">';
-    WORLDS.forEach(function (w) {
-      var p = progress(worldApps(w.n));
-      var home = state.classe === w.n;
-      html += '<button type="button" class="world-tile world-'+w.n+(home?' is-home':'')+'" data-act="world" data-n="'+w.n+'">' +
-        '<span class="tile-visual"><img src="assets/worlds/'+worldArtwork(w.n)+'.webp" alt="" loading="lazy" decoding="async">' +
-        '<span class="tile-badge">'+w.n+'e</span></span>' +
-        '<span class="tile-detail"><span class="tile-label">MONDE '+(7-w.n)+(home?' · TON MONDE':'')+'</span>' +
-        '<span class="tile-title">'+esc(w.nom)+'</span>' +
-        '<span class="bar" aria-hidden="true"><i style="width:'+pct(p)+'%"></i></span>' +
-        '<span class="tile-foot">'+p.seen+' / '+p.total+' applis ouvertes <span aria-hidden="true">↗</span></span></span></button>';
-    });
-    html += '</div>';
-    var allp=progress(APPS);
-    html += '<div class="adventure-callout"><span class="callout-icon" aria-hidden="true">' + uiIcon('bag', 'pixel-callout-icon') + '</span><div>' +
-      '<strong>Ton aventure commence ici !</strong><p>'+allp.seen+' application(s) ouvertes sur '+allp.total+' disponibles. Les découvertes correspondent aux applis lancées, pas à des exercices terminés.</p></div>' +
-      '<button class="btn primary" data-act="bag">Explorer mon sac →</button></div>';
-    $('view').innerHTML = html;
+    html+='</section><div class="v4-mobile-worlds" aria-label="Choisir son niveau">';
+    WORLDS.forEach(function(w){html+='<button type="button" data-act="world" data-n="'+w.n+'" class="v4-grade grade-'+w.n+'">'+w.n+'e <span>'+esc(w.nom)+'</span></button>';});
+    html+='</div><div class="v4-map-status"><span>✦ &nbsp; CHOISIS UN MONDE EN CLIQUANT SUR LA CARTE</span><button type="button" data-act="bag">🎒 Mon sac →</button></div></div>';
+    html+=v4InventoryPreview()+'</div>'+v4Extras();
+    $('view').innerHTML=html;
   }
 
   /* ---------- Monde : le sac ---------- */
@@ -250,17 +280,15 @@
   }
 
   function slotHTML(a) {
-    var d = discById[a.disc];
-    var tag = '';
-    if (a.bientot) { tag = '<span class="tag soon">Bientôt</span>'; }
-    else if (state.seen[a.id]) { tag = '<span class="tag seen" aria-label="déjà ouverte">✓ Ouverte</span>'; }
-    else if (a.nouveau) { tag = '<span class="tag new">NEW</span>'; }
-    var fav = isFav(a.id) ? '<span class="tag fav" aria-label="dans tes raccourcis">★</span>' : '';
-    return '<button type="button" class="slot" data-act="item" data-id="' + a.id + '" style="' + discStyle(a) + '" aria-label="' +
-      esc(a.nom + ', ' + d.nom) + '">' +
-      '<span class="slot-art" aria-hidden="true">' + appArt(a, 'pixel-poster') + '</span>' +
-      fav + tag + '<span class="slot-card-info"><span class="slot-name">' + esc(a.nom) + '</span>' +
-      '<span class="slot-sub">' + esc(d.nom) + ' · ' + esc(a.duree) + '</span></span></button>';
+    var d=discById[a.disc], tag='';
+    if(a.bientot) tag='<span class="tag soon">Bientôt</span>';
+    else if(state.seen[a.id]) tag='<span class="tag seen">✓ Ouverte</span>';
+    else if(a.nouveau) tag='<span class="tag new">Nouveau</span>';
+    var fav=isFav(a.id)?'<span class="tag fav" aria-label="Dans tes favoris">★</span>':'';
+    return '<button type="button" class="slot" data-act="item" data-id="'+a.id+'" style="'+discStyle(a)+'" aria-label="Voir '+esc(a.nom)+', '+esc(d.nom)+'">'+
+      '<span class="slot-art">'+appArt(a,'pixel-poster')+'<span class="v4-slot-star">★</span></span>'+
+      fav+tag+'<span class="slot-card-info"><span class="slot-name">'+esc(a.nom)+'</span>'+
+      '<span class="slot-sub">'+esc(d.nom)+' · '+esc(a.duree)+'</span></span></button>';
   }
 
   function filtered() {
@@ -294,55 +322,30 @@
   }
 
   function renderWorld() {
-    var n = ui.world, w = worldByN[n], all = worldApps(n), p = progress(all);
-    var html = '<div class="world-top"><button class="btn" data-act="map">← Retour à la carte</button>' +
-      '<div class="wt-txt"><span class="eyebrow">MONDE ' + (7-n) + ' · CLASSE DE ' + n + 'e</span>' +
-      '<h1 class="h1">' + esc(w.nom) + '</h1>' +
-      '<p class="lede">Choisis une application pour commencer ton aventure.</p>' +
-      '<div class="wt-prog"><span class="bar" aria-hidden="true"><i style="width:' + pct(p) + '%"></i></span>' +
-      '<span class="wc-p">' + p.seen + ' / ' + p.total + ' applications ouvertes dans ce monde</span></div></div></div>' +
-      '<div class="world-banner"><img src="assets/worlds/'+worldArtwork(n)+'.webp" alt="Décor de '+esc(w.nom)+' en pixel art" />' +
-      '<span class="banner-level">✦ '+n+'e · MONDE '+(7-n)+'</span></div>';
-
-    html += '<section class="pack" aria-label="Ton sac">';
-    html += '<div class="flap"><h2>Ton sac de ' + n + 'e</h2><p>' + all.length + ' objets rangés dans 5 poches</p><span class="buckle" aria-hidden="true"></span></div>';
-    html += '<div class="pack-body">';
-
-    var q = questFor(n);
-    if (q) {
-      var done = !!state.seen[q.id];
-      html += '<div class="quest"><span class="quest-ico" aria-hidden="true">' + uiIcon('quest', 'pixel-quest-icon') + '</span><div class="quest-txt">' +
-        '<div class="quest-k">' + (done ? 'Application du jour déjà ouverte ✓' : 'Application à découvrir aujourd’hui') + '</div>' +
-        '<div class="quest-t">' + (done ? 'Tu as déjà ouvert ' : 'Découvre ') + esc(q.nom) + '</div></div>' +
-        '<button class="btn primary" data-act="item" data-id="' + q.id + '">Voir l’objet</button></div>';
-    }
-
-    html += '<div class="pockets" role="tablist" aria-label="Poches du sac">';
-    html += '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="' + (ui.pocket === 'tout') + '">' + uiIcon('bag') + ' Tout le sac <span class="n">' + all.length + '</span></button>';
-    TYPES.forEach(function (t) {
-      var c = all.filter(function (a) { return a.type === t.id; }).length;
-      if (!c) { return; }
-      html += '<button class="pocket" role="tab" data-act="pocket" data-p="' + t.id + '" aria-selected="' + (ui.pocket === t.id) + '">' +
-        typeIcon(t.id) + ' ' + esc(t.nom) + ' <span class="n">' + c + '</span></button>';
+    var n=ui.world,w=worldByN[n],all=worldApps(n),p=progress(all);
+    var html='<div class="v4-world-intro"><button class="v4-return" data-act="map">← CARTE DES MONDES</button>'+
+      '<div><span class="v4-world-kicker">MONDE '+(7-n)+' · CLASSE DE '+n+'e</span>'+
+      '<h1>'+esc(w.nom)+'</h1><p>'+p.seen+' application(s) ouverte(s) sur '+p.total+' ayant un lien disponible dans ce monde</p></div></div>'+
+      '<div class="v4-world-banner"><img src="assets/worlds/'+worldArtwork(n)+'.webp" alt="Décor de '+esc(w.nom)+'"></div>'+
+      '<section class="pack" aria-label="Ton inventaire"><div class="v4-inventory-banner"><h2>MON SAC D’AVENTURIER</h2><span>CLASSE DE '+n+'e · '+all.length+' APPLICATIONS</span></div>'+
+      '<div class="pack-body">';
+    var q=questFor(n);
+    if(q) html+='<div class="v4-quest-inline"><span>★ &nbsp; QUÊTE DU JOUR : '+esc(q.nom)+'</span><button type="button" data-act="item" data-id="'+q.id+'">DÉCOUVRIR →</button></div>';
+    html+='<div class="pockets" role="tablist" aria-label="Types d’applications">'+
+      '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="'+(ui.pocket==='tout')+'">Toutes <span class="n">'+all.length+'</span></button>';
+    TYPES.forEach(function(t){var count=all.filter(function(a){return a.type===t.id;}).length;
+      if(count)html+='<button class="pocket" role="tab" data-act="pocket" data-p="'+t.id+'" aria-selected="'+(ui.pocket===t.id)+'">'+esc(t.nom)+' <span class="n">'+count+'</span></button>';
     });
-    html += '</div>';
-
-    html += '<div class="tools"><label class="search"><span aria-hidden="true">🔎</span><span class="sr">Rechercher</span>' +
-      '<input id="q" type="search" placeholder="Chercher un objet" value="' + esc(ui.query) + '" autocomplete="off"></label>';
-    html += '<div class="chips" role="group" aria-label="Matières">';
-    html += '<button class="chip" data-act="disc" data-d="tout" aria-pressed="' + (ui.disc === 'tout') + '">Toutes</button>';
-    DISCS.forEach(function (d) {
-      if (!all.some(function (a) { return a.disc === d.id; })) { return; }
-      html += '<button class="chip" data-act="disc" data-d="' + d.id + '" aria-pressed="' + (ui.disc === d.id) + '">' +
-        discIcon(d.id) + esc(d.nom) + '</button>';
+    html+='</div><div class="v4-inventory-controls"><label class="search"><span aria-hidden="true">⌕</span><span class="sr">Rechercher une application</span>'+
+      '<input id="q" type="search" placeholder="Rechercher une application..." value="'+esc(ui.query)+'" autocomplete="off"></label>'+
+      '<div class="chips" role="group" aria-label="Matières">'+
+      '<button class="chip" data-act="disc" data-d="tout" aria-pressed="'+(ui.disc==='tout')+'">Toutes</button>';
+    DISCS.forEach(function(d){if(!all.some(function(a){return a.disc===d.id;}))return;
+      html+='<button class="chip" data-act="disc" data-d="'+d.id+'" aria-pressed="'+(ui.disc===d.id)+'">'+discIcon(d.id)+esc(d.nom)+'</button>';
     });
-    html += '</div></div>';
-
-    html += '<div id="grid"></div></div></section>';
-    $('view').innerHTML = html;
-    renderGrid();
-    var inp = $('q');
-    inp.addEventListener('input', function () { ui.query = inp.value; renderGrid(); });
+    html+='</div></div><div id="grid"></div></div></section>';
+    $('view').innerHTML=html;renderGrid();
+    var inp=$('q');inp.addEventListener('input',function(){ui.query=inp.value;renderGrid();});
   }
 
   /* ---------- Barre de raccourcis ---------- */
@@ -366,12 +369,16 @@
     $('appName').textContent = CFG.nom;
     $('appSub').textContent = CFG.sousTitre;
     var p = progress(APPS);
-    $('loot').innerHTML = '🏅 ' + p.seen + ' / ' + p.total;
+    $('loot').innerHTML = '★ ' + p.seen + ' / ' + p.total;
     $('loot').setAttribute('aria-label', p.seen + ' objets découverts sur ' + p.total);
     document.documentElement.className = (state.lexend ? 'lexend ' : '') + (state.calme ? 'calme' : '');
   }
 
   function render() {
+    // Preserve the real RPG navigation between HTML rerenders, including when it
+    // lives inside the overworld panel on desktop.
+    var nav = document.querySelector('.rpg-bottom-nav');
+    if (nav && nav.parentElement !== document.body) document.body.appendChild(nav);
     renderHeader();
     if ($('hotbar')) $('hotbar').setAttribute('data-open','false');
     if ($('shortcutToggle')) $('shortcutToggle').setAttribute('aria-expanded','false');
@@ -380,6 +387,9 @@
     else if (ui.view === 'discoveries') { renderDiscoveries(); }
     else { renderMap(); }
     renderHotbar();
+    if (ui.view === 'map' && nav && document.querySelector('.v4-worldside')) {
+      document.querySelector('.v4-worldside').appendChild(nav);
+    }
     document.querySelectorAll('.main-tab').forEach(function(tab){
       var on = tab.getAttribute('data-tab') === ui.view;
       if (on) tab.setAttribute('aria-current','page');
@@ -546,6 +556,28 @@
       panel.setAttribute('data-open', String(open));
       trigger.setAttribute('aria-expanded', String(open));
       return;
+    }
+    if (act === 'preview') {
+      ui.preview = id;
+      var pane=$('v4Feature'); if(pane)pane.innerHTML=featuredCard(id);
+      document.querySelectorAll('.v4-game-card').forEach(function(b){
+        var on=b.getAttribute('data-id')===id;
+        b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));
+      });return;
+    }
+    if (act === 'preview-disc') {
+      ui.view='world';ui.world=state.classe||6;ui.disc=t.getAttribute('data-d');ui.pocket='tout';ui.query='';render();window.scrollTo(0,0);return;
+    }
+    if (act === 'go-disc') {
+      ui.view='world';ui.world=state.classe||6;ui.disc=t.getAttribute('data-d');ui.pocket='tout';ui.query='';render();window.scrollTo(0,0);return;
+    }
+    if (act === 'quickfav') {
+      if(isFav(id))state.favs.splice(state.favs.indexOf(id),1);
+      else if(state.favs.length>=MAXFAV){toast('Six favoris maximum : libère d’abord une place.');return;}
+      else state.favs.push(id);
+      save();renderHotbar();
+      var pane=$('v4Feature');if(pane)pane.innerHTML=featuredCard(id);
+      toast(isFav(id)?'Ajouté aux raccourcis ⭐':'Favori retiré');return;
     }
     if (act === 'world') { openWorld(parseInt(t.getAttribute('data-n'), 10)); }
     else if (act === 'map') { ui.view = 'map'; render(); window.scrollTo(0, 0); }
