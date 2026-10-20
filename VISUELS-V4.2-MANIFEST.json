@@ -1,0 +1,250 @@
+{
+  "version": "4.2",
+  "mode": "recadrage non destructif a partir des planches existantes",
+  "applications": [
+    {
+      "id": "survival",
+      "fichier": "assets/illustrations/applications/survival.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "phonix",
+      "fichier": "assets/illustrations/applications/phonix.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "verbdojo",
+      "fichier": "assets/illustrations/applications/verbdojo.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "pastmasters",
+      "fichier": "assets/illustrations/applications/pastmasters.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "arena",
+      "fichier": "assets/illustrations/applications/arena.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "mtm",
+      "fichier": "assets/illustrations/applications/mtm.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "wordup",
+      "fichier": "assets/illustrations/applications/wordup.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "swipeen",
+      "fichier": "assets/illustrations/applications/swipeen.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "tama",
+      "fichier": "assets/illustrations/applications/tama.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "dinobuddy",
+      "fichier": "assets/illustrations/applications/dinobuddy.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "pixelquest",
+      "fichier": "assets/illustrations/applications/pixelquest.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "books",
+      "fichier": "assets/illustrations/applications/books.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "mmr",
+      "fichier": "assets/illustrations/applications/mmr.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "plume",
+      "fichier": "assets/illustrations/applications/plume.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "ravensmoor",
+      "fichier": "assets/illustrations/applications/ravensmoor.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "freq",
+      "fichier": "assets/illustrations/applications/freq.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "logic",
+      "fichier": "assets/illustrations/applications/logic.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "arbre",
+      "fichier": "assets/illustrations/applications/arbre.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "verbetes",
+      "fichier": "assets/illustrations/applications/verbetes.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "corrige",
+      "fichier": "assets/illustrations/applications/corrige.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "grimoire",
+      "fichier": "assets/illustrations/applications/grimoire.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "frise",
+      "fichier": "assets/illustrations/applications/frise.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "chrono",
+      "fichier": "assets/illustrations/applications/chrono.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "geopins",
+      "fichier": "assets/illustrations/applications/geopins.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "maths",
+      "fichier": "assets/illustrations/applications/maths.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "pupitre",
+      "fichier": "assets/illustrations/applications/pupitre.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "atelier",
+      "fichier": "assets/illustrations/applications/atelier.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "brevet",
+      "fichier": "assets/illustrations/applications/brevet.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "mochi",
+      "fichier": "assets/illustrations/applications/mochi.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "boost",
+      "fichier": "assets/illustrations/applications/boost.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "objdev",
+      "fichier": "assets/illustrations/applications/objdev.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    },
+    {
+      "id": "cogni",
+      "fichier": "assets/illustrations/applications/cogni.webp",
+      "dimensions": "512x512",
+      "composition": "scene complete conservee avec marge de securite"
+    }
+  ],
+  "disciplines": [
+    {
+      "id": "anglais",
+      "fichier": "assets/illustrations/disciplines/anglais.webp",
+      "dimensions": "384x384"
+    },
+    {
+      "id": "francais",
+      "fichier": "assets/illustrations/disciplines/francais.webp",
+      "dimensions": "384x384"
+    },
+    {
+      "id": "maths",
+      "fichier": "assets/illustrations/disciplines/maths.webp",
+      "dimensions": "384x384"
+    },
+    {
+      "id": "histoire",
+      "fichier": "assets/illustrations/disciplines/histoire.webp",
+      "dimensions": "384x384"
+    },
+    {
+      "id": "geo",
+      "fichier": "assets/illustrations/disciplines/geo.webp",
+      "dimensions": "384x384"
+    },
+    {
+      "id": "musique",
+      "fichier": "assets/illustrations/disciplines/musique.webp",
+      "dimensions": "384x384"
+    },
+    {
+      "id": "arts",
+      "fichier": "assets/illustrations/disciplines/arts.webp",
+      "dimensions": "384x384"
+    },
+    {
+      "id": "toutes",
+      "fichier": "assets/illustrations/disciplines/toutes.webp",
+      "dimensions": "384x384"
+    }
+  ],
+  "a_redessiner_plus_tard": [
+    "phonix",
+    "verbdojo",
+    "verbetes",
+    "corrige",
+    "swipeen",
+    "tama",
+    "logic"
+  ],
+  "commentaire": "Les applications ci-dessus utilisent encore des images indicatives; leur visuel doit etre specifie ou illustre individuellement si une fidelite parfaite a leur univers est recherchee."
+}

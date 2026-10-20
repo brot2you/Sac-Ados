@@ -1,0 +1,208 @@
+{
+  "direction_artistique": "Pixel Kingdom Deluxe — pixel art illustré sans texte intégré",
+  "disciplines": [
+    "anglais",
+    "francais",
+    "maths",
+    "histoire",
+    "geo",
+    "musique",
+    "arts",
+    "toutes"
+  ],
+  "applications": [
+    {
+      "id": "survival",
+      "nom": "My Survival Kit",
+      "disc": "anglais",
+      "desc": "Les phrases de survie, le vocabulaire et l’anglais de la classe pour oser parler, avec 35 badges à collectionner."
+    },
+    {
+      "id": "phonix",
+      "nom": "Phonix",
+      "disc": "anglais",
+      "desc": "Les 44 sons de l’anglais en cartes magiques à collectionner. Choisis ton accent !"
+    },
+    {
+      "id": "verbdojo",
+      "nom": "VerbDojo",
+      "disc": "anglais",
+      "desc": "92 verbes irréguliers rangés par familles pour les retenir plus vite."
+    },
+    {
+      "id": "pastmasters",
+      "nom": "Past Masters",
+      "disc": "anglais",
+      "desc": "Collectionne les verbes irréguliers en cartes et fais-les combattre."
+    },
+    {
+      "id": "arena",
+      "nom": "Grammar Arena",
+      "disc": "anglais",
+      "desc": "Affronte les champions de l’arène à coups de grammaire anglaise."
+    },
+    {
+      "id": "mtm",
+      "nom": "Mind the Mistake!",
+      "disc": "anglais",
+      "desc": "Comprends les codes de correction de tes copies d’anglais et corrige tes erreurs."
+    },
+    {
+      "id": "wordup",
+      "nom": "Word Up",
+      "disc": "anglais",
+      "desc": "Fini « good », « bad » et « interesting » : enrichis ton vocabulaire anglais."
+    },
+    {
+      "id": "swipeen",
+      "nom": "Swipe ton English",
+      "disc": "anglais",
+      "desc": "Révise l’anglais en faisant glisser des cartes, comme sur ton fil."
+    },
+    {
+      "id": "tama",
+      "nom": "Ma créature anglaise",
+      "disc": "anglais",
+      "desc": "Adopte une créature qui ne parle qu’anglais et prends soin d’elle chaque jour."
+    },
+    {
+      "id": "dinobuddy",
+      "nom": "Dino Buddy Park",
+      "disc": "anglais",
+      "desc": "Apprends l’anglais avec ton compagnon dinosaure grâce à des défis et des quiz."
+    },
+    {
+      "id": "pixelquest",
+      "nom": "PixelQuest English",
+      "disc": "anglais",
+      "desc": "Transforme ton travail d’anglais en habitudes de héros, en pixel art."
+    },
+    {
+      "id": "books",
+      "nom": "Books of Heroes",
+      "disc": "anglais",
+      "desc": "Des livres dont tu es le héros, en anglais, avec des aides à la lecture."
+    },
+    {
+      "id": "mmr",
+      "nom": "Make-Me-Read",
+      "disc": "anglais",
+      "desc": "De vrais textes de la littérature anglophone, avec des stratégies pour les comprendre."
+    },
+    {
+      "id": "plume",
+      "nom": "PlumeCraft",
+      "disc": "anglais",
+      "desc": "Écris en anglais pas à pas, avec des débuts de phrases et une grille pour t’évaluer."
+    },
+    {
+      "id": "ravensmoor",
+      "nom": "Ravensmoor",
+      "disc": "anglais",
+      "desc": "1925, un meurtre au manoir. Interroge les suspects et démasque le coupable."
+    },
+    {
+      "id": "freq",
+      "nom": "Frequency Zero",
+      "disc": "anglais",
+      "desc": "Une animatrice radio a disparu. Écoute les indices sonores pour la retrouver."
+    },
+    {
+      "id": "logic",
+      "nom": "Whodunnit Logic Puzzle",
+      "disc": "anglais",
+      "desc": "15 énigmes de logique à résoudre case par case pour trouver le coupable."
+    },
+    {
+      "id": "arbre",
+      "nom": "L’arbre des devoirs",
+      "disc": "anglais",
+      "desc": "Bloqué sur tes devoirs d’anglais ? Suis l’arbre, étape par étape."
+    },
+    {
+      "id": "verbetes",
+      "nom": "Verbêtes",
+      "disc": "francais",
+      "desc": "La conjugaison française en cartes à collectionner et en combats."
+    },
+    {
+      "id": "corrige",
+      "nom": "Corrige ta Copie",
+      "disc": "francais",
+      "desc": "Comprends les 22 codes de correction de tes copies de français."
+    },
+    {
+      "id": "grimoire",
+      "nom": "Le Grimoire du Style",
+      "disc": "francais",
+      "desc": "18 figures de style à repérer, puis à glisser dans tes propres textes."
+    },
+    {
+      "id": "frise",
+      "nom": "La Frise vivante",
+      "disc": "histoire",
+      "desc": "Voyage dans le temps sur une frise qui couvre toute l’histoire du collège."
+    },
+    {
+      "id": "chrono",
+      "nom": "Chronogramme",
+      "disc": "histoire",
+      "desc": "Mène l’enquête dans le fil social du passé."
+    },
+    {
+      "id": "geopins",
+      "nom": "Geopins",
+      "disc": "geo",
+      "desc": "Place les grands repères géographiques sur la carte muette."
+    },
+    {
+      "id": "maths",
+      "nom": "Le Kit de Survie en Maths",
+      "disc": "maths",
+      "desc": "Ta caisse à outils pour réussir en maths, de la 6e à la 3e."
+    },
+    {
+      "id": "pupitre",
+      "nom": "Le Pupitre",
+      "disc": "musique",
+      "desc": "Écoute, analyse et apprends le vocabulaire de l’éducation musicale."
+    },
+    {
+      "id": "atelier",
+      "nom": "L’Atelier",
+      "disc": "arts",
+      "desc": "Découvre les notions, les techniques et les œuvres des arts plastiques."
+    },
+    {
+      "id": "brevet",
+      "nom": "Swipe ton brevet",
+      "disc": "toutes",
+      "desc": "Toutes les matières du brevet en cartes à faire glisser : conseils, révisions et méthodes."
+    },
+    {
+      "id": "mochi",
+      "nom": "Mochi Check",
+      "disc": "toutes",
+      "desc": "Fais le point sur tes objectifs, gagne des stickers et fais grandir ton compagnon."
+    },
+    {
+      "id": "boost",
+      "nom": "Boost",
+      "disc": "toutes",
+      "desc": "Prends confiance, suis tes progrès et dis ce dont tu as besoin pour avancer."
+    },
+    {
+      "id": "objdev",
+      "nom": "Objectif devoirs",
+      "disc": "toutes",
+      "desc": "Organise tes devoirs : minuteur, fiches méthode, quiz et cartes mentales."
+    },
+    {
+      "id": "cogni",
+      "nom": "CogniCoach",
+      "disc": "toutes",
+      "desc": "Apprends à apprendre : répétition espacée, cartes mémoire et dictées."
+    }
+  ],
+  "liens": "Les liens des applications seront renseignés ultérieurement; aucun lien n’a été modifié."
+}

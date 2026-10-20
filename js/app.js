@@ -49,8 +49,8 @@
   function pixelImg(src, cls) {
     return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" decoding="async" draggable="false">';
   }
-  function appArt(a, cls) { return pixelImg('assets/premium/covers/' + a.id + '.webp', cls || 'pixel-app-image'); }
-  function discIcon(id) { return pixelImg('assets/premium/icons/' + id + '.webp', 'pixel-small-icon'); }
+  function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp', cls || 'pixel-app-image'); }
+  function discIcon(id) { return pixelImg('assets/illustrations/disciplines/' + id + '.webp', 'pixel-small-icon'); }
   function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '.webp', 'pixel-small-icon'); }
   function uiIcon(id, cls) { return pixelImg('assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
@@ -205,7 +205,7 @@
   /* V4: illustrated dashboard, with independently clickable real HTML controls. */
   function featuredCard(id) {
     var a = byId[id] || byId.arena, d = discById[a.disc], url = urlOf(a);
-    var poster = id === 'arena' ? '<img src="assets/premium/decor/arena-hero.webp" alt="" class="v4-feature-art">' : appArt(a,'v4-feature-art');
+    var poster = appArt(a,'v4-feature-art');
     return '<div class="v4-feature">' +
       '<div class="v4-feature-image">' + poster + '</div>' +
       '<div class="v4-feature-copy"><div class="v4-feature-top"><span class="v4-medal" aria-hidden="true">✦</span><div>' +
@@ -254,18 +254,20 @@
       '<div class="v4-progress"><span style="width:'+pct(all)+'%"></span></div>'+
       '<button type="button" data-act="discoveries">Découvrir mon album →</button></div></section></div>';
   }
+  /* V4.4 : accueil épuré. La carte reste l’unique contenu principal.
+     Le sac et tous les outils sont accessibles uniquement par la navigation RPG.
+     Les zones d’îles restent interactives pour un accès direct à chaque niveau. */
   function renderMap() {
-    var html='<div class="v4-hub"><div class="v4-worldside"><section class="v4-map-panel" aria-label="Carte interactive des quatre mondes">'+
-      '<img src="assets/worlds/kingdom-map.webp" alt="Carte illustrée des quatre mondes Sac’Ados : prairie, désert, forêt et royaume enneigé" width="1536" height="875">';
-    WORLDS.forEach(function(w){
-      var pr=progress(worldApps(w.n));
-      html+='<button type="button" class="map-hit hit-'+w.n+'" data-act="world" data-n="'+w.n+'" aria-label="Ouvrir le monde '+w.n+'e, '+esc(w.nom)+', '+pr.seen+' sur '+pr.total+' applications ouvertes"><span class="sr">Entrer en '+w.n+'e</span></button>';
+    var html = '<div class="v4-worldside v44-home">' +
+      '<section class="v4-map-panel v44-world-map" aria-label="Carte interactive des quatre mondes de Sac’Ados">' +
+      '<img src="assets/worlds/kingdom-map.webp" alt="Carte illustrée de Sac’Ados avec les mondes de 6e, 5e, 4e et 3e" width="1536" height="875" fetchpriority="high" draggable="false">';
+    WORLDS.forEach(function (w) {
+      var pr = progress(worldApps(w.n));
+      html += '<button type="button" class="map-hit hit-' + w.n + '" data-act="world" data-n="' + w.n + '" aria-label="Entrer dans le monde de ' + w.n + 'e : ' + esc(w.nom) + ' ; ' + pr.seen + ' applications découvertes sur ' + pr.total + '">' +
+        '<span class="v44-zone-label" aria-hidden="true">' + w.n + 'e</span></button>';
     });
-    html+='</section><div class="v4-mobile-worlds" aria-label="Choisir son niveau">';
-    WORLDS.forEach(function(w){html+='<button type="button" data-act="world" data-n="'+w.n+'" class="v4-grade grade-'+w.n+'">'+w.n+'e <span>'+esc(w.nom)+'</span></button>';});
-    html+='</div><div class="v4-map-status"><span>✦ &nbsp; CHOISIS UN MONDE EN CLIQUANT SUR LA CARTE</span><button type="button" data-act="bag">🎒 Mon sac →</button></div></div>';
-    html+=v4InventoryPreview()+'</div>'+v4Extras();
-    $('view').innerHTML=html;
+    html += '</section><p class="sr" id="mapHelp">Choisis une île sur la carte pour explorer ses applications, ou touche Mon sac dans le menu inférieur.</p></div>';
+    $('view').innerHTML = html;
   }
 
   /* ---------- Monde : le sac ---------- */
@@ -453,23 +455,27 @@
   function showItem(id) {
     var a = byId[id]; if (!a) { return; }
     var d = discById[a.disc], t = typeById[a.type], url = urlOf(a);
-    var html = '<button class="close-x" data-act="close" aria-label="Fermer">✕</button>';
-    html += '<div class="sheet-head"><div class="sheet-ico pixel-sheet-art" style="' + discStyle(a) + '" aria-hidden="true">' + appArt(a, 'pixel-modal-poster') + '</div><div><h3>' + esc(a.nom) + '</h3>' +
-      '<div class="pills"><span class="pill" style="box-shadow:inset 0 0 0 2px ' + d.c + '">' + discIcon(d.id) + ' ' + esc(d.nom) + '</span>' +
-      '<span class="pill">' + typeIcon(t.id) + ' ' + esc(t.nom) + '</span><span class="pill">⏱ ' + esc(a.duree) + '</span></div></div></div>';
-    html += '<p>' + esc(a.desc) + '</p>';
-    html += '<div class="lvls"><span>Pour les classes de</span>';
-    [6, 5, 4, 3].forEach(function (n) { html += '<span class="lvl' + (a.niveaux.indexOf(n) > -1 ? ' on' : '') + '">' + n + 'e</span>'; });
-    html += '</div><div class="actions">';
+    var grades=a.niveaux.map(function(n){return '<span class="v42-grade">'+n+'e</span>';}).join('');
+    var html = '<button type="button" class="close-x v42-close" data-act="close" aria-label="Fermer cette fenêtre">✕</button>';
+    html += '<div class="v42-detail">'+
+      '<div class="v42-detail-cover" role="img" aria-label="Illustration de '+esc(a.nom)+'">'+appArt(a, 'pixel-modal-poster')+'</div>'+
+      '<div class="v42-detail-info"><span class="v42-overline">✦ FICHE DE L’AVENTURIER</span>'+
+      '<h3 id="v42-modal-heading">'+esc(a.nom)+'</h3>'+
+      '<div class="v42-badges"><span class="v42-tag">'+discIcon(d.id)+esc(d.nom)+'</span><span class="v42-tag">'+typeIcon(t.id)+esc(t.nom)+'</span></div>'+
+      '<p class="v42-detail-desc">'+esc(a.desc)+'</p>'+
+      '<div class="v42-grades"><strong>Pour les classes :</strong> '+grades+'</div>'+
+      '<p class="v42-duration">◷ Durée indicative : '+esc(a.duree)+'</p>';
     if (url) {
-      html += '<a class="btn primary" href="' + esc(url) + '" target="_blank" rel="noopener" data-act="launch" data-id="' + a.id + '">▶ Lancer l’appli</a>';
+      html += '<a class="v42-play" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" data-act="launch" data-id="'+a.id+'">▶ &nbsp; LANCER L’APPLICATION</a>';
     } else {
-      html += '<button class="btn primary" disabled>' + (a.bientot ? '🥚 Bientôt dans ton sac' : '🔗 Lien à venir') + '</button>';
+      html += '<button type="button" class="v42-play" disabled>'+(a.bientot?'Bientôt disponible':'Lien à venir')+'</button>';
     }
-    html += '<button class="btn" data-act="fav" data-id="' + a.id + '">' + (isFav(a.id) ? '⭐ Retirer des raccourcis' : '☆ Ajouter aux raccourcis') + '</button>';
-    html += '</div>';
-    if (state.seen[a.id]) { html += '<div class="note">✓ Tu as déjà ouvert cette application.</div>'; }
+    html += '<button type="button" class="v42-favorite" data-act="fav" data-id="'+a.id+'">'+(isFav(a.id)?'★ Retirer des raccourcis':'☆ Ajouter à mes raccourcis')+'</button>';
+    if (state.seen[a.id]) html += '<p class="v42-opened">✓ Application déjà ouverte</p>';
+    html += '</div></div>';
     openModal(html);
+    var box=$('modal').querySelector('.sheet');
+    if(box) box.setAttribute('aria-labelledby','v42-modal-heading');
   }
 
   function classPickHTML() {

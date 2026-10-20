@@ -1,0 +1,16 @@
+SAC’ADOS V4.2 — RAPPORT DE VÉRIFICATION
+
+VALIDÉ STATIQUEMENT :
+- 32 images d’applications, 512x512, toutes ouvrables.
+- 8 images de disciplines, 384x384, toutes ouvrables.
+- Noms des fichiers = identifiants du catalogue (32 + 8).
+- Références HTML à des fichiers locaux présentes.
+- JavaScript : syntaxe Node.js valide.
+- Feuilles CSS : parsing valide.
+- ZIP : intégrité validée.
+- Catalogue et clé sacados_v1 conservés.
+
+NON EFFECTUÉ :
+- Tests visuels Chromium / responsive 1440, 768, 390, 320 px : le navigateur Chromium local refuse de charger même les fichiers locaux (ERR_BLOCKED_BY_ADMINISTRATOR).
+- Validation fonctionnelle des clics dans un navigateur : non effectuée pour cette version ; la logique de navigation et de sauvegarde précédente est préservée.
+- Nouveau dessin individualisé d’applications : recadrage, mais pas de nouveau dessin. Les images pas parfaitement représentatives sont listées dans VISUELS-V4.2-MANIFEST.json.
