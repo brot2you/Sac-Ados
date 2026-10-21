@@ -1,0 +1,33 @@
+/* Sac'Ados V5.3: dedicated gold-trimmed adventure backpack as header emblem.
+   The image has transparent padding so its outline never touches the edge. */
+header.top .brand .brand-ico.brand-new-logo {
+  display:grid!important;
+  place-items:center!important;
+  width:58px!important;
+  height:58px!important;
+  min-width:58px!important;
+  min-height:58px!important;
+  padding:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:visible!important;
+  filter:none!important;
+}
+header.top .brand .brand-ico.brand-new-logo .brand-app-icon {
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  image-rendering:auto!important;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.34));
+}
+@media (max-width:650px) {
+  header.top .brand .brand-ico.brand-new-logo { width:44px!important; height:44px!important; min-width:44px!important; min-height:44px!important; }
+}
+@media (max-width:380px) {
+  header.top .brand .brand-ico.brand-new-logo { width:38px!important; height:38px!important; min-width:38px!important; min-height:38px!important; }
+}
