@@ -49,8 +49,8 @@
   function pixelImg(src, cls) {
     return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" decoding="async" draggable="false">';
   }
-  function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp?v=46', cls || 'pixel-app-image'); }
-  function discIcon(id) { return pixelImg('assets/illustrations/disciplines/' + id + '.webp', 'pixel-small-icon'); }
+  function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp?v=' + (a.id === 'boost' ? '47' : '46'), cls || 'pixel-app-image'); }
+  function discIcon(id) { return pixelImg('assets/illustrations/disciplines/' + id + '.webp?v=47', 'pixel-small-icon'); }
   function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '.webp', 'pixel-small-icon'); }
   function uiIcon(id, cls) { return pixelImg('assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
