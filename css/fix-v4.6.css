@@ -1,0 +1,42 @@
+/* SAC’ADOS V4.6 — centrage vérifiable sur TOUTES les pages.
+   L’accueil conserve la barre sous la carte sur ordinateur ; autres pages : centrée dans la fenêtre.
+   Le centrage utilise inset-inline + marges auto, sans transform ni alignement conditionnel :has(). */
+#mainTabs.rpg-bottom-nav { box-sizing:border-box; }
+@media (min-width:931px) {
+ body > #mainTabs.rpg-bottom-nav {
+   position:fixed!important;left:0!important;right:0!important;
+   transform:none!important;margin:0 auto!important;
+   bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+   width:min(1130px,calc(100vw - 24px))!important;max-width:1130px!important;
+ }
+ .v44-home > #mainTabs.rpg-bottom-nav {
+   position:relative!important;left:auto!important;right:auto!important;
+   top:auto!important;bottom:auto!important;transform:none!important;
+   margin:22px auto 0!important;width:min(100%,1110px)!important;
+   max-width:1110px!important;
+ }
+}
+@media (max-width:930px) {
+ body > #mainTabs.rpg-bottom-nav,
+ .v44-home > #mainTabs.rpg-bottom-nav {
+   position:fixed!important;left:0!important;right:0!important;
+   transform:none!important;margin:0 auto!important;
+   width:calc(100% - 12px)!important;max-width:1130px!important;
+   bottom:calc(5px + env(safe-area-inset-bottom,0px))!important;
+ }
+}
+/* Source covers are already squared, golden framed, and padded with transparent outer margins. */
+.pack .slot-art .pixel-poster,.slot-art .pixel-poster,
+.v4-feature-image img,.v4-game-picture .v4-game-art,
+.v42-detail-cover .pixel-modal-poster,.pixel-shortcut-art {
+ object-fit:contain!important;object-position:center!important;
+ image-rendering:auto!important;
+}
+.pack .slot-art,.slot-art,.v4-game-picture,.v42-detail-cover {
+ background: #142c4a!important;
+}
+/* Avoid cropping the transparent safe margins at any breakpoint. */
+.v4-game-picture .v4-game-art{padding:0!important;}
+@media (prefers-reduced-motion: reduce) {
+ #mainTabs.rpg-bottom-nav{transition:none!important;}
+}

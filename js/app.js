@@ -17,7 +17,7 @@
   var state = load();
 
   function load() {
-    var d = { classe: null, favs: [], seen: {}, lexend: false, calme: false, urls: {} };
+    var d = { classe: null, favs: [], seen: {}, lexend: false, calme: false, sound: true, urls: {} };
     try {
       var raw = localStorage.getItem(KEY);
       if (raw) {
@@ -49,7 +49,7 @@
   function pixelImg(src, cls) {
     return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" decoding="async" draggable="false">';
   }
-  function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp', cls || 'pixel-app-image'); }
+  function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp?v=46', cls || 'pixel-app-image'); }
   function discIcon(id) { return pixelImg('assets/illustrations/disciplines/' + id + '.webp', 'pixel-small-icon'); }
   function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '.webp', 'pixel-small-icon'); }
   function uiIcon(id, cls) { return pixelImg('assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
@@ -373,6 +373,8 @@
     var p = progress(APPS);
     $('loot').innerHTML = '★ ' + p.seen + ' / ' + p.total;
     $('loot').setAttribute('aria-label', p.seen + ' objets découverts sur ' + p.total);
+    var soundButton = $('soundToggle');
+    if (soundButton) { soundButton.textContent = state.sound ? '♫' : '♩'; soundButton.setAttribute('aria-pressed', String(!!state.sound)); soundButton.setAttribute('aria-label', state.sound ? 'Désactiver les sons rétro' : 'Activer les sons rétro'); }
     document.documentElement.className = (state.lexend ? 'lexend ' : '') + (state.calme ? 'calme' : '');
   }
 
@@ -501,6 +503,8 @@
       '<button class="switch" role="switch" data-act="toggle" data-k="lexend" aria-checked="' + !!state.lexend + '" aria-label="Police très lisible"></button></div>';
     html += '<div class="row"><span><b>Mode calme</b><small>Sans animations</small></span>' +
       '<button class="switch" role="switch" data-act="toggle" data-k="calme" aria-checked="' + !!state.calme + '" aria-label="Mode calme"></button></div>';
+    html += '<div class="row"><span><b>Sons de jeux vidéo</b><small>Petites notes rétro au clic</small></span>' +
+      '<button class="switch" role="switch" data-act="toggle" data-k="sound" aria-checked="' + !!state.sound + '" aria-label="Sons de jeux vidéo"></button></div>';
     html += '<div class="row"><span><b>Recommencer</b><small>Efface tes découvertes et tes raccourcis</small></span>' +
       '<button class="btn" data-act="reset">Tout effacer</button></div>';
     html += '<div class="row"><span><b>Espace prof</b><small>Ajouter les liens des applis</small></span>' +
@@ -539,6 +543,30 @@
     toastTimer = setTimeout(function () { t.innerHTML = ''; }, 2600);
   }
 
+  /* Original 8-bit menu effects synthesized locally: no download, no external library.
+     Audio starts only after a user interaction; the persistent mute switch is respected. */
+  var sfxCtx = null;
+  function playSfx(mode) {
+    if (!state.sound) return;
+    try {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      if (!sfxCtx) sfxCtx = new Ctx();
+      if (sfxCtx.state === 'suspended') sfxCtx.resume().catch(function(){});
+      var notes = mode === 'open' ? [[523,.0,.045],[659,.06,.045],[784,.12,.10]] :
+                  mode === 'star' ? [[659,0,.05],[880,.055,.095]] :
+                  mode === 'back' ? [[520,0,.045],[390,.06,.06]] :
+                  [[520,0,.055],[680,.055,.045]];
+      notes.forEach(function(note){
+        var osc=sfxCtx.createOscillator(),gain=sfxCtx.createGain(),t=sfxCtx.currentTime+note[1];
+        osc.type='square';osc.frequency.setValueAtTime(note[0],t);
+        gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.035,t+.007);
+        gain.gain.exponentialRampToValueAtTime(.0001,t+note[2]);
+        osc.connect(gain);gain.connect(sfxCtx.destination);osc.start(t);osc.stop(t+note[2]+.007);
+      });
+    } catch(err) { /* no sound device / blocked by browser -> silently continue */ }
+  }
+
   /* ---------- Actions ---------- */
   function openWorld(n) {
     ui.view = 'world'; ui.world = n; ui.pocket = 'tout'; ui.disc = 'tout'; ui.query = '';
@@ -555,6 +583,13 @@
     }
     var act = t.getAttribute('data-act');
     var id = t.getAttribute('data-id');
+    if (act === 'sound-toggle') {
+      state.sound = !state.sound; save(); renderHeader();
+      if (state.sound) playSfx('star');
+      toast(state.sound ? 'Sons rétro activés' : 'Sons coupés');
+      return;
+    }
+    playSfx(act === 'launch' ? 'open' : (act === 'fav' || act === 'quickfav' ? 'star' : (act === 'map' || act === 'close' ? 'back' : 'tap')));
 
     if (act === 'hot-toggle') {
       var panel=$('hotbar'), trigger=$('shortcutToggle');

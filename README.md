@@ -1,22 +1,15 @@
-# SAC’ADOS — V4.4, accueil carte uniquement
+# SAC’ADOS V4.5 — Menu centré, planches aérées, icônes dorées, sons rétro
 
-Cette version repart de **V4.2** pour conserver le catalogue, les 40 visuels cadrés, la fiche d’application RPG, l’inventaire, et tous les réglages.
+**Base : V4.4 complète.** Catalogue, liens, carte, inventaire, écran professeur, favoris et données locales conservés.
 
-## Changement d’interface
+- Le menu RPG reste à sa place sous la carte d’accueil sur ordinateur et est **recentré** sur les pages Sac, Quêtes et Découvertes. Sur tablette/téléphone, il reste fixé et centré.
+- Les 32 illustrations d’applications utilisent des compositions **à marges peintes d’origine** : pas de recadrage brutal de la scène, `object-fit: contain` partout.
+- Nouvelle série de 8 disciplines à bordures dorées, plus 5 **planches 4 × 2** faciles à examiner et découper avec **68px de gouttières** entre images ; les planches sont des visuels de vérification, les vrais fichiers sont déjà séparés dans `assets/illustrations/`.
+- Reflets d’or animés (CSS) sur les icônes et les cartes, désactivés par « Mode calme » et `prefers-reduced-motion`.
+- Sons 8-bit brefs, synthétisés en local par WebAudio au clic. **On/Off** en haut et dans Réglages ; choix enregistré dans `sacados_v1`. Aucun fichier externe à télécharger.
 
-L’écran **Accueil** présente UNIQUEMENT la grande carte des quatre mondes. Suppression de l’aperçu du sac à droite et des panneaux de disciplines, de quêtes et de progression sous la carte. Le menu RPG illustré, dans sa version PNG détourée, se situe sous la carte sur grand écran et reste fixé en bas sur téléphone. **Mon sac** ouvre l’inventaire de la classe choisie. Les quatre zones de la carte continuent à ouvrir directement leurs mondes. Les libellés de niveau sont légèrement renforcés sur petits écrans à l’intérieur de la carte.
+## Installer
+Décompresser et copier **le contenu du dossier** dans le dépôt GitHub, puis Commit/Push. Les planches `PLANCHES-RECADRAGE/` ne sont pas nécessaires au fonctionnement de l’application et peuvent rester sur ton ordinateur.
 
-Aucune modification du catalogue ni des liens, aucun effacement des favoris/découvertes (`localStorage` `sacados_v1`).  
-Les fonctions Quêtes, Découvertes, Réglages, Espace professeur, recherche et filtres demeurent disponibles via les écrans existants.
-
-## Installation GitHub Pages
-
-Décompresser le ZIP, copier le contenu (`index.html`, `css`, `js`, `assets`) à la racine du dépôt puis Commit et Push. Aucun serveur ni compilation requis. Lors d’un changement de version, recharger sans cache si nécessaire (Ctrl+F5).
-
-## Fichiers modifiés
-
-- `js/app.js` : `renderMap()` simplifié uniquement.
-- `index.html` : ajout du style dédié.
-- `css/home-v4.4.css` : dispositions carte seule, responsive et positionnement du menu.
-
-Les autres écrans et visuels restent ceux de la version précédente.
+## Mise à jour légère
+Le ZIP « mise à jour » ne contient que le `index.html`, `js/app.js`, `css/finish-v4.5.css` et les **40 illustrations modifiées**. Copie son contenu à la racine du dépôt en autorisant le remplacement ; ne supprime pas les dossiers déjà présents.
