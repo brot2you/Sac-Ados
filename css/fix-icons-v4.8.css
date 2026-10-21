@@ -1,0 +1,27 @@
+/* SAC'ADOS V4.8 — two redesigned transparent icons; leave navigation and all other artwork untouched. */
+.journal-icon:has(.pixel-journal-icon){
+  display:grid;place-items:center;flex:0 0 auto;
+  width:112px;height:112px;padding:9px;overflow:visible;
+  background:linear-gradient(145deg,#1d4060,#102744);
+  border:3px solid #d6aa66;border-radius:14px;
+}
+.journal-icon .pixel-journal-icon{
+  display:block;width:90px;height:90px;max-width:100%;max-height:100%;
+  object-fit:contain;object-position:center;image-rendering:auto;
+  filter:drop-shadow(0 3px 5px rgba(37,25,12,.36));
+}
+.pack>.v4-inventory-banner::after{
+  content:'';position:absolute;right:18px;top:7px;
+  width:108px;height:98px;
+  background:url('../assets/premium/decor/backpack.webp?v=48') center center/contain no-repeat;
+  filter:drop-shadow(0 3px 5px rgba(10,10,24,.45));
+  pointer-events:none;z-index:1;
+}
+@media(max-width:650px){
+ .pack>.v4-inventory-banner::after{right:4px;top:17px;width:50px;height:65px;}
+ .journal-icon:has(.pixel-journal-icon){width:94px;height:94px;padding:7px;}
+ .journal-icon .pixel-journal-icon{width:76px;height:76px;}
+}
+@media(max-width:370px){
+ .pack>.v4-inventory-banner::after{width:38px;height:53px;top:19px;right:2px;}
+}
