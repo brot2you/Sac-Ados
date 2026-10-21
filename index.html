@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#0f2448">
 <meta name="description" content="Sac’Ados : explore quatre mondes et découvre les applications du collège.">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sac’Ados — Pixel Kingdom Deluxe · V5</title>
+<title>Sac’Ados — Pixel Kingdom Deluxe · V5.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600;700&family=Lexend:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -20,6 +20,25 @@
 <link rel="stylesheet" href="css/fix-v4.6.css?v=46">
 <link rel="stylesheet" href="css/fix-icons-v4.8.css">
 <link rel="stylesheet" href="css/fix-v4.9.css?v=49">
+
+<style id="sacados-categories-v51">
+/* Five newly illustrated categories, with safe margins and no stretching. */
+.sac-category-icon { image-rendering:auto!important; object-fit:contain!important; object-position:center!important; flex:none; }
+.pocket .sac-category-icon { width:29px!important; height:29px!important; margin:0 4px 0 0!important; }
+.sec-h .sac-category-icon { width:43px!important; height:43px!important; }
+.quest-category-section { margin:24px 0 38px; }
+.quest-category-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+.quest-category-button { min-width:0; min-height:148px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+ padding:12px 9px; cursor:pointer; color:#fcebc2; font-family:var(--title,system-ui);font-weight:700; font-size:15px; line-height:1.2;
+ border:2px solid #cb9347; border-radius:14px; background:linear-gradient(145deg,#1c3856,#152942 70%,#0e233a); box-shadow:inset 0 0 0 2px #3e5670,0 4px 0 #92612d;
+ transition:transform .14s ease, box-shadow .14s ease; }
+.quest-category-button .sac-category-icon { width:90px!important; height:90px!important; margin:0!important;filter:drop-shadow(0 3px 7px rgba(255,200,90,.28)); }
+.quest-category-button:hover { transform:translateY(-3px);box-shadow:inset 0 0 0 2px #bd965c,0 6px 0 #966329,0 0 16px rgba(255,195,86,.22); }
+.quest-category-button:focus-visible { outline:3px solid #ffe78b;outline-offset:3px; }
+@media(max-width:850px){.quest-category-grid {grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media(max-width:480px){.quest-category-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;} .quest-category-button {min-height:124px;font-size:14px;} .quest-category-button .sac-category-icon {width:72px!important;height:72px!important;}}
+@media(prefers-reduced-motion:reduce){.quest-category-button {transition:none!important;}}
+</style>
 </head>
 <body>
 
@@ -120,6 +139,6 @@
 }
 </script>
 
-<script src="js/app.js?v=49" defer></script>
+<script src="js/app.js?v=51" defer></script>
 </body>
 </html>

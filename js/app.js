@@ -51,7 +51,7 @@
   }
   function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp?v=' + (a.id === 'boost' ? '47' : '46'), cls || 'pixel-app-image'); }
   function discIcon(id) { return pixelImg('assets/illustrations/disciplines/' + id + '.webp?v=47', 'pixel-small-icon'); }
-  function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '.webp', 'pixel-small-icon'); }
+  function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '-v51.webp', 'pixel-small-icon sac-category-icon'); }
   function uiIcon(id, cls) { return pixelImg(id === 'quest' ? 'assets/premium/icons/quest-gold-v49.png' : 'assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
 
@@ -336,7 +336,7 @@
     html+='<div class="pockets" role="tablist" aria-label="Types d’applications">'+
       '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="'+(ui.pocket==='tout')+'">Toutes <span class="n">'+all.length+'</span></button>';
     TYPES.forEach(function(t){var count=all.filter(function(a){return a.type===t.id;}).length;
-      if(count)html+='<button class="pocket" role="tab" data-act="pocket" data-p="'+t.id+'" aria-selected="'+(ui.pocket===t.id)+'">'+esc(t.nom)+' <span class="n">'+count+'</span></button>';
+      if(count)html+='<button class="pocket" role="tab" data-act="pocket" data-p="'+t.id+'" aria-selected="'+(ui.pocket===t.id)+'">'+typeIcon(t.id)+'<span>'+esc(t.nom)+'</span><span class="n">'+count+'</span></button>';
     });
     html+='</div><div class="v4-inventory-controls"><label class="search"><span aria-hidden="true">⌕</span><span class="sr">Rechercher une application</span>'+
       '<input id="q" type="search" placeholder="Rechercher une application..." value="'+esc(ui.query)+'" autocomplete="off"></label>'+
@@ -422,6 +422,14 @@
         '<strong>'+ww.n+'e</strong><span>'+esc(ww.nom)+'</span> →</button>';
     });
     html+='</div>';
+    html+='<section class="quest-category-section" aria-labelledby="quest-category-heading">'+
+      '<div class="section-line"><div><span class="eyebrow">CHOISIS TON AVENTURE</span><h2 id="quest-category-heading">Les cinq catégories</h2></div></div>'+
+      '<div class="quest-category-grid">';
+    TYPES.forEach(function(t){
+      html+='<button class="quest-category-button" type="button" data-act="quest-category" data-p="'+t.id+'" aria-label="Explorer : '+esc(t.nom)+'">'+
+        typeIcon(t.id)+'<span>'+esc(t.nom)+'</span></button>';
+    });
+    html+='</div></section>';
     $('view').innerHTML=html;
   }
   function renderDiscoveries() {
@@ -625,6 +633,12 @@
     else if (act === 'bag') { openWorld(state.classe || ui.world || 6); }
     else if (act === 'quests') { ui.view = 'quests'; render(); window.scrollTo(0, 0); }
     else if (act === 'discoveries') { ui.view = 'discoveries'; render(); window.scrollTo(0, 0); }
+    else if (act === 'quest-category') {
+      var category=t.getAttribute('data-p');
+      if(!typeById[category])return;
+      ui.view='world'; ui.world=state.classe||6; ui.pocket=category;ui.disc='tout';ui.query='';
+      render();window.scrollTo(0,0);
+    }
     else if (act === 'pocket') { ui.pocket = t.getAttribute('data-p'); renderWorld(); }
     else if (act === 'disc') { ui.disc = t.getAttribute('data-d'); renderWorld(); }
     else if (act === 'item') { showItem(id); }
