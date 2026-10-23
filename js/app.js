@@ -49,7 +49,7 @@
   function pixelImg(src, cls) {
     return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" decoding="async" draggable="false">';
   }
-  function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp?v=' + (a.id === 'evalang' ? '58' : (a.id === 'boost' ? '47' : '46')), cls || 'pixel-app-image'); }
+  function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp?v=' + (a.id === 'evalang' ? '59' : (a.id === 'boost' ? '47' : '46')), (cls || 'pixel-app-image') + (a.id === 'evalang' ? ' evalang-pixel' : '')); }
   function discIcon(id) { return pixelImg('assets/illustrations/disciplines/' + id + '.webp?v=47', 'pixel-small-icon'); }
   function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '-v51.webp', 'pixel-small-icon sac-category-icon'); }
   function uiIcon(id, cls) { return pixelImg(id === 'quest' ? 'assets/premium/icons/quest-gold-v49.png' : 'assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
