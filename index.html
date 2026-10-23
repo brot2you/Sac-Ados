@@ -82,63 +82,625 @@
 -->
 <script type="application/json" id="catalogue">
 {
-  "config": { "nom": "Sac’Ados", "sousTitre": "le kit du collégien", "maxRaccourcis": 6 },
+  "config": {
+    "nom": "Sac’Ados",
+    "sousTitre": "le kit du collégien",
+    "maxRaccourcis": 6
+  },
   "mondes": [
-    { "n": 6, "monde": "Monde 1", "nom": "L’Île Prairie", "emoji": "🌿" },
-    { "n": 5, "monde": "Monde 2", "nom": "Les Dunes Dorées", "emoji": "🌵" },
-    { "n": 4, "monde": "Monde 3", "nom": "La Forêt des Brumes", "emoji": "🌲" },
-    { "n": 3, "monde": "Monde 4", "nom": "Le Pic du Brevet", "emoji": "🏰" }
+    {
+      "n": 6,
+      "monde": "Monde 1",
+      "nom": "L’Île Prairie",
+      "emoji": "🌿"
+    },
+    {
+      "n": 5,
+      "monde": "Monde 2",
+      "nom": "Les Dunes Dorées",
+      "emoji": "🌵"
+    },
+    {
+      "n": 4,
+      "monde": "Monde 3",
+      "nom": "La Forêt des Brumes",
+      "emoji": "🌲"
+    },
+    {
+      "n": 3,
+      "monde": "Monde 4",
+      "nom": "Le Pic du Brevet",
+      "emoji": "🏰"
+    }
   ],
   "types": [
-    { "id": "jouer", "nom": "Jouer", "emoji": "🎮", "desc": "jeux, enquêtes et combats" },
-    { "id": "entrainer", "nom": "S’entraîner", "emoji": "🎯", "desc": "révisions, cartes et quiz" },
-    { "id": "lire", "nom": "Lire et écrire", "emoji": "📖", "desc": "histoires, textes et ateliers d’écriture" },
-    { "id": "comprendre", "nom": "Comprendre", "emoji": "💡", "desc": "fiches, méthodes et outils" },
-    { "id": "soin", "nom": "Prendre soin de moi", "emoji": "🌱", "desc": "confiance, organisation et progrès" }
+    {
+      "id": "jouer",
+      "nom": "Jouer",
+      "emoji": "🎮",
+      "desc": "jeux, enquêtes et combats"
+    },
+    {
+      "id": "entrainer",
+      "nom": "S’entraîner",
+      "emoji": "🎯",
+      "desc": "révisions, cartes et quiz"
+    },
+    {
+      "id": "lire",
+      "nom": "Lire et écrire",
+      "emoji": "📖",
+      "desc": "histoires, textes et ateliers d’écriture"
+    },
+    {
+      "id": "comprendre",
+      "nom": "Comprendre",
+      "emoji": "💡",
+      "desc": "fiches, méthodes et outils"
+    },
+    {
+      "id": "soin",
+      "nom": "Prendre soin de moi",
+      "emoji": "🌱",
+      "desc": "confiance, organisation et progrès"
+    }
   ],
   "disciplines": [
-    { "id": "anglais", "nom": "Anglais", "emoji": "🇬🇧", "c": "#e5484d" },
-    { "id": "francais", "nom": "Français", "emoji": "✒️", "c": "#4263eb" },
-    { "id": "histoire", "nom": "Histoire", "emoji": "⏳", "c": "#b0702f" },
-    { "id": "geo", "nom": "Géographie", "emoji": "🧭", "c": "#2b9a66" },
-    { "id": "maths", "nom": "Maths", "emoji": "📐", "c": "#f08c00" },
-    { "id": "musique", "nom": "Musique", "emoji": "🎵", "c": "#ae3ec9" },
-    { "id": "arts", "nom": "Arts plastiques", "emoji": "🎨", "c": "#e64980" },
-    { "id": "toutes", "nom": "Toutes matières", "emoji": "🌈", "c": "#1098ad" }
+    {
+      "id": "anglais",
+      "nom": "Anglais",
+      "emoji": "🇬🇧",
+      "c": "#e5484d"
+    },
+    {
+      "id": "francais",
+      "nom": "Français",
+      "emoji": "✒️",
+      "c": "#4263eb"
+    },
+    {
+      "id": "histoire",
+      "nom": "Histoire",
+      "emoji": "⏳",
+      "c": "#b0702f"
+    },
+    {
+      "id": "geo",
+      "nom": "Géographie",
+      "emoji": "🧭",
+      "c": "#2b9a66"
+    },
+    {
+      "id": "maths",
+      "nom": "Maths",
+      "emoji": "📐",
+      "c": "#f08c00"
+    },
+    {
+      "id": "musique",
+      "nom": "Musique",
+      "emoji": "🎵",
+      "c": "#ae3ec9"
+    },
+    {
+      "id": "arts",
+      "nom": "Arts plastiques",
+      "emoji": "🎨",
+      "c": "#e64980"
+    },
+    {
+      "id": "toutes",
+      "nom": "Toutes matières",
+      "emoji": "🌈",
+      "c": "#1098ad"
+    }
   ],
   "applis": [
-    { "id": "survival", "nom": "My Survival Kit", "emoji": "🧰", "disc": "anglais", "type": "soin", "niveaux": [6,5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/My-Survival-Kit/", "desc": "Les phrases de survie, le vocabulaire et l’anglais de la classe pour oser parler, avec 35 badges à collectionner." },
-    { "id": "phonix", "nom": "Phonix", "emoji": "🔮", "disc": "anglais", "type": "entrainer", "niveaux": [6,5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/Phonix/", "nouveau": true, "desc": "Les 44 sons de l’anglais en cartes magiques à collectionner. Choisis ton accent !" },
-    { "id": "verbdojo", "nom": "VerbDojo", "emoji": "🥋", "disc": "anglais", "type": "entrainer", "niveaux": [5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/Verb-Dojo/", "desc": "92 verbes irréguliers rangés par familles pour les retenir plus vite." },
-    { "id": "pastmasters", "nom": "Past Masters", "emoji": "🃏", "disc": "anglais", "type": "entrainer", "niveaux": [5,4,3], "duree": "15 min", "url": "https://brot2you.github.io/Past-Masters/", "desc": "Collectionne les verbes irréguliers en cartes et fais-les combattre." },
-    { "id": "arena", "nom": "Grammar Arena", "emoji": "⚔️", "disc": "anglais", "type": "jouer", "niveaux": [5,4,3], "duree": "15 min", "url": "https://brot2you.github.io/Grammar-Arena/", "nouveau": true, "desc": "Affronte les champions de l’arène à coups de grammaire anglaise." },
-    { "id": "mtm", "nom": "Mind the Mistake!", "emoji": "🔍", "disc": "anglais", "type": "comprendre", "niveaux": [5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/mind-the-mistake/", "desc": "Comprends les codes de correction de tes copies d’anglais et corrige tes erreurs." },
-    { "id": "wordup", "nom": "Word Up", "emoji": "💬", "disc": "anglais", "type": "entrainer", "niveaux": [6,5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/Wordup/index.html", "desc": "Fini « good », « bad » et « interesting » : enrichis ton vocabulaire anglais." },
-    { "id": "swipeen", "nom": "Swipe ton English", "emoji": "📱", "disc": "anglais", "type": "entrainer", "niveaux": [6,5,4,3], "duree": "5 min", "url": "https://brot2you.github.io/Swipe-Ton-English/", "desc": "Révise l’anglais en faisant glisser des cartes, comme sur ton fil." },
-    { "id": "tama", "nom": "Ma créature anglaise", "emoji": "🥚", "disc": "anglais", "type": "jouer", "niveaux": [6,5], "duree": "5 min par jour", "url": "", "bientot": true, "desc": "Adopte une créature qui ne parle qu’anglais et prends soin d’elle chaque jour." },
-    { "id": "dinobuddy", "nom": "Dino Buddy Park", "emoji": "🦕", "disc": "anglais", "type": "jouer", "niveaux": [6,5], "duree": "10 min", "url": "https://brot2you.github.io/Dino-Buddy-Park/", "nouveau": true, "desc": "Apprends l’anglais avec ton compagnon dinosaure grâce à des défis et des quiz." },
-    { "id": "pixelquest", "nom": "PixelQuest English", "emoji": "👾", "disc": "anglais", "type": "soin", "niveaux": [6,5,4,3], "duree": "5 min par jour", "url": "", "desc": "Transforme ton travail d’anglais en habitudes de héros, en pixel art." },
-    { "id": "books", "nom": "Books of Heroes", "emoji": "🐉", "disc": "anglais", "type": "lire", "niveaux": [5,4,3], "duree": "20 min", "url": "https://brot2you.github.io/BOOKS-OF-HEROES/", "desc": "Des livres dont tu es le héros, en anglais, avec des aides à la lecture." },
-    { "id": "mmr", "nom": "Make-Me-Read", "emoji": "📚", "disc": "anglais", "type": "lire", "niveaux": [5,4,3], "duree": "20 min", "url": "https://brot2you.github.io/Make-Me-Read/", "desc": "De vrais textes de la littérature anglophone, avec des stratégies pour les comprendre." },
-    { "id": "plume", "nom": "PlumeCraft", "emoji": "🪶", "disc": "anglais", "type": "lire", "niveaux": [4,3], "duree": "20 min", "url": "", "desc": "Écris en anglais pas à pas, avec des débuts de phrases et une grille pour t’évaluer." },
-    { "id": "ravensmoor", "nom": "Ravensmoor", "emoji": "🕯️", "disc": "anglais", "type": "jouer", "niveaux": [3], "duree": "45 min", "url": "https://brot2you.github.io/Ravensmoor/", "desc": "1925, un meurtre au manoir. Interroge les suspects et démasque le coupable." },
-    { "id": "freq", "nom": "Frequency Zero", "emoji": "📻", "disc": "anglais", "type": "jouer", "niveaux": [3], "duree": "40 min", "url": "", "desc": "Une animatrice radio a disparu. Écoute les indices sonores pour la retrouver." },
-    { "id": "logic", "nom": "Whodunnit Logic Puzzle", "emoji": "🧩", "disc": "anglais", "type": "jouer", "niveaux": [4,3], "duree": "15 min", "url": "https://brot2you.github.io/Brot2you-Case-Files/", "desc": "15 énigmes de logique à résoudre case par case pour trouver le coupable." },
-    { "id": "arbre", "nom": "L’arbre des devoirs", "emoji": "🌳", "disc": "anglais", "type": "comprendre", "niveaux": [6,5,4,3], "duree": "5 min", "url": "https://brot2you.github.io/Arbre-des-devoirs/", "desc": "Bloqué sur tes devoirs d’anglais ? Suis l’arbre, étape par étape." },
-    { "id": "verbetes", "nom": "Verbêtes", "emoji": "🐾", "disc": "francais", "type": "entrainer", "niveaux": [6,5,4], "duree": "15 min", "url": "https://brot2you.github.io/Verbetes/", "desc": "La conjugaison française en cartes à collectionner et en combats." },
-    { "id": "corrige", "nom": "Corrige ta Copie", "emoji": "✏️", "disc": "francais", "type": "comprendre", "niveaux": [6,5,4,3], "duree": "10 min", "url": "", "desc": "Comprends les 22 codes de correction de tes copies de français." },
-    { "id": "grimoire", "nom": "Le Grimoire du Style", "emoji": "📜", "disc": "francais", "type": "lire", "niveaux": [5,4,3], "duree": "15 min", "url": "", "desc": "18 figures de style à repérer, puis à glisser dans tes propres textes." },
-    { "id": "frise", "nom": "La Frise vivante", "emoji": "⏳", "disc": "histoire", "type": "jouer", "niveaux": [6,5,4,3], "duree": "15 min", "url": "https://brot2you.github.io/La-Frise/", "desc": "Voyage dans le temps sur une frise qui couvre toute l’histoire du collège." },
-    { "id": "chrono", "nom": "Chronogramme", "emoji": "🕵️", "disc": "histoire", "type": "jouer", "niveaux": [6,5,4,3], "duree": "20 min", "url": "https://brot2you.github.io/Chronogramme/", "desc": "Mène l’enquête dans le fil social du passé." },
-    { "id": "geopins", "nom": "Geopins", "emoji": "📍", "disc": "geo", "type": "jouer", "niveaux": [6,5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/Geopins/", "desc": "Place les grands repères géographiques sur la carte muette." },
-    { "id": "maths", "nom": "Le Kit de Survie en Maths", "emoji": "🧮", "disc": "maths", "type": "comprendre", "niveaux": [6,5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/Le-Kit-De-Survie-En-Maths/", "desc": "Ta caisse à outils pour réussir en maths, de la 6e à la 3e." },
-    { "id": "pupitre", "nom": "Le Pupitre", "emoji": "🎼", "disc": "musique", "type": "entrainer", "niveaux": [6,5,4,3], "duree": "15 min", "url": "", "desc": "Écoute, analyse et apprends le vocabulaire de l’éducation musicale." },
-    { "id": "atelier", "nom": "L’Atelier", "emoji": "🖌️", "disc": "arts", "type": "comprendre", "niveaux": [6,5,4,3], "duree": "15 min", "url": "", "desc": "Découvre les notions, les techniques et les œuvres des arts plastiques." },
-    { "id": "brevet", "nom": "Swipe ton brevet", "emoji": "🎓", "disc": "toutes", "type": "entrainer", "niveaux": [3], "duree": "5 min", "url": "https://brot2you.github.io/Swipe-Ton-Brevet/", "desc": "Toutes les matières du brevet en cartes à faire glisser : conseils, révisions et méthodes." },
-    { "id": "mochi", "nom": "Mochi Check", "emoji": "🍡", "disc": "toutes", "type": "soin", "niveaux": [6,5,4,3], "duree": "5 min", "url": "https://brot2you.github.io/Mochi-Check/", "desc": "Fais le point sur tes objectifs, gagne des stickers et fais grandir ton compagnon." },
-    { "id": "boost", "nom": "Boost", "emoji": "🚀", "disc": "toutes", "type": "soin", "niveaux": [6,5,4,3], "duree": "5 min", "url": "https://brot2you.github.io/Boost/", "desc": "Prends confiance, suis tes progrès et dis ce dont tu as besoin pour avancer." },
-    { "id": "objdev", "nom": "Objectif devoirs", "emoji": "⏱️", "disc": "toutes", "type": "comprendre", "niveaux": [6,5,4,3], "duree": "25 min", "url": "https://brot2you.github.io/Objectif-Devoirs/", "desc": "Organise tes devoirs : minuteur, fiches méthode, quiz et cartes mentales." },
-    { "id": "cogni", "nom": "CogniCoach", "emoji": "🧠", "disc": "toutes", "type": "comprendre", "niveaux": [6,5,4,3], "duree": "10 min", "url": "https://brot2you.github.io/Cognicoach/", "desc": "Apprends à apprendre : répétition espacée, cartes mémoire et dictées." }
+    {
+      "id": "survival",
+      "nom": "My Survival Kit",
+      "emoji": "🧰",
+      "disc": "anglais",
+      "type": "soin",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/My-Survival-Kit/",
+      "desc": "Les phrases de survie, le vocabulaire et l’anglais de la classe pour oser parler, avec 35 badges à collectionner."
+    },
+    {
+      "id": "phonix",
+      "nom": "Phonix",
+      "emoji": "🔮",
+      "disc": "anglais",
+      "type": "entrainer",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Phonix/",
+      "nouveau": true,
+      "desc": "Les 44 sons de l’anglais en cartes magiques à collectionner. Choisis ton accent !"
+    },
+    {
+      "id": "evalang",
+      "nom": "Ev@lang Quest",
+      "emoji": "🧭",
+      "disc": "anglais",
+      "type": "entrainer",
+      "niveaux": [
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Evalang-Quest/",
+      "nouveau": true,
+      "desc": "Prépare-toi à Ev@lang avec des questions évolutives en compréhension orale, compréhension écrite, grammaire et vocabulaire. Suis ton positionnement CECRL et tes progrès dans ton carnet d’apprentissage."
+    },
+    {
+      "id": "verbdojo",
+      "nom": "VerbDojo",
+      "emoji": "🥋",
+      "disc": "anglais",
+      "type": "entrainer",
+      "niveaux": [
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Verb-Dojo/",
+      "desc": "92 verbes irréguliers rangés par familles pour les retenir plus vite."
+    },
+    {
+      "id": "pastmasters",
+      "nom": "Past Masters",
+      "emoji": "🃏",
+      "disc": "anglais",
+      "type": "entrainer",
+      "niveaux": [
+        5,
+        4,
+        3
+      ],
+      "duree": "15 min",
+      "url": "https://brot2you.github.io/Past-Masters/",
+      "desc": "Collectionne les verbes irréguliers en cartes et fais-les combattre."
+    },
+    {
+      "id": "arena",
+      "nom": "Grammar Arena",
+      "emoji": "⚔️",
+      "disc": "anglais",
+      "type": "jouer",
+      "niveaux": [
+        5,
+        4,
+        3
+      ],
+      "duree": "15 min",
+      "url": "https://brot2you.github.io/Grammar-Arena/",
+      "nouveau": true,
+      "desc": "Affronte les champions de l’arène à coups de grammaire anglaise."
+    },
+    {
+      "id": "mtm",
+      "nom": "Mind the Mistake!",
+      "emoji": "🔍",
+      "disc": "anglais",
+      "type": "comprendre",
+      "niveaux": [
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/mind-the-mistake/",
+      "desc": "Comprends les codes de correction de tes copies d’anglais et corrige tes erreurs."
+    },
+    {
+      "id": "wordup",
+      "nom": "Word Up",
+      "emoji": "💬",
+      "disc": "anglais",
+      "type": "entrainer",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Wordup/index.html",
+      "desc": "Fini « good », « bad » et « interesting » : enrichis ton vocabulaire anglais."
+    },
+    {
+      "id": "swipeen",
+      "nom": "Swipe ton English",
+      "emoji": "📱",
+      "disc": "anglais",
+      "type": "entrainer",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "5 min",
+      "url": "https://brot2you.github.io/Swipe-Ton-English/",
+      "desc": "Révise l’anglais en faisant glisser des cartes, comme sur ton fil."
+    },
+    {
+      "id": "tama",
+      "nom": "Ma créature anglaise",
+      "emoji": "🥚",
+      "disc": "anglais",
+      "type": "jouer",
+      "niveaux": [
+        6,
+        5
+      ],
+      "duree": "5 min par jour",
+      "url": "",
+      "bientot": true,
+      "desc": "Adopte une créature qui ne parle qu’anglais et prends soin d’elle chaque jour."
+    },
+    {
+      "id": "dinobuddy",
+      "nom": "Dino Buddy Park",
+      "emoji": "🦕",
+      "disc": "anglais",
+      "type": "jouer",
+      "niveaux": [
+        6,
+        5
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Dino-Buddy-Park/",
+      "nouveau": true,
+      "desc": "Apprends l’anglais avec ton compagnon dinosaure grâce à des défis et des quiz."
+    },
+    {
+      "id": "pixelquest",
+      "nom": "PixelQuest English",
+      "emoji": "👾",
+      "disc": "anglais",
+      "type": "soin",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "5 min par jour",
+      "url": "",
+      "desc": "Transforme ton travail d’anglais en habitudes de héros, en pixel art."
+    },
+    {
+      "id": "books",
+      "nom": "Books of Heroes",
+      "emoji": "🐉",
+      "disc": "anglais",
+      "type": "lire",
+      "niveaux": [
+        5,
+        4,
+        3
+      ],
+      "duree": "20 min",
+      "url": "https://brot2you.github.io/BOOKS-OF-HEROES/",
+      "desc": "Des livres dont tu es le héros, en anglais, avec des aides à la lecture."
+    },
+    {
+      "id": "mmr",
+      "nom": "Make-Me-Read",
+      "emoji": "📚",
+      "disc": "anglais",
+      "type": "lire",
+      "niveaux": [
+        5,
+        4,
+        3
+      ],
+      "duree": "20 min",
+      "url": "https://brot2you.github.io/Make-Me-Read/",
+      "desc": "De vrais textes de la littérature anglophone, avec des stratégies pour les comprendre."
+    },
+    {
+      "id": "plume",
+      "nom": "PlumeCraft",
+      "emoji": "🪶",
+      "disc": "anglais",
+      "type": "lire",
+      "niveaux": [
+        4,
+        3
+      ],
+      "duree": "20 min",
+      "url": "",
+      "desc": "Écris en anglais pas à pas, avec des débuts de phrases et une grille pour t’évaluer."
+    },
+    {
+      "id": "ravensmoor",
+      "nom": "Ravensmoor",
+      "emoji": "🕯️",
+      "disc": "anglais",
+      "type": "jouer",
+      "niveaux": [
+        3
+      ],
+      "duree": "45 min",
+      "url": "https://brot2you.github.io/Ravensmoor/",
+      "desc": "1925, un meurtre au manoir. Interroge les suspects et démasque le coupable."
+    },
+    {
+      "id": "freq",
+      "nom": "Frequency Zero",
+      "emoji": "📻",
+      "disc": "anglais",
+      "type": "jouer",
+      "niveaux": [
+        3
+      ],
+      "duree": "40 min",
+      "url": "",
+      "desc": "Une animatrice radio a disparu. Écoute les indices sonores pour la retrouver."
+    },
+    {
+      "id": "logic",
+      "nom": "Whodunnit Logic Puzzle",
+      "emoji": "🧩",
+      "disc": "anglais",
+      "type": "jouer",
+      "niveaux": [
+        4,
+        3
+      ],
+      "duree": "15 min",
+      "url": "https://brot2you.github.io/Brot2you-Case-Files/",
+      "desc": "15 énigmes de logique à résoudre case par case pour trouver le coupable."
+    },
+    {
+      "id": "arbre",
+      "nom": "L’arbre des devoirs",
+      "emoji": "🌳",
+      "disc": "anglais",
+      "type": "comprendre",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "5 min",
+      "url": "https://brot2you.github.io/Arbre-des-devoirs/",
+      "desc": "Bloqué sur tes devoirs d’anglais ? Suis l’arbre, étape par étape."
+    },
+    {
+      "id": "verbetes",
+      "nom": "Verbêtes",
+      "emoji": "🐾",
+      "disc": "francais",
+      "type": "entrainer",
+      "niveaux": [
+        6,
+        5,
+        4
+      ],
+      "duree": "15 min",
+      "url": "https://brot2you.github.io/Verbetes/",
+      "desc": "La conjugaison française en cartes à collectionner et en combats."
+    },
+    {
+      "id": "corrige",
+      "nom": "Corrige ta Copie",
+      "emoji": "✏️",
+      "disc": "francais",
+      "type": "comprendre",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "",
+      "desc": "Comprends les 22 codes de correction de tes copies de français."
+    },
+    {
+      "id": "grimoire",
+      "nom": "Le Grimoire du Style",
+      "emoji": "📜",
+      "disc": "francais",
+      "type": "lire",
+      "niveaux": [
+        5,
+        4,
+        3
+      ],
+      "duree": "15 min",
+      "url": "",
+      "desc": "18 figures de style à repérer, puis à glisser dans tes propres textes."
+    },
+    {
+      "id": "frise",
+      "nom": "La Frise vivante",
+      "emoji": "⏳",
+      "disc": "histoire",
+      "type": "jouer",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "15 min",
+      "url": "https://brot2you.github.io/La-Frise/",
+      "desc": "Voyage dans le temps sur une frise qui couvre toute l’histoire du collège."
+    },
+    {
+      "id": "chrono",
+      "nom": "Chronogramme",
+      "emoji": "🕵️",
+      "disc": "histoire",
+      "type": "jouer",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "20 min",
+      "url": "https://brot2you.github.io/Chronogramme/",
+      "desc": "Mène l’enquête dans le fil social du passé."
+    },
+    {
+      "id": "geopins",
+      "nom": "Geopins",
+      "emoji": "📍",
+      "disc": "geo",
+      "type": "jouer",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Geopins/",
+      "desc": "Place les grands repères géographiques sur la carte muette."
+    },
+    {
+      "id": "maths",
+      "nom": "Le Kit de Survie en Maths",
+      "emoji": "🧮",
+      "disc": "maths",
+      "type": "comprendre",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Le-Kit-De-Survie-En-Maths/",
+      "desc": "Ta caisse à outils pour réussir en maths, de la 6e à la 3e."
+    },
+    {
+      "id": "pupitre",
+      "nom": "Le Pupitre",
+      "emoji": "🎼",
+      "disc": "musique",
+      "type": "entrainer",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "15 min",
+      "url": "",
+      "desc": "Écoute, analyse et apprends le vocabulaire de l’éducation musicale."
+    },
+    {
+      "id": "atelier",
+      "nom": "L’Atelier",
+      "emoji": "🖌️",
+      "disc": "arts",
+      "type": "comprendre",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "15 min",
+      "url": "",
+      "desc": "Découvre les notions, les techniques et les œuvres des arts plastiques."
+    },
+    {
+      "id": "brevet",
+      "nom": "Swipe ton brevet",
+      "emoji": "🎓",
+      "disc": "toutes",
+      "type": "entrainer",
+      "niveaux": [
+        3
+      ],
+      "duree": "5 min",
+      "url": "https://brot2you.github.io/Swipe-Ton-Brevet/",
+      "desc": "Toutes les matières du brevet en cartes à faire glisser : conseils, révisions et méthodes."
+    },
+    {
+      "id": "mochi",
+      "nom": "Mochi Check",
+      "emoji": "🍡",
+      "disc": "toutes",
+      "type": "soin",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "5 min",
+      "url": "https://brot2you.github.io/Mochi-Check/",
+      "desc": "Fais le point sur tes objectifs, gagne des stickers et fais grandir ton compagnon."
+    },
+    {
+      "id": "boost",
+      "nom": "Boost",
+      "emoji": "🚀",
+      "disc": "toutes",
+      "type": "soin",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "5 min",
+      "url": "https://brot2you.github.io/Boost/",
+      "desc": "Prends confiance, suis tes progrès et dis ce dont tu as besoin pour avancer."
+    },
+    {
+      "id": "objdev",
+      "nom": "Objectif devoirs",
+      "emoji": "⏱️",
+      "disc": "toutes",
+      "type": "comprendre",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "25 min",
+      "url": "https://brot2you.github.io/Objectif-Devoirs/",
+      "desc": "Organise tes devoirs : minuteur, fiches méthode, quiz et cartes mentales."
+    },
+    {
+      "id": "cogni",
+      "nom": "CogniCoach",
+      "emoji": "🧠",
+      "disc": "toutes",
+      "type": "comprendre",
+      "niveaux": [
+        6,
+        5,
+        4,
+        3
+      ],
+      "duree": "10 min",
+      "url": "https://brot2you.github.io/Cognicoach/",
+      "desc": "Apprends à apprendre : répétition espacée, cartes mémoire et dictées."
+    }
   ]
 }
 </script>
