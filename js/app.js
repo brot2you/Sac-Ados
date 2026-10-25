@@ -55,7 +55,7 @@
   function uiIcon(id, cls) { return pixelImg(id === 'quest' ? 'assets/premium/icons/quest-gold-v49.png' : 'assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
 
-  function urlOf(a) { return (state.urls && state.urls[a.id]) || a.url || ''; }
+  function urlOf(a) { if (a.id === 'agora') return 'https://brot2you.github.io/Agora/#home'; return (state.urls && state.urls[a.id]) || a.url || ''; }
   function isFav(id) { return state.favs.indexOf(id) > -1; }
   function worldApps(n) { return APPS.filter(function (a) { return a.niveaux.indexOf(n) > -1; }); }
   function progress(list) {
