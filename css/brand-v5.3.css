@@ -99,3 +99,20 @@ img.pixel-prof-art.dojo-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V77 — nouvelle illustration pixel art du bandeau Mon sac */
+.v4-inventory-banner,
+.pack > .v4-inventory-banner {
+ background:#192a42 url('../assets/Sac.PNG?v=77') center center / cover no-repeat !important;
+ background-size:cover!important;
+ background-position:center center!important;
+}
+.pack > .v4-inventory-banner::after {
+ content:none!important;display:none!important;background:none!important;
+}
+.pack > .v4-inventory-banner::before {
+ content:none!important;display:none!important;
+}
+@media(max-width:650px){
+ .v4-inventory-banner,.pack > .v4-inventory-banner {background-position:50% center!important;}
+}
