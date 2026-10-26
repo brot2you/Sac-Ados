@@ -116,3 +116,19 @@ img.pixel-prof-art.dojo-cover {
 @media(max-width:650px){
  .v4-inventory-banner,.pack > .v4-inventory-banner {background-position:50% center!important;}
 }
+
+/* V79 Arts Attack : jaquette pixel art verticale bord à bord */
+.v4-game-picture img.v4-game-art.arts-cover,
+.pack .slot-art img.pixel-poster.arts-cover,
+.slot-art img.pixel-poster.arts-cover,
+.v4-feature-image img.v4-feature-art.arts-cover,
+.sheet img.pixel-modal-poster.arts-cover,
+.v42-detail-cover img.pixel-modal-poster.arts-cover,
+img.pixel-shortcut-art.arts-cover,
+img.pixel-prof-art.arts-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
