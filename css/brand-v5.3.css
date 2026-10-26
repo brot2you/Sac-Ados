@@ -34,3 +34,20 @@ header.top .brand .brand-ico.brand-new-logo .brand-app-icon {
 
 /* Brick It Up : jaquette pleine surface, sans bandes vides */
 img.brick-cover{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;display:block!important;}
+
+/* V69 — Brick It Up : remplissage intégral dans tous les cadres de jaquettes */
+.v4-game-picture img.v4-game-art.brick-cover,
+.pack .slot-art img.pixel-poster.brick-cover,
+.slot-art img.pixel-poster.brick-cover,
+.v4-feature-image img.v4-feature-art.brick-cover,
+.sheet img.pixel-modal-poster.brick-cover,
+.v42-detail-cover img.pixel-modal-poster.brick-cover,
+img.pixel-shortcut-art.brick-cover,
+img.pixel-prof-art.brick-cover {
+  width:100%!important;height:100%!important;
+  min-width:100%!important;min-height:100%!important;
+  max-width:none!important;max-height:none!important;
+  object-fit:cover!important;object-position:center!important;
+  padding:0!important;margin:0!important;
+  transform:none!important;
+}
