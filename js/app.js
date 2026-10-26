@@ -328,7 +328,7 @@
     var html='<div class="v4-world-intro"><button class="v4-return" data-act="map">← CARTE DES MONDES</button>'+
       '<div><span class="v4-world-kicker">MONDE '+(7-n)+' · CLASSE DE '+n+'e</span>'+
       '<h1>'+esc(w.nom)+'</h1><p>'+p.seen+' application(s) ouverte(s) sur '+p.total+' ayant un lien disponible dans ce monde</p></div></div>'+
-      '<div class="v4-world-banner"><img src="assets/worlds/'+worldArtwork(n)+'.webp" alt="Décor de '+esc(w.nom)+'"></div>'+
+      
       '<section class="pack" aria-label="Ton inventaire"><div class="v4-inventory-banner"><h2>MON SAC D’AVENTURIER</h2><span>CLASSE DE '+n+'e · '+all.length+' APPLICATIONS</span></div>'+
       '<div class="pack-body">';
     var q=questFor(n);
