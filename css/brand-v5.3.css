@@ -83,3 +83,19 @@ img.pixel-prof-art.case-files-cover {
  object-fit:cover!important;object-position:center center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V76 : Verb Dojo — image pixel art pleine surface */
+.v4-game-picture img.v4-game-art.dojo-cover,
+.pack .slot-art img.pixel-poster.dojo-cover,
+.slot-art img.pixel-poster.dojo-cover,
+.v4-feature-image img.v4-feature-art.dojo-cover,
+.sheet img.pixel-modal-poster.dojo-cover,
+.v42-detail-cover img.pixel-modal-poster.dojo-cover,
+img.pixel-shortcut-art.dojo-cover,
+img.pixel-prof-art.dojo-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
