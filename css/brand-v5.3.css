@@ -51,3 +51,19 @@ img.pixel-prof-art.brick-cover {
   padding:0!important;margin:0!important;
   transform:none!important;
 }
+
+/* V73 : Grammar Arena — jaquette bord à bord dans tous les cadres */
+.v4-game-picture img.v4-game-art.arena-cover,
+.pack .slot-art img.pixel-poster.arena-cover,
+.slot-art img.pixel-poster.arena-cover,
+.v4-feature-image img.v4-feature-art.arena-cover,
+.sheet img.pixel-modal-poster.arena-cover,
+.v42-detail-cover img.pixel-modal-poster.arena-cover,
+img.pixel-shortcut-art.arena-cover,
+img.pixel-prof-art.arena-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
