@@ -31,3 +31,6 @@ header.top .brand .brand-ico.brand-new-logo .brand-app-icon {
 @media (max-width:380px) {
   header.top .brand .brand-ico.brand-new-logo { width:38px!important; height:38px!important; min-width:38px!important; min-height:38px!important; }
 }
+
+/* Brick It Up : jaquette pleine surface, sans bandes vides */
+img.brick-cover{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;display:block!important;}
