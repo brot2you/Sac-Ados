@@ -67,3 +67,19 @@ img.pixel-prof-art.arena-cover {
  object-fit:cover!important;object-position:center center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V74 : Case Files — remplir les jaquettes sans étirer l'image */
+.v4-game-picture img.v4-game-art.case-files-cover,
+.pack .slot-art img.pixel-poster.case-files-cover,
+.slot-art img.pixel-poster.case-files-cover,
+.v4-feature-image img.v4-feature-art.case-files-cover,
+.sheet img.pixel-modal-poster.case-files-cover,
+.v42-detail-cover img.pixel-modal-poster.case-files-cover,
+img.pixel-shortcut-art.case-files-cover,
+img.pixel-prof-art.case-files-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
