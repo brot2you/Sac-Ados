@@ -50,7 +50,7 @@
     return '<img class="' + cls + '" src="' + src + '" alt="" loading="lazy" decoding="async" draggable="false">';
   }
   function appArt(a, cls) { return pixelImg('assets/illustrations/applications/' + a.id + '.webp?v=' + (a.id === 'evalang' ? '59' : (a.id === 'boost' ? '47' : '46')), (cls || 'pixel-app-image') + (a.id === 'evalang' ? ' evalang-pixel' : '')); }
-  function discIcon(id) { var extras = {eps:1,svt:1,physique:1,technologie:1,espagnol:1,allemand:1,italien:1,emc:1}; if (extras[id]) return '<span class="pixel-small-icon" aria-hidden="true">' + esc(discById[id].emoji) + '</span>'; return pixelImg('assets/illustrations/disciplines/' + id + '.webp?v=47', 'pixel-small-icon'); }
+  function discIcon(id) { var extras = {eps:1,svt:1,physique:1,technologie:1,espagnol:1,allemand:1,italien:1,emc:1}; if (id === 'svt') return pixelImg('assets/illustrations/disciplines/svt.webp?v=65', 'pixel-small-icon'); if (extras[id]) return '<span class="pixel-small-icon" aria-hidden="true">' + esc(discById[id].emoji) + '</span>'; return pixelImg('assets/illustrations/disciplines/' + id + '.webp?v=47', 'pixel-small-icon'); }
   function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '-v51.webp', 'pixel-small-icon sac-category-icon'); }
   function uiIcon(id, cls) { return pixelImg(id === 'quest' ? 'assets/premium/icons/quest-gold-v49.png' : 'assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
