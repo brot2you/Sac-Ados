@@ -132,3 +132,19 @@ img.pixel-prof-art.arts-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V82 Bioquest — jaquette pixel art en plein cadre */
+.v4-game-picture img.v4-game-art.bioquest-cover,
+.pack .slot-art img.pixel-poster.bioquest-cover,
+.slot-art img.pixel-poster.bioquest-cover,
+.v4-feature-image img.v4-feature-art.bioquest-cover,
+.sheet img.pixel-modal-poster.bioquest-cover,
+.v42-detail-cover img.pixel-modal-poster.bioquest-cover,
+img.pixel-shortcut-art.bioquest-cover,
+img.pixel-prof-art.bioquest-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
