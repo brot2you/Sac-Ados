@@ -148,3 +148,19 @@ img.pixel-prof-art.bioquest-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V84 Musicollège : illustration pixel art pleine surface */
+.v4-game-picture img.v4-game-art.musicollege-cover,
+.pack .slot-art img.pixel-poster.musicollege-cover,
+.slot-art img.pixel-poster.musicollege-cover,
+.v4-feature-image img.v4-feature-art.musicollege-cover,
+.sheet img.pixel-modal-poster.musicollege-cover,
+.v42-detail-cover img.pixel-modal-poster.musicollege-cover,
+img.pixel-shortcut-art.musicollege-cover,
+img.pixel-prof-art.musicollege-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
