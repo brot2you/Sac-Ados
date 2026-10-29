@@ -13,7 +13,7 @@
   TYPES.forEach(function (t) { typeById[t.id] = t; });
   WORLDS.forEach(function (w) { worldByN[w.n] = w; });
 
-  var ui = { view: 'map', world: null, pocket: 'tout', disc: 'tout', query: '', preview: 'arena' };
+  var ui = { view: 'map', world: null, pocket: 'tout', disc: 'tout', query: '', preview: 'arena', allMode: false };
   var state = load();
 
   function load() {
@@ -295,7 +295,7 @@
 
   function filtered() {
     var q = fold(ui.query.trim());
-    return worldApps(ui.world).filter(function (a) {
+    return (ui.allMode ? APPS : worldApps(ui.world)).filter(function (a) {
       if (ui.pocket !== 'tout' && a.type !== ui.pocket) { return false; }
       if (ui.disc !== 'tout' && a.disc !== ui.disc) { return false; }
       if (q) {
@@ -324,14 +324,14 @@
   }
 
   function renderWorld() {
-    var n=ui.world,w=worldByN[n],all=worldApps(n),p=progress(all);
+    var n=ui.world,w=worldByN[n],all=ui.allMode ? APPS : worldApps(n),p=progress(all);
     var html='<div class="v4-world-intro"><button class="v4-return" data-act="map">← CARTE DES MONDES</button>'+
-      '<div><span class="v4-world-kicker">MONDE '+(7-n)+' · CLASSE DE '+n+'e</span>'+
+      '<div><span class="v4-world-kicker">'+(ui.allMode ? 'CATALOGUE COMPLET · TOUS NIVEAUX' : 'MONDE '+(7-n)+' · CLASSE DE '+n+'e')+'</span>'+
       '<h1>'+esc(w.nom)+'</h1><p>'+p.seen+' application(s) ouverte(s) sur '+p.total+' ayant un lien disponible dans ce monde</p></div></div>'+
       
-      '<section class="pack" aria-label="Ton inventaire"><div class="v4-inventory-banner"><h2>MON SAC D’AVENTURIER</h2><span>CLASSE DE '+n+'e · '+all.length+' APPLICATIONS</span></div>'+
+      '<section class="pack" aria-label="Ton inventaire"><div class="v4-inventory-banner"><h2>MON SAC D’AVENTURIER</h2><span>'+(ui.allMode ? 'TOUS NIVEAUX' : 'CLASSE DE '+n+'e')+' · '+all.length+' APPLICATIONS</span></div>'+
       '<div class="pack-body">';
-    var q=questFor(n);
+    var q=ui.allMode ? null : questFor(n);
     if(q) html+='<div class="v4-quest-inline"><span>★ &nbsp; QUÊTE DU JOUR : '+esc(q.nom)+'</span><button type="button" data-act="item" data-id="'+q.id+'">DÉCOUVRIR →</button></div>';
     html+='<div class="pockets" role="tablist" aria-label="Types d’applications">'+
       '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="'+(ui.pocket==='tout')+'">Toutes <span class="n">'+all.length+'</span></button>';
@@ -577,7 +577,7 @@
 
   /* ---------- Actions ---------- */
   function openWorld(n) {
-    ui.view = 'world'; ui.world = n; ui.pocket = 'tout'; ui.disc = 'tout'; ui.query = '';
+    ui.view = 'world'; ui.world = n; ui.allMode = false; ui.pocket = 'tout'; ui.disc = 'tout'; ui.query = '';
     render();
     window.scrollTo(0, 0);
   }
@@ -630,7 +630,7 @@
     }
     if (act === 'world') { openWorld(parseInt(t.getAttribute('data-n'), 10)); }
     else if (act === 'map') { ui.view = 'map'; render(); window.scrollTo(0, 0); }
-    else if (act === 'bag') { openWorld(state.classe || ui.world || 6); }
+    else if (act === 'bag') { openWorld(state.classe || ui.world || 6); ui.allMode = true; render(); }
     else if (act === 'quests') { ui.view = 'quests'; render(); window.scrollTo(0, 0); }
     else if (act === 'discoveries') { ui.view = 'discoveries'; render(); window.scrollTo(0, 0); }
     else if (act === 'quest-category') {
