@@ -180,3 +180,40 @@ img.pixel-prof-art.elementaire-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V89 — frise panoramique Mon sac, visible intégralement sans rognage */
+.pack > .v4-inventory-banner,
+.v4-inventory-banner {
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio: 3 / 1!important;
+  padding:0!important;
+  margin:0!important;
+  background-color:#143459!important;
+  background-image:url('../assets/illustrations/banniere-mon-sac.png?v=89')!important;
+  background-repeat:no-repeat!important;
+  background-position:center center!important;
+  background-size:contain!important;
+  overflow:hidden!important;
+}
+/* Le titre figure déjà dans l'illustration : éviter un doublon par-dessus. */
+.pack > .v4-inventory-banner h2,
+.v4-inventory-banner h2 {
+  position:absolute!important;width:1px!important;height:1px!important;
+  overflow:hidden!important;clip-path:inset(50%)!important;
+  padding:0!important;border:0!important;margin:0!important;
+}
+.pack > .v4-inventory-banner > span,
+.v4-inventory-banner > span {
+  position:absolute!important;left:50%!important;bottom:3%!important;
+  transform:translateX(-50%)!important;
+  z-index:3!important;max-width:94%!important;
+  width:max-content!important;white-space:nowrap!important;
+  font-size:clamp(8px,1.1vw,13px)!important;
+  padding:3px 10px!important;border-radius:5px!important;
+  color:#fff5cf!important;background:rgba(12,30,48,.84)!important;
+}
+.pack > .v4-inventory-banner::before,
+.pack > .v4-inventory-banner::after {content:none!important;display:none!important;}
