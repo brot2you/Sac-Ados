@@ -250,3 +250,19 @@ img.pixel-prof-art.elementaire-cover {
   width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;max-width:29px!important;max-height:29px!important;font-size:25px!important;line-height:29px!important;
  }
 }
+
+/* V91 — jaquette Mind The Sound plein cadre */
+.v4-game-picture img.v4-game-art.mind-sound-cover,
+.pack .slot-art img.pixel-poster.mind-sound-cover,
+.slot-art img.pixel-poster.mind-sound-cover,
+.v4-feature-image img.v4-feature-art.mind-sound-cover,
+.sheet img.pixel-modal-poster.mind-sound-cover,
+.v42-detail-cover img.pixel-modal-poster.mind-sound-cover,
+img.pixel-shortcut-art.mind-sound-cover,
+img.pixel-prof-art.mind-sound-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
