@@ -292,3 +292,8 @@ img.sac-disc-icon {
  border:0!important;border-radius:0!important;
  box-shadow:none!important;background:transparent!important;
 }
+
+/* V96 — jaquettes disciplinaires V95, netteté sans recadrage */
+.pack .pockets .pocket img.sac-disc-v95,
+.pack .chips .chip img.sac-disc-v95,
+img.sac-disc-v95 {object-fit:contain!important;image-rendering:pixelated!important;image-rendering:crisp-edges!important;}
