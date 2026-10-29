@@ -1,0 +1,9 @@
+Pack de 16 icones pixel art - SAC ADOS V95
+
+Chaque PNG correspond a une vignette individuelle decoupee de la planche validee.
+
+Attention : les 16 vignettes de la planche sont : anglais, francais, histoire, geo, maths, physique-chimie, svt, technologie, arts plastiques, musique, eps, numerique, langues, dnl, parcours, orientation.
+
+Le catalogue actuel SAC ADOS comprend aussi espagnol, allemand, italien, EMC et toutes : ces cinq disciplines ne sont pas representees sur la planche. Elles necessiteront des illustrations complementaires pour remplacer les icones actuelles sans correspondance incorrecte.
+
+Ces fichiers ne sont pas encore publies sur GitHub.
