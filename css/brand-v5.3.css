@@ -266,3 +266,19 @@ img.pixel-prof-art.mind-sound-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V92 — jaquette Technova pleine surface */
+.v4-game-picture img.v4-game-art.technova-cover,
+.pack .slot-art img.pixel-poster.technova-cover,
+.slot-art img.pixel-poster.technova-cover,
+.v4-feature-image img.v4-feature-art.technova-cover,
+.sheet img.pixel-modal-poster.technova-cover,
+.v42-detail-cover img.pixel-modal-poster.technova-cover,
+img.pixel-shortcut-art.technova-cover,
+img.pixel-prof-art.technova-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
