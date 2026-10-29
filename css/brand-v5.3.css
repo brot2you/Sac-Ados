@@ -282,3 +282,13 @@ img.pixel-prof-art.technova-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V93 — identité commune pour les 16 icônes disciplinaires */
+.pack .pockets .pocket img.sac-disc-icon,
+.pack .chips .chip img.sac-disc-icon,
+img.sac-disc-icon {
+ image-rendering:pixelated!important;image-rendering:crisp-edges;
+ object-fit:contain!important;aspect-ratio:1/1!important;
+ border:0!important;border-radius:0!important;
+ box-shadow:none!important;background:transparent!important;
+}
