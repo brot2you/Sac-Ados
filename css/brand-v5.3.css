@@ -297,3 +297,10 @@ img.sac-disc-icon {
 .pack .pockets .pocket img.sac-disc-v95,
 .pack .chips .chip img.sac-disc-v95,
 img.sac-disc-v95 {object-fit:contain!important;image-rendering:pixelated!important;image-rendering:crisp-edges!important;}
+
+/* V97 — matières : titres masqués, icônes deux fois plus grandes */
+.pack .chips .chip[data-d]:not([data-d="tout"]){padding:7px!important;min-width:82px!important;min-height:82px!important;gap:0!important;}
+.pack .chips .chip img.sac-disc-icon{width:68px!important;height:68px!important;min-width:68px!important;min-height:68px!important;max-width:68px!important;max-height:68px!important;}
+.v4-subject-grid .v4-subject{display:flex!important;align-items:center!important;justify-content:center!important;min-height:110px!important;padding:10px!important;}
+.v4-subject-grid .v4-subject img.sac-disc-icon{width:80px!important;height:80px!important;min-width:80px!important;min-height:80px!important;max-width:80px!important;max-height:80px!important;object-fit:contain!important;}
+@media(max-width:600px){.pack .chips .chip[data-d]:not([data-d="tout"]){min-width:70px!important;min-height:70px!important;padding:5px!important;}.pack .chips .chip img.sac-disc-icon{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;max-width:58px!important;max-height:58px!important;}.v4-subject-grid .v4-subject img.sac-disc-icon{width:70px!important;height:70px!important;min-width:70px!important;min-height:70px!important;max-width:70px!important;max-height:70px!important;}}
