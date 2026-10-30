@@ -321,13 +321,4 @@ img.pixel-prof-art.citezen-cover {
  padding:0!important;margin:0!important;transform:none!important;
 }
 
-/* V102 — EMC : recadrer les marges noires internes de la source PNG */
-.pack .chips .chip[data-d="emc"],
-.v4-subject-grid .v4-subject[data-d="emc"] {overflow:hidden!important;}
-.pack .chips .chip[data-d="emc"] img.sac-disc-icon,
-.v4-subject-grid .v4-subject[data-d="emc"] img.sac-disc-icon {
- transform:scale(1.22)!important;
- transform-origin:center center!important;
- object-fit:contain!important;
- image-rendering:pixelated!important;
-}
+/* V103 : nouvelle icône EMC native, sans zoom ni recadrage forcé. */
