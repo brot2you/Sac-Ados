@@ -322,3 +322,18 @@ img.pixel-prof-art.citezen-cover {
 }
 
 /* V103 : nouvelle icône EMC native, sans zoom ni recadrage forcé. */
+
+/* V105 — Jaquettes Verbcraft et Grammarland, sans déformation */
+.v4-game-picture img.verbcraft-cover,.v4-game-picture img.grammarland-cover,
+.pack .slot-art img.verbcraft-cover,.pack .slot-art img.grammarland-cover,
+.v4-feature-image img.verbcraft-cover,.v4-feature-image img.grammarland-cover,
+.sheet img.verbcraft-cover,.sheet img.grammarland-cover,
+.v42-detail-cover img.verbcraft-cover,.v42-detail-cover img.grammarland-cover,
+img.pixel-shortcut-art.verbcraft-cover,img.pixel-shortcut-art.grammarland-cover,
+img.pixel-prof-art.verbcraft-cover,img.pixel-prof-art.grammarland-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
