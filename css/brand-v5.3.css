@@ -304,3 +304,19 @@ img.sac-disc-v95 {object-fit:contain!important;image-rendering:pixelated!importa
 .v4-subject-grid .v4-subject{display:flex!important;align-items:center!important;justify-content:center!important;min-height:110px!important;padding:10px!important;}
 .v4-subject-grid .v4-subject img.sac-disc-icon{width:80px!important;height:80px!important;min-width:80px!important;min-height:80px!important;max-width:80px!important;max-height:80px!important;object-fit:contain!important;}
 @media(max-width:600px){.pack .chips .chip[data-d]:not([data-d="tout"]){min-width:70px!important;min-height:70px!important;padding:5px!important;}.pack .chips .chip img.sac-disc-icon{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;max-width:58px!important;max-height:58px!important;}.v4-subject-grid .v4-subject img.sac-disc-icon{width:70px!important;height:70px!important;min-width:70px!important;min-height:70px!important;max-width:70px!important;max-height:70px!important;}}
+
+/* V99 — jaquette CITÉZEN plein cadre */
+.v4-game-picture img.v4-game-art.citezen-cover,
+.pack .slot-art img.pixel-poster.citezen-cover,
+.slot-art img.pixel-poster.citezen-cover,
+.v4-feature-image img.v4-feature-art.citezen-cover,
+.sheet img.pixel-modal-poster.citezen-cover,
+.v42-detail-cover img.pixel-modal-poster.citezen-cover,
+img.pixel-shortcut-art.citezen-cover,
+img.pixel-prof-art.citezen-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
