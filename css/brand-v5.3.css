@@ -337,3 +337,19 @@ img.pixel-prof-art.verbcraft-cover,img.pixel-prof-art.grammarland-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V106 — jaquette Palabras */
+.v4-game-picture img.palabras-cover,
+.pack .slot-art img.palabras-cover,
+.slot-art img.palabras-cover,
+.v4-feature-image img.palabras-cover,
+.sheet img.palabras-cover,
+.v42-detail-cover img.palabras-cover,
+img.pixel-shortcut-art.palabras-cover,
+img.pixel-prof-art.palabras-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
