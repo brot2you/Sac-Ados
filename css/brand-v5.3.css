@@ -378,3 +378,25 @@ img.pixel-prof-art.palabras-cover {
  width:29px!important;height:36px!important;min-width:29px!important;min-height:36px!important;max-width:29px!important;max-height:36px!important;
  }
 }
+
+/* V110 : icones individuelles extraites de la planche officielle, sans sprite ni fond blanc */
+.pack .chips .chip[data-d]:not([data-d="tout"]){
+ box-sizing:border-box!important; width:106px!important;min-width:106px!important;
+ height:108px!important;min-height:108px!important; padding:7px!important;
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ overflow:hidden!important;
+}
+.pack .chips .chip img.sac-disc-individual,
+.v4-subject-grid .v4-subject img.sac-disc-individual,
+img.sac-disc-individual{
+ display:block!important; width:72px!important;height:96px!important;
+ min-width:72px!important;min-height:96px!important;
+ max-width:72px!important;max-height:96px!important;
+ aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;
+ padding:0!important;margin:0 auto!important;border:0!important;
+ background:transparent!important;transform:none!important;image-rendering:auto!important;
+}
+@media(max-width:600px){
+ .pack .chips .chip[data-d]:not([data-d="tout"]){width:88px!important;min-width:88px!important;height:94px!important;min-height:94px!important;padding:5px!important;}
+ .pack .chips .chip img.sac-disc-individual,.v4-subject-grid .v4-subject img.sac-disc-individual,img.sac-disc-individual{width:62px!important;min-width:62px!important;max-width:62px!important;height:82px!important;min-height:82px!important;max-height:82px!important;}
+}
