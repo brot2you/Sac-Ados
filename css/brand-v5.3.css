@@ -353,3 +353,28 @@ img.pixel-prof-art.palabras-cover {
  object-fit:cover!important;object-position:center!important;
  padding:0!important;margin:0!important;transform:none!important;
 }
+
+/* V109 — Découpage visuel des 13 icônes depuis la planche officielle V95. */
+.pack .chips .chip .sac-disc-sprite,
+.pack .pockets .pocket .sac-disc-sprite,
+.sac-disc-sprite {
+ display:inline-block!important;
+ flex:0 0 auto!important;
+ width:34px!important;height:42px!important;
+ min-width:34px!important;min-height:42px!important;
+ max-width:34px!important;max-height:42px!important;
+ background-image:url('../assets/disciplines-v95/icones-disciplines-V95.png?v=109')!important;
+ background-repeat:no-repeat!important;
+ background-size:1450% auto!important;
+ background-position:var(--disc-sprite-x) 30%!important;
+ image-rendering:pixelated!important;
+ border:0!important;
+ border-radius:0!important;
+ overflow:hidden!important;
+ transform:none!important;
+}
+@media(max-width:600px){
+ .pack .chips .chip .sac-disc-sprite,.pack .pockets .pocket .sac-disc-sprite,.sac-disc-sprite{
+ width:29px!important;height:36px!important;min-width:29px!important;min-height:36px!important;max-width:29px!important;max-height:36px!important;
+ }
+}
