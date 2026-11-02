@@ -407,3 +407,6 @@ img.sac-disc-individual{
 /* V118: crop letterbox bars baked into Class Reward Jar artwork. */
 .slot-art { position:relative; }
 .slot-art img.pixel-poster.class-reward-jar-cover { width:100%!important;height:100%!important;object-fit:cover!important;transform:scale(1.36)!important;transform-origin:50% 50%!important; }
+
+/* V119 square artwork: undo legacy zoom for Class Reward Jar. */
+.slot-art img.pixel-poster.class-reward-jar-cover {transform:none!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;}
