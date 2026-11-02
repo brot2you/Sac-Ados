@@ -403,3 +403,7 @@ img.sac-disc-individual{
 
 /* V117 — Class Reward Jar: cover fills the entire application artwork frame. */
 .slot-art img.class-reward-jar-cover, .slot-art .class-reward-jar-cover, img.class-reward-jar-cover { width:100% !important; height:100% !important; max-width:none !important; max-height:none !important; object-fit:cover !important; object-position:center center !important; display:block !important; }
+
+/* V118: crop letterbox bars baked into Class Reward Jar artwork. */
+.slot-art { position:relative; }
+.slot-art img.pixel-poster.class-reward-jar-cover { width:100%!important;height:100%!important;object-fit:cover!important;transform:scale(1.36)!important;transform-origin:50% 50%!important; }
