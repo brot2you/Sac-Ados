@@ -400,3 +400,6 @@ img.sac-disc-individual{
  .pack .chips .chip[data-d]:not([data-d="tout"]){width:88px!important;min-width:88px!important;height:94px!important;min-height:94px!important;padding:5px!important;}
  .pack .chips .chip img.sac-disc-individual,.v4-subject-grid .v4-subject img.sac-disc-individual,img.sac-disc-individual{width:62px!important;min-width:62px!important;max-width:62px!important;height:82px!important;min-height:82px!important;max-height:82px!important;}
 }
+
+/* V117 — Class Reward Jar: cover fills the entire application artwork frame. */
+.slot-art img.class-reward-jar-cover, .slot-art .class-reward-jar-cover, img.class-reward-jar-cover { width:100% !important; height:100% !important; max-width:none !important; max-height:none !important; object-fit:cover !important; object-position:center center !important; display:block !important; }
