@@ -419,3 +419,11 @@ img.sac-disc-individual{
  object-position:center center!important;transform:none!important;scale:1!important;
  padding:0!important;margin:0!important;
 }
+
+/* V122 — grandes icônes des cinq activités, libellés sous l'illustration. */
+.pack .pockets {display:flex!important;flex-wrap:wrap!important;gap:10px!important;align-items:stretch!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) {display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;min-width:118px!important;min-height:116px!important;padding:10px 9px!important;text-align:center!important;white-space:normal!important;line-height:1.25!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) img.sac-category-icon {display:block!important;flex:none!important;width:70px!important;height:70px!important;min-width:70px!important;min-height:70px!important;max-width:70px!important;max-height:70px!important;object-fit:contain!important;margin:0 auto!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) > span:not(.n) {display:block!important;font-size:12px!important;font-weight:700!important;max-width:130px!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) .n {font-size:11px!important;}
+@media(max-width:600px){.pack .pockets .pocket[data-p]:not([data-p="tout"]){min-width:95px!important;flex:1 1 29%!important;min-height:108px!important;padding:7px 4px!important;}.pack .pockets .pocket[data-p]:not([data-p="tout"]) img.sac-category-icon{width:60px!important;height:60px!important;min-width:60px!important;min-height:60px!important;max-width:60px!important;max-height:60px!important;}}
