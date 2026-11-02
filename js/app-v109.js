@@ -17,7 +17,7 @@
   var state = load();
 
   function load() {
-    var d = { classe: null, favs: [], seen: {}, lexend: false, calme: false, sound: true, urls: {} };
+    var d = { classe: null, favs: [], favorites: [], seen: {}, lexend: false, calme: false, sound: true, urls: {} };
     try {
       var raw = localStorage.getItem(KEY);
       if (raw) {
@@ -27,6 +27,8 @@
     } catch (e) {}
     if (!(d.favs instanceof Array)) { d.favs = []; }
     d.favs = d.favs.filter(function (id) { return !!byId[id]; });
+    if (!(d.favorites instanceof Array)) d.favorites=[];
+    d.favorites=d.favorites.filter(function(id){return !!byId[id];});
     return d;
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
@@ -80,7 +82,8 @@
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
 
   function urlOf(a) { if (a.id === 'agora') return 'https://brot2you.github.io/Agora/#home'; return (state.urls && state.urls[a.id]) || a.url || ''; }
-  function isFav(id) { return state.favs.indexOf(id) > -1; }
+  function isFav(id) { return state.favorites.indexOf(id) > -1; }
+  function isShortcut(id) { return state.favs.indexOf(id) > -1; }
   function worldApps(n) { return APPS.filter(function (a) { return a.niveaux.indexOf(n) > -1; }); }
   function progress(list) {
     var av = list.filter(function (a) { return !!urlOf(a); });
@@ -237,7 +240,7 @@
       '<p class="v4-feature-text">' + esc(a.desc) + '</p>' +
       (url ? '<a class="v4-launch" href="' + esc(url) + '" target="_blank" rel="noopener" data-act="launch" data-id="'+a.id+'">▶ &nbsp; LANCER L’APPLICATION</a>' :
       '<button class="v4-launch" disabled>LIEN À VENIR</button>') +
-      '<div class="v4-feature-actions"><button type="button" data-act="quickfav" data-id="'+a.id+'">' + (isFav(a.id)?'★ Dans mes favoris':'☆ Mettre en favori') + '</button>' +
+      '<div class="v4-feature-actions"><button type="button" data-act="quickfav" data-id="'+a.id+'">' + (isFav(a.id)?'★ Retirer des favoris':'☆ Mettre en favori') + '</button>' +
       '<button type="button" data-act="item" data-id="'+a.id+'">ⓘ &nbsp; Voir les détails</button></div></div></div>';
   }
   function v4Card(a) {
@@ -380,8 +383,10 @@
     for (var i = 0; i < MAXFAV; i++) {
       var id = state.favs[i], a = id ? byId[id] : null;
       if (a && urlOf(a)) {
+        html += '<button class="hb-remove" data-act="remove-shortcut" data-id="' + a.id + '" aria-label="Retirer ' + esc(a.nom) + ' des raccourcis" title="Retirer ce raccourci">×</button>';
         html += '<a class="hb-slot lnk" href="' + esc(urlOf(a)) + '" target="_blank" rel="noopener" data-act="launch" data-id="' + a.id + '" title="Lancer ' + esc(a.nom) + '" aria-label="Lancer ' + esc(a.nom) + '">' + appArt(a, 'pixel-shortcut-art') + '</a>';
       } else if (a) {
+        html += '<button class="hb-remove" data-act="remove-shortcut" data-id="' + a.id + '" aria-label="Retirer ' + esc(a.nom) + ' des raccourcis" title="Retirer ce raccourci">×</button>';
         html += '<button class="hb-slot" data-act="item" data-id="' + a.id + '" title="' + esc(a.nom) + '" aria-label="' + esc(a.nom) + '">' + appArt(a, 'pixel-shortcut-art') + '</button>';
       } else {
         html += '<button class="hb-slot empty-s" data-act="hot-empty" aria-label="Emplacement libre">＋</button>';
@@ -504,7 +509,8 @@
     } else {
       html += '<button type="button" class="v42-play" disabled>'+(a.bientot?'Bientôt disponible':'Lien à venir')+'</button>';
     }
-    html += '<button type="button" class="v42-favorite" data-act="fav" data-id="'+a.id+'">'+(isFav(a.id)?'★ Retirer des raccourcis':'☆ Ajouter à mes raccourcis')+'</button>';
+    html += '<button type="button" class="v42-favorite" data-act="quickfav" data-id="'+a.id+'">'+(isFav(a.id)?'★ Retirer des favoris':'☆ Mettre en favori')+'</button>';
+    html += '<button type="button" class="v42-favorite" data-act="fav" data-id="'+a.id+'">'+(isShortcut(a.id)?'✕ Retirer des raccourcis':'＋ Ajouter aux raccourcis')+'</button>'; 
     if (state.seen[a.id]) html += '<p class="v42-opened">✓ Application déjà ouverte</p>';
     html += '</div></div>';
     openModal(html);
@@ -623,6 +629,7 @@
     }
     playSfx(act === 'launch' ? 'open' : (act === 'fav' || act === 'quickfav' ? 'star' : (act === 'map' || act === 'close' ? 'back' : 'tap')));
 
+    if (act === 'remove-shortcut') { var pos=state.favs.indexOf(id);if(pos!==-1){state.favs.splice(pos,1);save();renderHotbar();toast('Raccourci supprimé');}return; }
     if (act === 'hot-toggle') {
       var panel=$('hotbar'), trigger=$('shortcutToggle');
       var open=panel.getAttribute('data-open') !== 'true';
@@ -645,12 +652,12 @@
       ui.view='world';ui.world=state.classe||6;ui.disc=t.getAttribute('data-d');ui.pocket='tout';ui.query='';render();window.scrollTo(0,0);return;
     }
     if (act === 'quickfav') {
-      if(isFav(id))state.favs.splice(state.favs.indexOf(id),1);
-      else if(state.favs.length>=MAXFAV){toast('Six favoris maximum : libère d’abord une place.');return;}
-      else state.favs.push(id);
-      save();renderHotbar();
+      if(isFav(id))state.favorites.splice(state.favorites.indexOf(id),1);
+      else state.favorites.push(id);
+      save();render();
       var pane=$('v4Feature');if(pane)pane.innerHTML=featuredCard(id);
-      toast(isFav(id)?'Ajouté aux raccourcis ⭐':'Favori retiré');return;
+      if(modalOpen())showItem(id);
+      toast(isFav(id)?'Ajouté aux favoris ⭐':'Favori retiré');return;
     }
     if (act === 'world') { openWorld(parseInt(t.getAttribute('data-n'), 10)); }
     else if (act === 'map') { ui.view = 'map'; render(); window.scrollTo(0, 0); }
@@ -676,7 +683,7 @@
       }, 350);
     }
     else if (act === 'fav') {
-      if (isFav(id)) {
+      if (isShortcut(id)) {
         state.favs.splice(state.favs.indexOf(id), 1); save(); toast('Retiré de tes raccourcis');
       } else if (state.favs.length >= MAXFAV) {
         toast('Ta barre est pleine : retire d’abord un raccourci.'); return;
