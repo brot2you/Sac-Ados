@@ -312,7 +312,7 @@
     else if(a.nouveau) tag='<span class="tag new">Nouveau</span>';
     var fav=isFav(a.id)?'<span class="tag fav" aria-label="Dans tes favoris">★</span>':'';
     return '<button type="button" class="slot" data-act="item" data-id="'+a.id+'" style="'+discStyle(a)+'" aria-label="Voir '+esc(a.nom)+', '+esc(d.nom)+'">'+
-      '<span class="slot-art">'+appArt(a,'pixel-poster')+'<span class="v4-slot-star">★</span></span>'+
+      '<span class="slot-art">'+appArt(a,'pixel-poster')+'</span>'+
       fav+tag+'<span class="slot-card-info"><span class="slot-name">'+esc(a.nom)+'</span>'+
       '<span class="slot-sub">'+esc(d.nom)+' · '+esc(a.duree)+'</span></span></button>';
   }
