@@ -432,3 +432,23 @@ img.sac-disc-individual{
 .hb-inner{position:relative!important;}
 .hb-remove{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:24px!important;height:24px!important;min-width:24px!important;padding:0!important;margin-right:-9px!important;position:relative!important;z-index:10!important;align-self:flex-start!important;border:2px solid #fff1bd!important;border-radius:50%!important;background:#b93543!important;color:white!important;font-size:19px!important;font-weight:bold!important;cursor:pointer!important;}
 .hb-remove:hover,.hb-remove:focus-visible{background:#e84b55!important;}
+
+/* V124 — smartphone: prevent the world/catalogue from widening and sliding sideways. */
+@media(max-width:650px){
+ html,body{width:100%!important;max-width:100%!important;overflow-x:clip!important;}
+ *,*::before,*::after{box-sizing:border-box;}
+ main,#view,.pack,.pack-body,.v4-world-intro,.v4-inventory-banner,.v4-inventory-controls{width:100%!important;max-width:100%!important;min-width:0!important;}
+ main{padding-left:10px!important;padding-right:10px!important;margin:0 auto!important;}
+ .v4-world-intro{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;}
+ .v4-world-intro>div{width:100%!important;min-width:0!important;overflow-wrap:anywhere!important;}
+ .v4-world-intro h1{font-size:clamp(24px,7vw,36px)!important;overflow-wrap:anywhere!important;}
+ .pack .pack-body{width:auto!important;max-width:calc(100% - 12px)!important;margin:0 6px 8px!important;min-width:0!important;}
+ .pack .pockets{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;width:100%!important;max-width:100%!important;overflow:visible!important;}
+ .pack .pockets .pocket{width:100%!important;max-width:100%!important;min-width:0!important;flex:none!important;white-space:normal!important;}
+ .pack .pockets .pocket[data-p]:not([data-p="tout"]){min-width:0!important;min-height:108px!important;}
+ .pack .pockets .pocket[data-p]:not([data-p="tout"]) img.sac-category-icon{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;max-width:58px!important;max-height:58px!important;}
+ .pack .grid,.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;min-width:0!important;}
+ header.top{width:100%!important;max-width:100%!important;min-width:0!important;}
+ header.top .brand{min-width:0!important;}
+ .rpg-bottom-nav,body>.rpg-bottom-nav{max-width:calc(100vw - 12px)!important;}
+}
