@@ -385,7 +385,8 @@
     } else {
       html = '<div class="grid">' + sortApps(list).map(slotHTML).join('') + '</div>';
     }
-    if (ui.query.trim()) html = '<p class="search-results-count" role="status">🔎 '+list.length+' application'+(list.length>1?'s':'')+' trouvée'+(list.length>1?'s':'')+' dans tout Sac’Ados</p>' + html;\n    $('grid').innerHTML = html;
+    if (ui.query.trim()) html = '<p class="search-results-count" role="status">🔎 '+list.length+' application'+(list.length>1?'s':'')+' trouvée'+(list.length>1?'s':'')+' dans tout Sac’Ados</p>' + html;
+    $('grid').innerHTML = html;
   }
 
   function renderWorld() {
