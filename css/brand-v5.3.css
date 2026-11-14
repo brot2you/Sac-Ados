@@ -452,3 +452,11 @@ img.sac-disc-individual{
  header.top .brand{min-width:0!important;}
  .rpg-bottom-nav,body>.rpg-bottom-nav{max-width:calc(100vw - 12px)!important;}
 }
+
+/* V130 — Fiches applications : grandes icônes de discipline et activité, textes dessous. */
+.sheet .v42-detail-info .v42-badges{display:flex!important;align-items:stretch!important;gap:12px!important;flex-wrap:wrap!important;margin:12px 0!important;}
+.sheet .v42-detail-info .v42-badges .v42-tag{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:112px!important;min-width:112px!important;min-height:126px!important;padding:9px 8px!important;text-align:center!important;line-height:1.2!important;white-space:normal!important;font-size:13px!important;font-weight:700!important;}
+.sheet .v42-detail-info .v42-badges .v42-tag img{display:block!important;width:82px!important;height:82px!important;min-width:82px!important;min-height:82px!important;max-width:82px!important;max-height:82px!important;object-fit:contain!important;object-position:center!important;margin:0 auto!important;flex:none!important;}
+.sheet .v42-detail-info .v42-badges .v42-tag img.sac-category-icon{width:82px!important;height:82px!important;min-width:82px!important;min-height:82px!important;max-width:82px!important;max-height:82px!important;}
+.search-results-count{padding:10px 14px;margin:8px 0 14px;border-radius:9px;background:#fff1c9;color:#493016;font-weight:700;}
+@media(max-width:600px){.sheet .v42-detail-info .v42-badges{gap:8px!important;}.sheet .v42-detail-info .v42-badges .v42-tag{width:104px!important;min-width:104px!important;min-height:112px!important;}.sheet .v42-detail-info .v42-badges .v42-tag img,.sheet .v42-detail-info .v42-badges .v42-tag img.sac-category-icon{width:72px!important;height:72px!important;min-width:72px!important;min-height:72px!important;max-width:72px!important;max-height:72px!important;}}
