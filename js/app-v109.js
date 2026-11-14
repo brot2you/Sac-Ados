@@ -320,15 +320,53 @@
       '<span class="slot-sub">'+esc(d.nom)+' · '+esc(a.duree)+'</span></span></button>';
   }
 
+  /* V130 — recherche globale, tolérante aux accents, mots multiples et synonymes. */
+  var searchAliases = {
+    anglais: 'english langue vocabulaire grammaire verbs verbes',
+    espagnol: 'spanish espanol conjugaison conjuguer verbes',
+    maths: 'mathematiques mathematique calcul geometrie nombres fractions equations',
+    francais: 'français orthographe conjugaison lecture ecriture',
+    histoire: 'historique chronologie passe',
+    geo: 'geographie pays cartes monde',
+    svt: 'biologie sciences nature',
+    physique: 'chimie sciences experiences',
+    emc: 'citoyennete citoyen',
+    jouer: 'jeu jeux ludique gaming aventure',
+    entrainer: 'exercice exercices revision reviser entrainement pratiquer',
+    comprendre: 'cours lecon methode apprendre explication',
+    lire: 'lecture textes livres',
+    soin: 'bien etre sante'
+  };
+  function searchWords(q) {
+    return fold(q).replace(/[^a-z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean);
+  }
+  function searchText(a) {
+    var d=discById[a.disc], t=typeById[a.type];
+    return fold([a.id,a.nom,a.desc,d.nom,t.nom,searchAliases[a.disc]||'',searchAliases[a.type]||''].join(' '));
+  }
+  function searchMatches(a, words) {
+    var hay=searchText(a), parts=hay.split(/[^a-z0-9]+/).filter(Boolean);
+    return words.every(function(word){
+      if(hay.indexOf(word)!==-1)return true;
+      if(word.length<4)return false;
+      return parts.some(function(part){
+        if(Math.abs(part.length-word.length)>2)return false;
+        var prev=Array.from({length:part.length+1},function(_,i){return i;});
+        for(var i=1;i<=word.length;i++){
+          var cur=[i];
+          for(var k=1;k<=part.length;k++)cur[k]=Math.min(cur[k-1]+1,prev[k]+1,prev[k-1]+(word[i-1]===part[k-1]?0:1));
+          prev=cur;
+        }
+        return prev[part.length]<=(word.length>=7?2:1);
+      });
+    });
+  }
   function filtered() {
-    var q = fold(ui.query.trim());
-    return (ui.allMode ? APPS : worldApps(ui.world)).filter(function (a) {
-      if (ui.pocket !== 'tout' && a.type !== ui.pocket) { return false; }
-      if (ui.disc !== 'tout' && a.disc !== ui.disc) { return false; }
-      if (q) {
-        var hay = fold(a.nom + ' ' + a.desc + ' ' + discById[a.disc].nom + ' ' + typeById[a.type].nom);
-        if (hay.indexOf(q) < 0) { return false; }
-      }
+    var words=searchWords(ui.query);
+    if(words.length) return APPS.filter(function(a){return searchMatches(a,words);});
+    return (ui.allMode ? APPS : worldApps(ui.world)).filter(function(a){
+      if(ui.pocket!=='tout' && a.type!==ui.pocket)return false;
+      if(ui.disc!=='tout' && a.disc!==ui.disc)return false;
       return true;
     });
   }
@@ -336,7 +374,7 @@
   function renderGrid() {
     var list = filtered(), html = '';
     if (!list.length) {
-      html = '<div class="empty"><b>Cette poche est vide</b>Choisis une autre poche ou une autre matière, ou efface ta recherche.</div>';
+      html = ui.query.trim() ? '<div class="empty"><b>Aucun résultat pour « '+esc(ui.query)+' »</b>Essaie un autre mot, une matière ou un nom d’application.</div>' : '<div class="empty"><b>Cette poche est vide</b>Choisis une autre poche ou une autre matière.</div>';
     } else if (ui.pocket === 'tout') {
       TYPES.forEach(function (t) {
         var part = sortApps(list.filter(function (a) { return a.type === t.id; }));
@@ -347,7 +385,7 @@
     } else {
       html = '<div class="grid">' + sortApps(list).map(slotHTML).join('') + '</div>';
     }
-    $('grid').innerHTML = html;
+    if (ui.query.trim()) html = '<p class="search-results-count" role="status">🔎 '+list.length+' application'+(list.length>1?'s':'')+' trouvée'+(list.length>1?'s':'')+' dans tout Sac’Ados</p>' + html;\n    $('grid').innerHTML = html;
   }
 
   function renderWorld() {
@@ -366,7 +404,7 @@
       if(count)html+='<button class="pocket" role="tab" data-act="pocket" data-p="'+t.id+'" aria-selected="'+(ui.pocket===t.id)+'">'+typeIcon(t.id)+'<span>'+esc(t.nom)+'</span><span class="n">'+count+'</span></button>';
     });
     html+='</div><div class="v4-inventory-controls"><label class="search"><span aria-hidden="true">⌕</span><span class="sr">Rechercher une application</span>'+
-      '<input id="q" type="search" placeholder="Rechercher une application..." value="'+esc(ui.query)+'" autocomplete="off"></label>'+
+      '<input id="q" type="search" placeholder="Nom, matière, thème, activité…" value="'+esc(ui.query)+'" autocomplete="off"></label>'+
       '<div class="chips" role="group" aria-label="Matières">'+
       '<button class="chip" data-act="disc" data-d="tout" aria-pressed="'+(ui.disc==='tout')+'">Toutes</button>';
     DISCS.forEach(function(d){if(!all.some(function(a){return a.disc===d.id;}))return;
