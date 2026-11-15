@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "Sac’Ados — le kit du collégien",
+  "short_name": "Sac’Ados",
+  "description": "Explore quatre mondes et découvre toutes les applis BROT2YOU du collège, de la 6e à la 3e.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#0f2448",
+  "theme_color": "#0f2448",
+  "categories": ["education", "kids"],
+  "icons": [
+    { "src": "assets/pwa/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/pwa/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/pwa/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/pwa/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
