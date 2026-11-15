@@ -130,6 +130,18 @@
       );
       return;
     }
+    if (isAndroid && /Firefox/.test(ua)) {
+      openSheet(
+        '<h3 id="pwaTitle">🎒 Installer Sac’Ados</h3>' +
+        '<ol class="pwa-steps">' +
+        '<li><span>Touche le menu ' + DOTS + ' (en bas ou en haut à droite de l’écran).</span></li>' +
+        '<li><span>Choisis <b>« Ajouter à l’écran d’accueil »</b>.</span></li>' +
+        '<li><span>Confirme avec <b>« Ajouter »</b>. L’icône du sac apparaît avec tes autres applis.</span></li>' +
+        '</ol>' +
+        '<button class="pwa-btn" data-pwa="close" style="width:100%">J’ai compris</button>'
+      );
+      return;
+    }
     if (firefox) {
       openSheet(
         '<h3 id="pwaTitle">🎒 Installer Sac’Ados</h3>' +
