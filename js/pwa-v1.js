@@ -100,6 +100,24 @@
 
   function helpIOS() {
     var ipad = /iPad/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var fx = /FxiOS/.test(ua), cr = /CriOS/.test(ua), ed = /EdgiOS/.test(ua);
+    if (fx || cr || ed) {
+      var step1 = fx ? 'Touche le menu <b>≡</b> en bas à droite, puis <b>« Partager »</b> ' + SHARE_SVG + '.' :
+        cr ? 'Touche le bouton Partager ' + SHARE_SVG + ' à droite de la barre d’adresse (ou dans le menu <b>⋯</b>).' :
+        'Touche le menu <b>⋯</b> en bas, puis <b>« Partager »</b> ' + SHARE_SVG + '.';
+      openSheet(
+        '<h3 id="pwaTitle">🎒 Mets ton sac sur ton écran</h3>' +
+        '<p>En 3 gestes, Sac’Ados s’ouvre comme une vraie appli, en plein écran.</p>' +
+        '<ol class="pwa-steps">' +
+        '<li><span>' + step1 + '</span></li>' +
+        '<li><span>Fais défiler et choisis <b>« Sur l’écran d’accueil »</b> ' + PLUS_SVG + '</span></li>' +
+        '<li><span>Touche <b>« Ajouter »</b> en haut à droite. C’est prêt !</span></li>' +
+        '</ol>' +
+        '<p class="pwa-note">Tu ne vois pas « Sur l’écran d’accueil » ? Mets ton iPhone à jour (iOS 16.4 ou plus) ou ouvre ce lien dans <b>Safari</b>.</p>' +
+        '<button class="pwa-btn" data-pwa="close" style="width:100%">J’ai compris</button>'
+      );
+      return;
+    }
     openSheet(
       '<h3 id="pwaTitle">🎒 Mets ton sac sur ton écran</h3>' +
       '<p>En 3 gestes, Sac’Ados s’ouvre comme une vraie appli, en plein écran.</p>' +
