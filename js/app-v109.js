@@ -289,7 +289,7 @@
       '<section class="v4-map-panel v44-world-map" aria-label="Carte interactive des quatre mondes de Sac’Ados">' +
       '<img src="assets/worlds/kingdom-map.webp" alt="Carte illustrée de Sac’Ados avec les mondes de 6e, 5e, 4e et 3e" width="1536" height="875" fetchpriority="high" draggable="false">';
     WORLDS.forEach(function (w) {
-      var pr = progress(worldApps(w.n));
+      var pr = progress(w.n === 3 ? APPS : worldApps(w.n));
       html += '<button type="button" class="map-hit hit-' + w.n + '" data-act="world" data-n="' + w.n + '" aria-label="Entrer dans le monde de ' + w.n + 'e : ' + esc(w.nom) + ' ; ' + pr.seen + ' applications découvertes sur ' + pr.total + '">' +
         '<span class="v44-zone-label" aria-hidden="true">' + w.n + 'e</span></button>';
     });
@@ -392,7 +392,7 @@
   function renderWorld() {
     var n=ui.world,w=worldByN[n],all=ui.allMode ? APPS : worldApps(n),p=progress(all);
     var html='<div class="v4-world-intro"><button class="v4-return" data-act="map">← CARTE DES MONDES</button>'+
-      '<div><span class="v4-world-kicker">'+(ui.allMode ? 'CATALOGUE COMPLET · TOUS NIVEAUX' : 'MONDE '+(7-n)+' · CLASSE DE '+n+'e')+'</span>'+
+      '<div><span class="v4-world-kicker">'+(ui.allMode ? (n === 3 ? 'MONDE 3e · CATALOGUE COMPLET · TOUS NIVEAUX' : 'CATALOGUE COMPLET · TOUS NIVEAUX') : 'MONDE '+(7-n)+' · CLASSE DE '+n+'e')+'</span>'+
       '<h1>'+esc(w.nom)+'</h1><p>'+p.seen+' application(s) ouverte(s) sur '+p.total+' ayant un lien disponible dans ce monde</p></div></div>'+
       
       '<section class="pack" aria-label="Ton inventaire"><div class="v4-inventory-banner"><h2>MON SAC D’AVENTURIER</h2><span>'+(ui.allMode ? 'TOUS NIVEAUX' : 'CLASSE DE '+n+'e')+' · '+all.length+' APPLICATIONS</span></div>'+
@@ -646,7 +646,7 @@
 
   /* ---------- Actions ---------- */
   function openWorld(n, showAll) {
-    ui.view = 'world'; ui.world = n; ui.allMode = !!showAll; ui.pocket = 'tout'; ui.disc = 'tout'; ui.query = '';
+    ui.view = 'world'; ui.world = n; ui.allMode = !!showAll || n === 3; ui.pocket = 'tout'; ui.disc = 'tout'; ui.query = '';
     render();
     window.scrollTo(0, 0);
   }
