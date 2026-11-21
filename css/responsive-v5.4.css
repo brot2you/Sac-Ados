@@ -138,3 +138,29 @@ header.top .brand-name{ white-space:nowrap; overflow:hidden; text-overflow:ellip
 }
 
 @media (prefers-reduced-motion:reduce){ .v44-home{ scroll-behavior:auto!important; } }
+
+/* V172 — La jaquette remplit réellement son cadre dans les fiches d'applications. */
+.sheet .v42-detail-cover{
+  box-sizing:border-box;
+  padding:0!important;
+  aspect-ratio:1/1;
+  overflow:hidden;
+}
+.sheet .v42-detail-cover img.pixel-modal-poster{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+@media (max-width:600px){
+  .sheet .v42-detail-cover{
+    width:100%!important;
+    max-width:min(100%,420px)!important;
+    margin:0 auto!important;
+  }
+}
