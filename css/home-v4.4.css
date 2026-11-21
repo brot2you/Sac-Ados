@@ -93,3 +93,9 @@ body:has(.v44-home) #view{
 .pack-body .sac-featured-heading p{color:#635743}
 .pack-body .sac-featured-kicker{color:#996623}
 .pack-body .sac-featured-info{color:#fff9eb}
+
+/* V170 : cartes À la une dans le journal Mes quêtes (et non sur la carte ou dans Mon sac). */
+#view > .sac-featured{max-width:1200px;margin:20px auto 28px;padding:0 10px}
+#view > .sac-featured .sac-featured-heading h2{color:#f0cd80}
+#view > .sac-featured .sac-featured-card{background:linear-gradient(135deg,#233d5b,#112842)}
+@media(max-width:620px){#view > .sac-featured{padding:0 2px;margin:18px auto 28px}}
