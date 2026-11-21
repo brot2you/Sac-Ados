@@ -452,7 +452,6 @@
       '<div class="pack-body">';
     var q=ui.allMode ? null : questFor(n);
     if(q) html+='<div class="v4-quest-inline"><span>★ &nbsp; QUÊTE DU JOUR : '+esc(q.nom)+'</span><button type="button" data-act="item" data-id="'+q.id+'">DÉCOUVRIR →</button></div>';
-    html += renderFeatured();
     html+='<div class="pockets" role="tablist" aria-label="Types d’applications">'+
       '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="'+(ui.pocket==='tout')+'">Toutes <span class="n">'+all.length+'</span></button>';
     TYPES.forEach(function(t){var count=all.filter(function(a){return a.type===t.id;}).length;
@@ -528,6 +527,7 @@
     var n=state.classe || 6, q=questFor(n), w=worldByN[n];
     var html='<div class="page-intro"><span class="eyebrow">JOURNAL DE L’AVENTURIER</span>' +
       '<h1 class="h1">Mes quêtes</h1><p class="lede">Chaque jour, une application à explorer dans ton monde. Une application ouverte n’est pas un exercice validé.</p></div>';
+    html += renderFeatured();
     html+='<div class="journal-card"><div class="journal-icon">' + uiIcon('quest', 'pixel-journal-icon') + '</div><div class="journal-body">' +
       '<span class="eyebrow">DÉCOUVERTE DU JOUR · '+n+'e</span><h2>'+esc(w.nom)+'</h2>';
     if(q){
