@@ -531,6 +531,7 @@
     html+='<div class="journal-card"><div class="journal-icon">' + uiIcon('quest', 'pixel-journal-icon') + '</div><div class="journal-body">' +
       '<span class="eyebrow">DÉCOUVERTE DU JOUR · '+n+'e</span><h2>'+esc(w.nom)+'</h2>';
     if(q){
+      html+='<div class="quest-daily-art" role="img" aria-label="Illustration de '+esc(q.nom)+'">'+appArt(q, 'quest-daily-image')+'</div>';
       html+='<p>' + (state.seen[q.id] ? 'Tu as déjà ouvert cette application :' : 'Ta suggestion pour aujourd’hui :') + '</p>' +
         '<h3>'+esc(q.nom)+'</h3><p>'+esc(q.desc)+'</p></div>' +
         '<button class="btn primary" data-act="item" data-id="'+q.id+'">Voir l’application →</button>';
