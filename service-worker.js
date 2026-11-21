@@ -3,7 +3,7 @@
    - CSS / JS / polices : copie en cache servie aussitôt, puis rafraîchie en arrière-plan.
    - Images : mises en cache au fur et à mesure qu’elles s’affichent (pas les 150 Mo d’un coup).
    À CHAQUE MODIFICATION DE CE FICHIER, augmenter VERSION. Pour index.html, css, js, images : rien à faire. */
-var VERSION = 'sacados-pwa-v1';
+var VERSION = 'sacados-pwa-v2';
 var SHELL = VERSION + '-shell';
 var RUNTIME = VERSION + '-runtime';
 var IMAGES = 'sacados-images'; /* garde le même nom entre versions : inutile de retélécharger les illustrations */
@@ -20,7 +20,7 @@ var BASE_FILES = [
 ];
 
 /* Lit index.html et met aussi en cache toutes les feuilles CSS, scripts et visuels d’interface qu’il appelle.
-   Ainsi, quand tu passes de app-v109.js à app-v110.js, rien à modifier ici. */
+   Ainsi, quand tu modifies sacados.js ou sacados.css, rien à modifier ici. */
 function shellFromIndex(html) {
   var out = [], re = /(?:href|src)="([^"#]+\.(?:css|js|webp|png)(?:\?[^"]*)?)"/g, m;
   while ((m = re.exec(html))) {

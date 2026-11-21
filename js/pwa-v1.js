@@ -3,7 +3,7 @@
    - Bandeau « Installe Sac’Ados » (Android : vraie fenêtre d’installation ; iPhone/iPad : mode d’emploi illustré)
    - Ligne « Installer l’appli » ajoutée automatiquement dans Réglages
    - Message « Nouvelle version » quand tu publies une mise à jour sur GitHub
-   Ne modifie pas app-v1xx.js : peut être retiré en supprimant sa balise <script>. */
+   Ne modifie pas sacados.js : peut être retiré en supprimant sa balise <script>. */
 (function () {
   'use strict';
 

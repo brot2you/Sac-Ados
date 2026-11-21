@@ -1,0 +1,2060 @@
+/* SAC’ADOS — feuille de style unique (V6).
+   Fusion, dans le même ordre, des anciennes feuilles : base.css, pixel.css, nav-v2.2.css, pixel-v3.css, pixel-v4.css, pixel-v4.2.css, home-v4.4.css, finish-v4.5.css, fix-v4.6.css, fix-icons-v4.8.css, fix-v4.9.css, category-gold-v5.2.css, brand-v5.3.css, responsive-v5.4.css.
+   Pour une nouvelle correction : ajoute-la à la fin de ce fichier. */
+
+/* ===== base.css ===== */
+
+:root{
+  --ocean:#9adcee; --ocean-2:#79cde6; --wave:#d6f3fa; --foam:#ffffff;
+  --paper:#fbfdff; --paper-2:#eef6fb; --line:#cfe3ee;
+  --ink:#22305a; --ink-soft:#56658f; --on-pack:#22305a;
+  --pack:#ffc83d; --pack-2:#f2a20c; --pack-3:#d98a00;
+  --wood:#2b3a6b; --wood-2:#1d2a52; --slot:#3c4d85; --slot-ink:#f4f8ff;
+  --focus:#ff5d8f;
+  --sand:#f6dc95; --sand-2:#dcb867;
+  --grass:#8fd46a; --grass-2:#5fae46; --leaf:#4e9e4c; --leaf-l:#79c26a; --trunk:#9a6a3c;
+  --wall:#fff4de; --roof:#e95c4b; --flower-1:#ff7ab0; --flower-2:#ffe066;
+  --dune:#f3c86c; --dune-2:#d39f3d; --cactus:#4fa456;
+  --pine:#3e9058; --pine-2:#2a6b40; --mist:#ffffff;
+  --rock:#b9b1cc; --rock-2:#7a7194; --snow:#ffffff; --castle:#f3edf9; --flag:#ff5d8f;
+  --cloud:#ffffff; --path:#fff6d8; --path-2:#e8c873;
+  --body:'Atkinson Hyperlegible', 'Verdana', system-ui, sans-serif;
+  --title:'Fredoka', 'Trebuchet MS', system-ui, sans-serif;
+  --pixel:'Press Start 2P', 'Courier New', monospace;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ocean:#12304a; --ocean-2:#0e2639; --wave:#22557a; --foam:#7fb6d4;
+    --paper:#1a2f47; --paper-2:#22395a; --line:#2f4b6e;
+    --ink:#eaf3ff; --ink-soft:#a9bddb; --on-pack:#1d2a52;
+    --pack:#f0b836; --pack-2:#d7930f; --pack-3:#b67700;
+    --wood:#0f1a35; --wood-2:#0a1226; --slot:#24325c; --slot-ink:#eaf3ff;
+    --sand:#cfb371; --sand-2:#a88c4c; --grass:#6aa952; --grass-2:#4a8239; --leaf:#3e7f3e; --leaf-l:#5e9f52; --trunk:#7a5430;
+    --wall:#e6d9c0; --roof:#c94c3e; --dune:#c9a253; --dune-2:#a57c30; --cactus:#3f8546;
+    --pine:#2f6f45; --pine-2:#1f5030; --mist:#bcd0e6; --rock:#8d84a3; --rock-2:#5c5476; --snow:#e7eef8; --castle:#d8cfe5;
+    --cloud:#d7e5f3; --path:#cbbd8f; --path-2:#9c8a52;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ocean:#12304a; --ocean-2:#0e2639; --wave:#22557a; --foam:#7fb6d4;
+  --paper:#1a2f47; --paper-2:#22395a; --line:#2f4b6e;
+  --ink:#eaf3ff; --ink-soft:#a9bddb; --on-pack:#1d2a52;
+  --pack:#f0b836; --pack-2:#d7930f; --pack-3:#b67700;
+  --wood:#0f1a35; --wood-2:#0a1226; --slot:#24325c; --slot-ink:#eaf3ff;
+  --sand:#cfb371; --sand-2:#a88c4c; --grass:#6aa952; --grass-2:#4a8239; --leaf:#3e7f3e; --leaf-l:#5e9f52; --trunk:#7a5430;
+  --wall:#e6d9c0; --roof:#c94c3e; --dune:#c9a253; --dune-2:#a57c30; --cactus:#3f8546;
+  --pine:#2f6f45; --pine-2:#1f5030; --mist:#bcd0e6; --rock:#8d84a3; --rock-2:#5c5476; --snow:#e7eef8; --castle:#d8cfe5;
+  --cloud:#d7e5f3; --path:#cbbd8f; --path-2:#9c8a52;
+  color-scheme: dark;
+}
+html.lexend{ --body:'Lexend', 'Verdana', system-ui, sans-serif; --title:'Lexend', 'Verdana', system-ui, sans-serif; --pixel:'Lexend', 'Verdana', sans-serif; }
+html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
+*,*::before,*::after{ box-sizing: inherit; }
+body{
+  margin:0; min-height:100%; font-family:var(--body); color:var(--ink); font-size:17px; line-height:1.5;
+  background-color:var(--ocean);
+  background-image: radial-gradient(circle at 20px 20px, var(--wave) 2px, transparent 2.5px);
+  background-size: 46px 46px;
+  padding-bottom: 104px;
+  -webkit-text-size-adjust:100%;
+}
+body::before{ content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:10; background:var(--wood); }
+button, input, textarea{ font:inherit; color:inherit; }
+button{ cursor:pointer; }
+a{ color:inherit; }
+:focus-visible{ outline:3px solid var(--focus); outline-offset:3px; border-radius:10px; }
+
+/* En-tête */
+.top{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:9;
+  background:var(--wood); color:#f4f8ff;
+  display:flex; align-items:center; gap:12px; padding:10px 16px;
+  box-shadow:0 4px 0 var(--wood-2);
+}
+.brand{ display:flex; align-items:center; gap:10px; margin-right:auto; min-width:0; background:none; border:0; padding:0; text-align:left; color:inherit; }
+.brand-ico{ font-size:30px; line-height:1; filter:drop-shadow(0 2px 0 rgba(0,0,0,.25)); }
+.brand-name{ font-family:var(--title); font-weight:700; font-size:24px; line-height:1; letter-spacing:.01em; }
+.brand-sub{ display:block; font-size:13px; opacity:.8; margin-top:3px; }
+.loot{ display:flex; align-items:center; gap:6px; background:var(--slot); border-radius:12px; padding:6px 10px; font-weight:700; font-size:15px; white-space:nowrap; }
+.icon-btn{ width:42px; height:42px; border-radius:12px; border:0; background:var(--slot); color:#f4f8ff; font-size:20px; display:grid; place-items:center; flex:none; }
+
+main{ max-width:1080px; margin:0 auto; padding:18px 16px 24px; }
+.h1{ font-family:var(--title); font-weight:700; font-size:30px; line-height:1.1; margin:2px 0 0; }
+.lede{ margin:6px 0 0; color:var(--ink-soft); max-width:60ch; }
+
+/* Carte du monde */
+.map-layout{ display:grid; gap:18px; grid-template-columns: 1fr; align-items:start; }
+@media (min-width: 860px){ .map-layout{ grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); } }
+.map-frame{
+  background:var(--ocean-2); border-radius:28px; padding:6px; position:relative;
+  box-shadow: inset 0 0 0 4px var(--foam), 0 8px 0 rgba(20,40,80,.18);
+  max-width:520px; width:100%; margin:0 auto;
+}
+.map-frame svg{ display:block; width:100%; height:auto; border-radius:24px; }
+.island{ cursor:pointer; outline:none; }
+.island .lift{ transition: transform .18s ease; transform-box: fill-box; transform-origin: center bottom; }
+.island:hover .lift, .island:focus-visible .lift{ transform: translateY(-4px); }
+.island:focus-visible .plate-bg{ stroke:var(--focus); stroke-width:3; }
+.f-sea2{ fill:var(--ocean-2); } .f-foam{ fill:var(--foam); } .f-sand{ fill:var(--sand); } .f-sand2{ fill:var(--sand-2); }
+.f-grass{ fill:var(--grass); } .f-grass2{ fill:var(--grass-2); } .f-leaf{ fill:var(--leaf); } .f-leafl{ fill:var(--leaf-l); } .f-trunk{ fill:var(--trunk); }
+.f-wall{ fill:var(--wall); } .f-roof{ fill:var(--roof); } .f-fl1{ fill:var(--flower-1); } .f-fl2{ fill:var(--flower-2); }
+.f-dune{ fill:var(--dune); } .f-dune2{ fill:var(--dune-2); } .f-cactus{ fill:var(--cactus); }
+.f-pine{ fill:var(--pine); } .f-pine2{ fill:var(--pine-2); } .f-mist{ fill:var(--mist); opacity:.55; }
+.f-rock{ fill:var(--rock); } .f-rock2{ fill:var(--rock-2); } .f-snow{ fill:var(--snow); } .f-castle{ fill:var(--castle); stroke:var(--rock-2); stroke-width:1.5; } .f-flag{ fill:var(--flag); }
+.f-win{ fill:var(--wood); } .f-cloud{ fill:var(--cloud); opacity:.92; }
+.f-wood{ fill:var(--wood); } .f-path{ fill:none; stroke:var(--path-2); stroke-width:13; stroke-linecap:round; }
+.f-pathdot{ fill:none; stroke:var(--path); stroke-width:5; stroke-linecap:round; stroke-dasharray:0.1 13; }
+.wave{ fill:none; stroke:var(--wave); stroke-width:2.2; stroke-linecap:round; }
+.plate-t{ font-family:var(--pixel); font-size:9px; fill:#fff6d8; }
+.plate-s{ font-family:var(--body); font-weight:700; font-size:11px; fill:#f4f8ff; }
+.start-t{ font-family:var(--pixel); font-size:7px; fill:var(--ink); }
+.cloud{ animation: drift 38s linear infinite alternate; }
+.cloud.c2{ animation-duration: 52s; }
+.cloud.c3{ animation-duration: 44s; }
+@keyframes drift{ from{ transform: translateX(-14px); } to{ transform: translateX(22px); } }
+.mist{ animation: drift 18s ease-in-out infinite alternate; }
+.bob{ animation: bob 1.6s ease-in-out infinite; }
+@keyframes bob{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-6px); } }
+.pulse{ animation: pulse 2.2s ease-out infinite; transform-box: fill-box; transform-origin:center; }
+@keyframes pulse{ 0%{ opacity:.7; transform:scale(.8); } 100%{ opacity:0; transform:scale(1.35); } }
+
+.side h2{ font-family:var(--title); font-size:22px; margin:0 0 10px; }
+.world-list{ display:grid; gap:12px; }
+.world-card{
+  display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:center; text-align:left;
+  background:var(--paper); border:0; border-radius:20px; padding:14px 16px;
+  box-shadow: inset 0 0 0 3px var(--line), 0 5px 0 rgba(20,40,80,.15);
+  transition: transform .15s ease;
+}
+.world-card:hover{ transform: translateY(-2px); }
+.world-card.home{ box-shadow: inset 0 0 0 3px var(--pack-2), 0 5px 0 var(--pack-3); }
+.wc-ico{ width:52px; height:52px; border-radius:16px; display:grid; place-items:center; font-size:28px; background:var(--paper-2); }
+.wc-k{ display:block; font-size:14px; color:var(--ink-soft); }
+.wc-n{ display:block; font-family:var(--title); font-weight:600; font-size:20px; line-height:1.15; }
+.wc-lvl{ font-family:var(--title); font-weight:700; font-size:28px; color:var(--ink); }
+.wc-lvl sup{ font-size:14px; }
+.home-tag{ display:inline-block; margin-left:6px; font-size:12px; font-weight:700; background:var(--pack); color:var(--on-pack); border-radius:8px; padding:1px 7px; vertical-align:2px; }
+.bar{ display:block; height:10px; border-radius:6px; background:var(--paper-2); box-shadow: inset 0 0 0 2px var(--line); overflow:hidden; margin-top:7px; }
+.bar i{ display:block; height:100%; background:var(--grass-2); border-radius:6px; }
+.wc-p{ display:block; font-size:13px; color:var(--ink-soft); margin-top:4px; }
+
+/* Monde : le sac */
+.world-top{ display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap; margin-bottom:16px; }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:46px; padding:10px 16px;
+  border-radius:14px; border:0; font-weight:700; text-decoration:none; font-size:16px;
+  background:var(--paper); color:var(--ink); box-shadow: inset 0 0 0 3px var(--line), 0 4px 0 rgba(20,40,80,.15);
+}
+.btn:active{ transform: translateY(2px); }
+.btn.primary{ background:var(--pack); color:var(--on-pack); box-shadow: 0 4px 0 var(--pack-3); }
+.btn.dark{ background:var(--wood); color:#f4f8ff; box-shadow: 0 4px 0 var(--wood-2); }
+.btn[disabled], .btn[aria-disabled="true"]{ opacity:.55; cursor:not-allowed; }
+.wt-txt{ flex:1; min-width:220px; }
+.wt-k{ font-size:15px; color:var(--ink-soft); }
+.wt-prog{ max-width:340px; }
+
+.pack{
+  background:var(--pack); border-radius:34px 34px 28px 28px; padding:0 12px 14px;
+  box-shadow: 0 9px 0 var(--pack-3), inset 0 -6px 0 var(--pack-2);
+  position:relative;
+}
+.pack::before, .pack::after{ content:""; position:absolute; top:22px; width:18px; height:70%; border-radius:10px; background:var(--pack-2); z-index:0; }
+.pack::before{ left:-9px; } .pack::after{ right:-9px; }
+.flap{
+  position:relative; z-index:1; background:var(--pack-2); color:var(--on-pack);
+  border-radius:34px 34px 46% 46% / 34px 34px 38px 38px;
+  padding:16px 18px 30px; margin:0 -12px; text-align:center;
+}
+.flap::after{ content:""; position:absolute; left:18px; right:18px; bottom:14px; border-bottom:3px dashed rgba(34,48,90,.35); border-radius:50%; }
+.flap h2{ font-family:var(--title); font-weight:700; font-size:24px; margin:0; }
+.flap p{ margin:2px 0 0; font-size:15px; }
+.buckle{ position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); width:54px; height:30px; border-radius:10px; background:var(--wood); box-shadow:0 3px 0 var(--wood-2); z-index:2; }
+.buckle::after{ content:""; position:absolute; inset:8px 14px; border-radius:5px; border:3px solid var(--pack); }
+.pack-body{ position:relative; z-index:1; background:var(--paper); border-radius:22px; margin-top:24px; padding:14px 12px; box-shadow: inset 0 0 0 3px rgba(34,48,90,.12); }
+
+.pockets{ display:flex; gap:8px; overflow-x:auto; padding:2px 2px 10px; scrollbar-width:thin; }
+.pocket{
+  flex:none; border:0; border-radius:14px 14px 18px 18px; padding:9px 13px; font-weight:700; font-size:15px;
+  background:var(--paper-2); color:var(--ink); box-shadow: inset 0 0 0 2px var(--line), 0 3px 0 var(--line);
+  display:flex; align-items:center; gap:7px; white-space:nowrap;
+}
+.pocket .n{ background:var(--paper); border-radius:8px; padding:0 7px; font-size:13px; }
+.pocket[aria-selected="true"]{ background:var(--wood); color:#f4f8ff; box-shadow:0 3px 0 var(--wood-2); }
+.pocket[aria-selected="true"] .n{ background:var(--slot); }
+
+.tools{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:4px 0 14px; }
+.search{ flex:1 1 220px; display:flex; align-items:center; gap:8px; background:var(--paper-2); border-radius:14px; padding:0 12px; box-shadow: inset 0 0 0 2px var(--line); min-height:46px; }
+.search input{ border:0; background:transparent; flex:1; min-width:0; padding:10px 0; outline:none; font-size:16px; }
+.chips{ display:flex; gap:6px; overflow-x:auto; max-width:100%; padding-bottom:4px; }
+.chip{ flex:none; border:0; border-radius:999px; padding:7px 12px; font-size:14px; font-weight:700; background:var(--paper-2); box-shadow: inset 0 0 0 2px var(--line); white-space:nowrap; }
+.chip .dot{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:0; }
+.chip[aria-pressed="true"]{ background:var(--ink); color:var(--paper); box-shadow:none; }
+
+.quest{
+  display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+  background:var(--paper-2); border-radius:18px; padding:12px 14px; margin-bottom:16px;
+  box-shadow: inset 0 0 0 2px var(--line);
+}
+.quest-ico{ font-size:30px; }
+.quest-txt{ flex:1; min-width:200px; }
+.quest-k{ font-weight:700; font-size:14px; color:var(--ink-soft); }
+.quest-t{ font-family:var(--title); font-weight:600; font-size:19px; line-height:1.2; }
+
+.sec-h{ font-family:var(--title); font-weight:600; font-size:19px; margin:18px 0 10px; display:flex; align-items:center; gap:8px; }
+.sec-h:first-child{ margin-top:0; }
+.sec-h small{ font-family:var(--body); font-weight:400; font-size:14px; color:var(--ink-soft); }
+.grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap:12px 10px; }
+@media (min-width: 600px){ .grid{ grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap:14px; } }
+.slot{
+  position:relative; border:0; border-radius:18px; padding:12px 8px 10px;
+  background:var(--t); box-shadow: inset 0 0 0 3px var(--c), 0 4px 0 var(--c);
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:6px; min-height:112px; text-align:center;
+  transition: transform .12s ease;
+}
+.slot:hover{ transform: translateY(-3px); }
+.slot:active{ transform: translateY(1px); }
+.slot-ico{ font-size:34px; line-height:1.1; margin-top:4px; }
+.slot-name{ font-weight:700; font-size:13.5px; overflow-wrap:anywhere; line-height:1.2; color:var(--ink); }
+.tag{ position:absolute; top:-8px; right:-6px; font-size:11px; font-weight:700; border-radius:8px; padding:2px 7px; box-shadow:0 2px 0 rgba(20,40,80,.2); }
+.tag.new{ background:var(--flag); color:#fff; }
+.tag.seen{ background:var(--grass-2); color:#fff; }
+.tag.soon{ background:var(--wood); color:#f4f8ff; }
+.tag.fav{ left:-6px; right:auto; background:var(--pack); color:var(--on-pack); }
+.empty{ text-align:center; padding:28px 10px; color:var(--ink-soft); }
+.empty b{ display:block; font-family:var(--title); font-size:20px; color:var(--ink); margin-bottom:4px; }
+
+/* Barre de raccourcis */
+.hotbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:8;
+  padding:8px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+  display:flex; justify-content:center; pointer-events:none;
+}
+.hb-inner{
+  pointer-events:auto; display:flex; align-items:center; gap:6px; padding:8px; border-radius:20px;
+  background:var(--wood); box-shadow: 0 5px 0 var(--wood-2), 0 10px 24px rgba(10,20,50,.25);
+}
+.hb-label{ color:#f4f8ff; font-size:12px; font-weight:700; line-height:1.15; width:66px; text-align:center; }
+.hb-slot{
+  width:52px; height:52px; border-radius:14px; border:0; background:var(--slot); color:var(--slot-ink);
+  display:grid; place-items:center; font-size:26px; text-decoration:none; position:relative;
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,.18);
+}
+.hb-slot.empty-s{ font-size:20px; opacity:.55; }
+.hb-slot.lnk{ box-shadow: inset 0 0 0 3px var(--pack), inset 0 -4px 0 rgba(0,0,0,.18); }
+@media (max-width: 420px){ .hb-label{ display:none; } .hb-slot{ width:48px; height:48px; font-size:24px; } }
+
+/* Fenêtres */
+.overlay{ position:fixed; inset:0; z-index:20; background:rgba(15,25,55,.55); display:flex; align-items:flex-end; justify-content:center; padding:12px; padding-top:calc(12px + env(safe-area-inset-top, 0px)); }
+@media (min-width: 700px){ .overlay{ align-items:center; } }
+.sheet{
+  width:100%; max-width:520px; max-height:calc(100% - 8px); overflow:auto; background:var(--paper); color:var(--ink);
+  border-radius:26px; padding:22px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 8px 0 rgba(10,20,50,.3); animation: up .22s ease-out;
+}
+@keyframes up{ from{ transform: translateY(24px); opacity:0; } to{ transform:none; opacity:1; } }
+.sheet-head{ display:flex; gap:14px; align-items:center; margin-bottom:12px; }
+.sheet-ico{ width:76px; height:76px; border-radius:22px; display:grid; place-items:center; font-size:42px; background:var(--t); box-shadow: inset 0 0 0 3px var(--c); flex:none; }
+.sheet h3{ font-family:var(--title); font-weight:700; font-size:26px; line-height:1.1; margin:0; }
+.pills{ display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 0; }
+.pill{ font-size:13px; font-weight:700; border-radius:999px; padding:3px 10px; background:var(--paper-2); box-shadow: inset 0 0 0 2px var(--line); }
+.sheet p{ margin:12px 0; }
+.lvls{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:12px 0 18px; font-size:15px; }
+.lvl{ font-weight:700; border-radius:10px; padding:4px 10px; background:var(--paper-2); color:var(--ink-soft); }
+.lvl.on{ background:var(--wood); color:#f4f8ff; }
+.actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.actions .btn{ flex:1 1 180px; }
+.note{ font-size:14px; color:var(--ink-soft); margin-top:12px; }
+.close-x{ float:right; margin:-6px -4px 0 8px; width:40px; height:40px; border-radius:12px; border:0; background:var(--paper-2); font-size:18px; }
+.class-pick{ display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin:14px 0 4px; }
+.class-pick button{ border:0; border-radius:18px; padding:16px 10px; background:var(--paper-2); box-shadow: inset 0 0 0 3px var(--line), 0 4px 0 var(--line); display:flex; flex-direction:column; align-items:center; gap:4px; }
+.class-pick button.on{ box-shadow: inset 0 0 0 3px var(--pack-2), 0 4px 0 var(--pack-3); background:var(--pack); color:var(--on-pack); }
+.class-pick .e{ font-size:32px; }
+.class-pick .l{ font-family:var(--title); font-weight:700; font-size:22px; }
+.class-pick .s{ font-size:13px; }
+.row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; border-top:2px dashed var(--line); }
+.row:first-of-type{ border-top:0; }
+.row b{ display:block; }
+.row small{ color:var(--ink-soft); }
+.switch{ width:58px; height:34px; border-radius:20px; border:0; background:var(--paper-2); box-shadow: inset 0 0 0 2px var(--line); position:relative; flex:none; }
+.switch::after{ content:""; position:absolute; top:4px; left:4px; width:26px; height:26px; border-radius:50%; background:var(--ink-soft); transition: left .15s ease; }
+.switch[aria-checked="true"]{ background:var(--grass-2); box-shadow:none; }
+.switch[aria-checked="true"]::after{ left:28px; background:#fff; }
+.prof-list{ display:grid; gap:8px; margin:12px 0; }
+.prof-item label{ display:block; font-weight:700; font-size:14px; }
+.prof-item input{ width:100%; border-radius:10px; border:0; padding:9px 10px; background:var(--paper-2); box-shadow: inset 0 0 0 2px var(--line); font-size:15px; }
+textarea.json{ width:100%; min-height:200px; border-radius:12px; border:0; padding:10px; background:var(--paper-2); box-shadow: inset 0 0 0 2px var(--line); font-family:'Courier New', monospace; font-size:12px; }
+.toast{
+  position:fixed; left:50%; top:calc(76px + env(safe-area-inset-top, 0px)); transform:translateX(-50%); z-index:30;
+  background:var(--ink); color:var(--paper); font-weight:700; border-radius:14px; padding:11px 16px; max-width:min(92vw, 440px); text-align:center;
+  box-shadow:0 5px 0 rgba(10,20,50,.3); animation: up .2s ease-out;
+}
+.sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+html.calme *, html.calme *::before, html.calme *::after{ animation:none !important; transition:none !important; }
+@media (prefers-reduced-motion: reduce){ *, *::before, *::after{ animation:none !important; transition:none !important; } }
+
+/* ===== pixel.css ===== */
+/* SAC'ADOS · Pixel Kingdom Deluxe — decorative pixel art + crisp readable text */
+:root {
+  --ocean:#101f38; --ocean-2:#0d2c4b; --wave:#184f73; --foam:#e7f3ff;
+  --paper:#fff6df; --paper-2:#f3e6cb; --line:#b79b6d;
+  --ink:#263654; --ink-soft:#56647a; --on-pack:#322b34;
+  --pack:#f4cc7a; --pack-2:#d79e47; --pack-3:#8f5b31;
+  --wood:#101e37; --wood-2:#081020; --slot:#243d61; --slot-ink:#f8f1df;
+  --focus:#ffcf6e;
+  --grass-2:#4ba675;
+  --title:'Fredoka','Trebuchet MS',system-ui,sans-serif;
+  --body:'Atkinson Hyperlegible','Verdana',system-ui,sans-serif;
+  --pixel:'Press Start 2P','Courier New',monospace;
+  color-scheme:light;
+}
+:root[data-theme='dark'] { color-scheme:light; }
+@media (prefers-color-scheme:dark) {
+ :root:not([data-theme='light']) {
+  --ocean:#101f38; --ocean-2:#0d2c4b; --wave:#184f73; --foam:#e7f3ff;
+  --paper:#fff6df; --paper-2:#f3e6cb; --line:#b79b6d;
+  --ink:#263654; --ink-soft:#56647a; --on-pack:#322b34;
+  --pack:#f4cc7a; --pack-2:#d79e47; --pack-3:#8f5b31;
+  --wood:#101e37; --wood-2:#081020; --slot:#243d61; --slot-ink:#f8f1df;
+  --focus:#ffcf6e; --grass-2:#4ba675; color-scheme:light;
+ }
+}
+html {background:#101f38;}
+body {
+  min-height:100vh;
+  font-size:16px;
+  color:#f8eacb;
+  background:#101f38;
+  background-image:radial-gradient(circle at 16% -4%,#26547b 0,transparent 38%),radial-gradient(circle at 90% 0%,#15365b 0,transparent 34%),repeating-linear-gradient(90deg,transparent 0 47px,rgba(255,255,255,.018) 48px 49px);
+  padding-bottom:118px;
+}
+body::before {background:#101e37;}
+.top {
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:13;
+  background:linear-gradient(#203d61,#112440 72%,#0a182e);
+  box-shadow:0 4px 0 #040d1a,0 8px 0 #3b5270;
+  border-bottom:2px solid #cd9955;
+  padding:11px max(16px,calc((100vw - 1300px)/2));
+}
+.brand-ico {display:grid;place-items:center;background:linear-gradient(150deg,#ffe49c,#b37630);width:47px;height:47px;font-size:26px;border-radius:10px;box-shadow:inset 0 0 0 3px #674827,0 3px 0 #080f20;}
+.brand-name {font-size:25px;color:#ffde91;text-shadow:0 2px 0 #573721;letter-spacing:.025em;}
+.brand-sub {color:#d1def3;font-size:13px;opacity:1;}
+.loot {background:#0b1830;border:2px solid #906f4b;color:#ffe3a8;padding:10px 12px;box-shadow:inset 0 2px 0 #385271;font-size:14px;}
+.icon-btn {background:linear-gradient(#3a5477,#192e4e);box-shadow:0 3px 0 #030b16,inset 0 0 0 2px #7193b2;border-radius:11px;}
+.main-tabs {
+  display:flex;justify-content:center;align-items:center;gap:8px;
+  margin:16px auto 4px;padding:0 16px;max-width:1050px;
+}
+.main-tab {
+  display:flex;align-items:center;justify-content:center;gap:8px;min-height:47px;
+  flex:1;max-width:240px;border:2px solid #48688b;
+  color:#e6edfc;background:linear-gradient(#2b486b,#132742);border-radius:12px;
+  font-weight:700;box-shadow:0 4px 0 #071225, inset 0 1px 0 #7d9ab9;
+  transition:background .13s ease,transform .13s ease;
+}
+.main-tab:hover {background:#315b83;}
+.main-tab[aria-current='page'] {color:#2c2d35;border-color:#ffde91;background:linear-gradient(#ffe7a8,#dca556);box-shadow:0 4px 0 #865329,inset 0 1px 0 #fff6ca;}
+.main-tab:active {transform:translateY(2px)}
+main {max-width:1310px;padding:25px 20px 45px;}
+.h1 {font-family:var(--title);font-size:clamp(29px,3.5vw,48px);color:#fff6d7;text-shadow:0 3px 0 #0d1423;letter-spacing:.012em;line-height:1.1;}
+.lede {max-width:75ch;color:#d1def0;font-size:17px;line-height:1.5;}
+.page-intro {margin:0 0 23px;}
+.page-intro .lede {margin-top:11px;}
+.eyebrow {font-family:var(--pixel);font-size:clamp(8px,.8vw,10px);letter-spacing:.03em;color:#f5cb74;line-height:1.7;}
+.kingdom-map {
+  position:relative;isolation:isolate;width:100%;overflow:hidden;
+  border:5px solid #e6bf7a;border-radius:18px;
+  box-shadow:0 0 0 5px #172944,0 9px 0 #080f20,0 26px 38px rgba(0,0,0,.28),inset 0 0 0 2px #fff0bf;
+  background:#2a89ae;
+}
+.kingdom-map>img {width:100%;height:auto;display:block;object-fit:contain;user-select:none;-webkit-user-drag:none;}
+.map-hit {
+  position:absolute;z-index:2;background:transparent;border:3px solid transparent;
+  border-radius:26px;cursor:pointer;touch-action:manipulation;
+  transition:background .17s ease,border-color .17s ease,box-shadow .17s ease;
+}
+.map-hit:hover,.map-hit:focus-visible {
+  background:rgba(255,244,162,.085);border-color:#ffe8a4;
+  outline:3px solid rgba(16,28,48,.9);outline-offset:0;
+  box-shadow:inset 0 0 36px rgba(255,240,170,.14),0 0 0 4px rgba(255,225,142,.35);
+}
+/* Four large accessible clickable regions. Positions measured in original artwork. */
+.hit-6 {left:14.0%;top:17.2%;width:40%;height:30%;}
+.hit-5 {left:56%;top:13.5%;width:42%;height:33%;}
+.hit-4 {left:1.2%;top:48%;width:43%;height:45%;}
+.hit-3 {left:59%;top:48%;width:40%;height:45%;}
+.map-hint {color:#d8deee;margin:17px 2px 30px;font-size:14px;text-align:center;}
+.map-hint span {color:#ffe096;margin-right:7px;}
+.section-line {display:flex;align-items:end;justify-content:space-between;gap:12px;margin:25px 0 15px;border-bottom:2px solid #496080;padding-bottom:12px;}
+.section-line h2 {font-family:var(--title);font-size:28px;margin:0;color:#fff1d0;}
+.chapter-count {border:2px solid #6d7994;border-radius:8px;padding:7px 10px;font-family:var(--pixel);font-size:9px;color:#dce5f1;white-space:nowrap;}
+.world-deck {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
+.world-tile {
+  display:flex;flex-direction:column;border:3px solid #7895aa;text-align:left;overflow:hidden;
+  background:#f9f0d7;border-radius:13px;box-shadow:0 6px 0 #071321,inset 0 0 0 2px #fff7da;
+  transition:transform .15s ease,border-color .15s ease;
+  padding:0;color:#293448;min-width:0;
+}
+.world-tile:hover {transform:translateY(-3px);border-color:#ffdb88;}
+.world-tile:active {transform:translateY(1px);}
+.world-tile.is-home {border-color:#ffcf68;box-shadow:0 6px 0 #724c2e,0 0 0 2px #6a4d2b;}
+.tile-visual {display:block;position:relative;height:130px;overflow:hidden;border-bottom:3px solid #34516f;background:#2371a1;}
+.tile-visual img {width:100%;height:100%;object-fit:cover;display:block;}
+.tile-badge {position:absolute;left:12px;top:12px;color:#fff5d7;background:#102941;border:2px solid #ffd788;box-shadow:0 3px 0 #07111c;border-radius:8px;padding:5px 9px;font-family:var(--pixel);font-size:12px;}
+.tile-detail {display:block;padding:13px 13px 14px;width:100%;}
+.tile-label {display:block;font-family:var(--pixel);color:#97642e;font-size:8px;line-height:1.5;margin:0 0 7px;}
+.tile-title {display:block;font-family:var(--title);font-size:21px;line-height:1.13;min-height:49px;color:#243752;}
+.tile-detail .bar {margin-top:13px;background:#ded1ae;box-shadow:inset 0 0 0 2px #bda676;}
+.tile-foot {display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;margin-top:7px;color:#59647b;}
+.bar i {background:linear-gradient(90deg,#349d77,#9bca64)}
+.adventure-callout {
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:28px 0 0;padding:18px 20px;
+  border:3px solid #b18b53;background:linear-gradient(110deg,#faf0d4,#f2e0b3);color:#303b53;
+  border-radius:13px;box-shadow:0 5px 0 #634a2d;
+}
+.adventure-callout>div {flex:1;min-width:180px;}
+.adventure-callout strong {font-family:var(--title);font-size:22px;}
+.adventure-callout p {font-size:14px;line-height:1.4;margin:4px 0;}
+.callout-icon {font-size:44px;line-height:1;}
+.btn {border-radius:10px;background:linear-gradient(#fff7e2,#eedbb7);box-shadow:0 4px 0 #a98a59,inset 0 0 0 2px #d1b27d;color:#23354c;}
+.btn:hover {filter:brightness(1.04)}
+.btn.primary {background:linear-gradient(#ffe9a5,#efb95f);box-shadow:0 4px 0 #a97734,inset 0 0 0 2px #fff1bc;color:#263249;}
+.btn.dark {background:linear-gradient(#3b5d81,#233a5b);color:#fff3d9;box-shadow:0 4px 0 #071124;}
+.world-top {display:flex;gap:20px;align-items:flex-start;margin:0 0 18px;}
+.world-top>.btn {flex:none;}
+.wt-txt {min-width:0;}
+.wt-txt .lede {margin:8px 0 9px;}
+.wt-prog {max-width:480px;margin-top:10px;}
+.wt-prog .wc-p {color:#d5dfed;font-size:13px;margin-top:6px;}
+.world-banner {position:relative;overflow:hidden;min-height:230px;height:clamp(230px,24vw,310px);border-radius:16px;border:4px solid #edca86;box-shadow:0 6px 0 #101b30;margin:0 0 25px;background:#246188;}
+.world-banner img {height:100%;width:100%;display:block;object-fit:cover;}
+.banner-level {position:absolute;bottom:15px;left:18px;background:#152943;border:2px solid #f8dc95;padding:12px 14px;color:#fff0d0;box-shadow:0 4px 0 #050e1c;border-radius:9px;font-family:var(--pixel);font-size:10px;}
+.pack {background:#142b4b;border:4px solid #c8a06a;border-radius:16px;box-shadow:0 8px 0 #090f1e, inset 0 0 0 3px #526c85;padding:0 15px 15px;}
+.pack::before,.pack::after {display:none;}
+.flap {background:linear-gradient(#3f6287,#213d62);color:#fff1ce;border-radius:8px;margin:12px 0 0;padding:17px 12px 14px;box-shadow:inset 0 0 0 2px #a7b9ba,0 4px 0 #0d1b35;}
+.flap::after,.buckle {display:none;}
+.flap h2 {font-family:var(--title);font-size:28px;text-shadow:0 2px 0 #0e1830;}
+.flap p {font-size:14px;color:#dce6f6;}
+.pack-body {margin-top:14px;background:#f7ebd0;border-radius:10px;padding:18px;box-shadow:inset 0 0 0 3px #dbc49a;color:#24344c;}
+.quest {background:#fff6e1;border:2px dashed #c7a876;box-shadow:0 3px 0 #cab386;border-radius:12px;}
+.quest-txt .quest-k {color:#886438;}
+.pockets {gap:9px;padding:7px 2px 13px;}
+.pocket {padding:10px 14px;border-radius:9px;background:#e9d8b6;box-shadow:inset 0 0 0 2px #bd9c67,0 3px 0 #a98d5d;color:#29384b;}
+.pocket .n {background:#fff6e0;}
+.pocket[aria-selected='true'] {background:linear-gradient(#3f6688,#1c3857);color:#fff6df;box-shadow:0 3px 0 #0d1b30,inset 0 0 0 2px #afc5d3;}
+.pocket[aria-selected='true'] .n {background:#16283d;color:#fff0d8;}
+.tools {margin:8px 0 20px;}
+.search {background:#fff7e5;box-shadow:inset 0 0 0 2px #c3a877;border-radius:9px;}
+.chip {background:#e9d7b3;color:#273951;border-radius:9px;box-shadow:inset 0 0 0 2px #b99b6b;padding:8px 11px;}
+.chip[aria-pressed='true'] {background:#244360;color:#fff6e1;}
+.sec-h {font-family:var(--title);font-size:22px;color:#253a54;margin:24px 0 12px;border-bottom:2px dashed #cfb38c;padding-bottom:7px;}
+.sec-h small {font-size:13px;color:#6b6e75;}
+.grid {grid-template-columns:repeat(auto-fill,minmax(154px,1fr));gap:15px;margin:12px 0 22px;}
+@media(min-width:600px) {.grid {grid-template-columns:repeat(auto-fill,minmax(174px,1fr));gap:18px;}}
+.slot {display:block;position:relative;min-height:230px;padding:0;background:#fff9e9;border:2px solid #4a6580;border-radius:12px;overflow:visible;text-align:left;box-shadow:0 5px 0 #9a805e,0 7px 0 #30485d;transition:transform .13s ease;}
+.slot:hover {transform:translateY(-3px);box-shadow:0 8px 0 #9a805e,0 10px 0 #30485d;}
+.slot:active {transform:translateY(2px);}
+.slot-art {display:grid;place-items:center;position:relative;width:100%;height:135px;border-radius:10px 10px 0 0;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.95),rgba(255,255,255,.4) 48%,transparent 75%),linear-gradient(135deg,var(--t),#d9e5ed);border-bottom:3px solid var(--c);}
+.slot-art::before,.slot-art::after {content:'';position:absolute;width:24px;height:24px;border:4px solid var(--c);opacity:.22;transform:rotate(45deg)}
+.slot-art::before {top:20px;left:18px}.slot-art::after {bottom:17px;right:17px;width:13px;height:13px;border-width:3px}
+.slot-stars {position:absolute;top:12px;right:12px;font-size:16px;color:var(--c);opacity:.8;}
+.slot-ico {font-size:62px;line-height:1;filter:drop-shadow(0 5px 1px rgba(37,40,61,.19));}
+.slot-card-info {display:block;padding:11px 11px 13px;color:#29394f;min-height:88px;}
+.slot-name {display:block;font-family:var(--title);font-size:18px;line-height:1.12;font-weight:700;color:#263953;overflow-wrap:anywhere;}
+.slot-sub {display:block;font-size:12px;margin-top:6px;color:#647086;line-height:1.25;}
+.slot .tag {top:-9px;right:-7px;font-size:11px;z-index:1;border-radius:7px;}
+.slot .tag.fav {left:-7px;right:auto;}
+.slot .tag.seen {background:#247f64;}
+.hotbar {padding:7px 12px calc(9px + env(safe-area-inset-bottom,0px));}
+.hb-inner {background:linear-gradient(#39577a,#1c3355);border:3px solid #d7aa65;border-radius:15px;box-shadow:0 5px 0 #091021,0 12px 24px #040c18;padding:7px;gap:6px;}
+.hb-label {color:#ffe5a8;width:80px;}
+.hb-slot {background:linear-gradient(#3d6084,#1e3858);box-shadow:inset 0 0 0 2px #7197b4,inset 0 -4px 0 #0a1930;border-radius:10px;}
+.hb-slot.lnk {box-shadow:inset 0 0 0 3px #ffe09b,inset 0 -4px 0 #17334b;}
+.overlay {background:rgba(3,9,24,.82);backdrop-filter:blur(4px);}
+.sheet {background:#fff3d9;border:4px solid #e3b76b;border-radius:16px;box-shadow:0 0 0 5px #112543,0 12px 0 #07152a,0 24px 60px rgba(0,0,0,.4);color:#263954;}
+.sheet h3 {font-size:29px;}
+.sheet-ico {border-radius:11px;}
+.close-x {background:#e9d6b1;border:2px solid #b79864;border-radius:7px;}
+.pill {background:#e8d6b8;border-radius:7px;box-shadow:inset 0 0 0 2px #c1a778;}
+.lvl {background:#e6d9bf;}.lvl.on{background:#204567;color:#fff5de;}
+.class-pick button {background:#f4e8d0;border-radius:11px;box-shadow:inset 0 0 0 3px #c3a77d,0 4px 0 #ac9069;}
+.class-pick button.on {background:#ffe29d;}
+.prof-item input,.search input,.json {color:#273954;}
+.toast {background:#fff1d1;color:#273c53;border:2px solid #dcae66;box-shadow:0 5px 0 #111f30;}
+.journal-card {display:flex;flex-wrap:wrap;align-items:center;gap:18px;background:#fff2ce;color:#26354d;border:4px solid #d5a567;padding:25px;border-radius:13px;box-shadow:0 7px 0 #765431;margin:27px 0 34px;}
+.journal-icon {background:#1e4164;color:#ffdda0;border:3px solid #b58f5d;border-radius:12px;font-size:42px;padding:16px;}
+.journal-body {flex:1 1 240px;}.journal-body h2{font-family:var(--title);font-size:28px;margin:5px 0 6px;}.journal-body h3{font-family:var(--title);font-size:24px;margin:8px 0 3px;}.journal-body p{margin:6px 0;color:#54617a;}
+.mini-worlds {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.mini-world {display:flex;align-items:center;gap:13px;min-width:0;background:#fff4da;color:#24364d;border:3px solid #b79765;padding:9px;border-radius:11px;text-align:left;box-shadow:0 4px 0 #5a4437;font-weight:700;}
+.mini-world img {width:85px;height:57px;object-fit:cover;border-radius:5px;flex:none;}.mini-world strong {font-family:var(--pixel);font-size:11px;}.mini-world span{flex:1;min-width:0;}
+.discover-totals {display:flex;gap:20px;align-items:center;background:#fff2d2;border:4px solid #cb9d63;border-radius:13px;padding:20px 25px;color:#243952;box-shadow:0 6px 0 #65472d;}
+.discover-totals>strong {color:#b07926;font-family:var(--title);font-size:65px;line-height:1.1;white-space:nowrap;}.discover-totals small {font-size:22px;color:#727b82;}
+.discover-totals>div {flex:1}.discover-totals h2 {font-size:24px;font-family:var(--title);margin:0;}.discover-totals p {font-size:14px;margin:6px 0 0;}
+.bottom-action {margin:24px 0}.pixel-empty {background:#fff4dc;border:3px dashed #c5a675;border-radius:10px;color:#52617c;}.pixel-empty b {color:#263a56;}
+@media (max-width:900px) {
+ .world-deck {grid-template-columns:repeat(2,minmax(0,1fr));}
+ .top {padding:10px 14px;}.tile-visual {height:145px;}
+}
+@media(max-width:650px) {
+ main {padding:21px 13px 32px;}
+ .top {gap:8px;}.brand-name {font-size:21px;}.brand-sub {font-size:11px;}.brand-ico {width:38px;height:38px;font-size:22px;}
+ .loot {font-size:12px;padding:7px 6px;}.icon-btn {width:36px;height:36px;font-size:18px;}
+ .main-tabs {margin-top:13px;padding:0 9px;gap:4px;}
+ .main-tab {display:grid;justify-items:center;align-content:center;gap:1px;font-size:11px;min-height:55px;padding:3px;line-height:1.2;}
+ .main-tab span:first-child {font-size:19px;}
+ .page-intro{margin-bottom:14px;}.h1 {font-size:30px;}.lede {font-size:15px;}
+ .kingdom-map {border-width:3px;border-radius:11px;box-shadow:0 0 0 3px #172944,0 6px 0 #080f20;}
+ .map-hint {margin:13px 3px 23px;}.chapter-count {display:none;}.section-line h2{font-size:24px;}
+ .world-deck {gap:10px;}.world-tile {border-width:2px;}.tile-visual {height:104px;}
+ .tile-badge {top:7px;left:7px;padding:5px 7px;font-size:10px;}
+ .tile-detail {padding:10px;}.tile-title {font-size:19px;min-height:43px;}.tile-label {font-size:7px;}
+ .adventure-callout {padding:15px;}.callout-icon{font-size:30px;}.adventure-callout .btn {width:100%;}
+ .world-top {flex-direction:column;gap:14px;}.world-banner {height:180px;min-height:180px;}
+ .pack {padding:0 8px 9px;}.pack-body {padding:12px;}
+ .flap h2 {font-size:24px;}.sec-h{font-size:19px;flex-wrap:wrap;}
+ .grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 10px;}
+ .slot {min-height:205px;}.slot-art {height:112px;}.slot-ico {font-size:53px;}.slot-name{font-size:16px;}.slot-card-info{min-height:86px;}
+ .mini-worlds {grid-template-columns:1fr;}
+ .discover-totals {padding:14px;gap:15px;}.discover-totals>strong {font-size:48px;}
+ .discover-totals small {font-size:16px;}
+}
+@media(max-width:400px){
+ .top {padding-left:9px;padding-right:9px;}.brand {gap:5px;}.brand-name{font-size:19px;}.brand-ico{width:34px;height:34px;font-size:19px;}
+ .loot {font-size:11px;}.main-tab {font-size:10px;}.hb-label{display:none;}.hb-slot {width:39px;height:42px;font-size:22px;}.hb-inner {gap:4px;padding:6px;}
+ .tile-title{font-size:17px;}.tile-detail{padding:9px;}.tile-foot{font-size:11px;}
+}
+@media(prefers-reduced-motion:reduce){.main-tab,.world-tile,.slot,.map-hit{transition:none!important;}}
+/* Feedback avoids covering main navigation, especially on narrow phones. */
+.toast {position:fixed;top:auto;bottom:calc(102px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);max-width:min(88vw,380px);font-size:14px;line-height:1.35;}
+
+/* ===== nav-v2.2.css ===== */
+/* SAC'ADOS V2.2 — MENU PNG WITH CLEAN ALPHA CONTOUR
+   Interactive HTML hotspots overlay image on desktop; mobile keeps readable native labels. */
+body {padding-bottom:clamp(115px,11.5vw,160px)!important;}
+main {padding-bottom:40px;}
+/* Transparent, precisely masked game UI artwork; HTML buttons stay independent and fully clickable. */
+.rpg-bottom-nav{
+ position:fixed;bottom:calc(8px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);
+ width:min(1307px,calc(100% - 18px));aspect-ratio:1307/131;z-index:15;
+ isolation:isolate;filter:drop-shadow(0 5px 0 rgba(2,8,23,.76)) drop-shadow(0 11px 14px rgba(3,7,18,.48));
+}
+.rpg-bottom-art {display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;image-rendering:auto;user-select:none;}
+/* Hit areas align with original five visibly illustrated buttons */
+.rpg-nav-button,.main-tab.rpg-nav-button{
+ position:absolute;left:var(--nav-x);width:var(--nav-w);top:14%;height:69%;
+ padding:0;margin:0;display:block;max-width:none;min-height:0;box-shadow:none!important;
+ border:2px solid transparent!important;border-radius:7px;color:transparent;
+ background:transparent!important;outline:none;touch-action:manipulation;
+ transition:background-color .12s ease,filter .12s ease,transform .12s ease;
+}
+.rpg-nav-button:hover {background:rgba(255,242,177,.20)!important;filter:brightness(1.15)}
+.rpg-nav-button:active{transform:translateY(2px)}
+.rpg-nav-button:focus-visible{border:3px solid #fff9c0!important;outline:3px solid #07142a;outline-offset:0}
+.rpg-nav-button[aria-current='page']{border:2px solid rgba(255,237,151,.75)!important;}
+.rpg-nav-button[aria-current='page']:not([data-tab='map']) {box-shadow:inset 0 0 0 3px #ffde86,0 0 19px rgba(255,209,97,.45)!important;background:rgba(255,221,117,.13)!important;}
+.rpg-nav-button[data-tab='map']:not([aria-current='page'])::before{content:'';position:absolute;inset:0;background:rgba(8,32,61,.25);border-radius:5px;}
+.rpg-nav-button .nav-icon,.rpg-nav-button .nav-caption{display:none;}
+/* Favorites are accessible from the topbar, instead of covering the game's bottom menu. */
+.shortcut-toggle{border:2px solid #a7814e;border-radius:9px;color:#ffe4a0;background:linear-gradient(#274d74,#122945);padding:8px 11px;min-height:43px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 3px 0 #071426;}
+.shortcut-toggle[aria-expanded='true'] {background:linear-gradient(#ffdc96,#c98b3a);color:#263b52;border-color:#fff0b5;}
+.shortcut-toggle:focus-visible{outline:3px solid #ffe69a;outline-offset:3px}
+.hotbar{position:fixed!important;left:auto!important;right:max(12px,calc((100vw - 1320px)/2));top:calc(84px + env(safe-area-inset-top,0px));bottom:auto!important;width:auto;max-width:calc(100vw - 22px);z-index:19;display:none!important;padding:0!important;pointer-events:auto;}
+.hotbar[data-open='true']{display:flex!important;}
+.hotbar .hb-inner{max-width:100%;flex-wrap:wrap;justify-content:center;}
+.hotbar .hb-label{width:auto;padding:0 5px;font-size:12px;}
+.hotbar .hb-slot{width:51px;height:51px;flex:none;}
+/* Keep popups and announcements away from bottom artwork */
+.toast{bottom:calc(clamp(100px,11vw,150px) + env(safe-area-inset-bottom,0px))!important;}
+@media(max-width:900px){
+ .rpg-bottom-nav{width:calc(100% - 12px);}
+}
+/* Convert the same supplied artwork into icon-button tabs at small sizes. */
+@media(max-width:760px){
+ body{padding-bottom:106px!important;}
+ .rpg-bottom-nav{aspect-ratio:auto;width:calc(100% - 12px);bottom:calc(5px + env(safe-area-inset-bottom,0px));height:75px;padding:6px;display:flex;gap:5px;transform:translateX(-50%);
+   border:4px solid #657b91;border-radius:12px;background:linear-gradient(180deg,#415d79 0%,#1b314e 10%,#142640 82%,#07142a 100%);
+   box-shadow:inset 0 0 0 2px #c3a579,inset 0 5px 0 #6e8198,0 6px 0 #070f1c,0 10px 18px rgba(0,0,0,.4);filter:none;}
+ .rpg-bottom-nav::before,.rpg-bottom-nav::after{content:'';position:absolute;top:7px;bottom:7px;width:3px;background:#b59b70;}
+ .rpg-bottom-nav::before{left:2px}.rpg-bottom-nav::after{right:2px}
+ .rpg-bottom-art{display:none;}
+ .rpg-nav-button,.main-tab.rpg-nav-button{position:relative;left:auto!important;width:auto!important;top:auto;height:100%;flex:1 1 0;min-width:0;max-width:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:1px 0 2px;
+   border:2px solid #6584a3!important;border-radius:7px;color:#f7e8cd;box-shadow:inset 0 1px 0 #a2c3d1,0 3px 0 #06162a!important;
+   background:linear-gradient(#255b8c,#18406c 68%,#103058)!important;}
+ .rpg-nav-button .nav-icon{display:block;width:35px;height:35px;object-fit:cover;object-position:center;border-radius:5px;image-rendering:pixelated;filter:drop-shadow(0 1px 1px #0a1934);}
+ .rpg-nav-button .nav-caption{display:block;color:inherit;font-size:clamp(9px,2.3vw,12px);font-family:'Fredoka',Verdana,sans-serif;font-weight:700;line-height:1.1;white-space:nowrap;letter-spacing:-.02em;}
+ .rpg-nav-button[aria-current='page'],.main-tab.rpg-nav-button[aria-current='page']{color:#263b51;border-color:#ffe0a0!important;background:linear-gradient(#ffebaf,#f6cc79 75%,#ce934e)!important;box-shadow:inset 0 2px 0 #fff5cd,0 3px 0 #8f5b30!important;}
+ .rpg-nav-button[data-tab='map']:not([aria-current='page'])::before{display:none}
+ .rpg-nav-button[aria-current='page'] .nav-caption {color:#283547;text-shadow:none;}
+ .rpg-nav-button:hover{filter:brightness(1.07)}
+ .shortcut-toggle {padding:6px 8px;min-height:37px;}
+ .shortcut-label {display:none;}
+ .hotbar{top:calc(72px + env(safe-area-inset-top,0px));}
+ .hotbar .hb-label{width:100%;}
+ .hotbar .hb-slot{width:42px;height:42px;font-size:22px;}
+ .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;}
+}
+@media(max-width:365px){
+ .rpg-bottom-nav{gap:3px;padding:5px 3px;height:72px;}
+ .rpg-nav-button .nav-icon{width:29px;height:29px;}
+ .rpg-nav-button .nav-caption{font-size:9px;}
+ .shortcut-toggle{padding:4px 6px;font-size:12px;}
+ .top{gap:5px;}
+}
+@media(prefers-reduced-motion:reduce){.rpg-nav-button{transition:none!important;}}
+/* On typical desktop screens, reveal all four continents above the bottom RPG menu. */
+@media (min-width:901px){
+ .rpg-bottom-nav{width:min(1130px,calc(100% - 18px));}
+ main{padding-top:15px;}
+ .page-intro{margin-bottom:10px;}
+ .page-intro .h1{font-size:clamp(30px,3.1vw,42px);}
+ .page-intro .lede{margin-top:4px;}
+ .kingdom-map{max-width:min(100%,calc((100dvh - 305px) * 1.75));margin-left:auto;margin-right:auto;}
+}
+
+/* ===== pixel-v3.css ===== */
+/* SAC'ADOS Pixel Kingdom Deluxe V3 · individual original 16-bit inspired pixel art assets.
+   Images contain NO text, buttons/labels remain accessible HTML and are independently clickable. */
+:root {--gold-v3:#e2b36d;--navy-v3:#152943;}
+.pixel-small-icon,.pixel-world-icon,.pixel-quest-icon,.pixel-callout-icon,.pixel-journal-icon,
+.pixel-brand-icon,.pixel-prof-art,.pixel-shortcut-art {display:inline-block;vertical-align:middle;object-fit:contain;image-rendering:pixelated;flex:none;}
+.pixel-small-icon{width:27px;height:27px;margin-right:5px;}
+.pixel-world-icon{height:63px;width:63px;max-width:100%;}
+.pixel-brand-icon{width:42px;height:42px;object-fit:contain;}
+.brand-ico:has(.pixel-brand-icon){overflow:hidden;}
+.pixel-callout-icon {width:58px;height:58px;}
+.callout-icon:has(.pixel-callout-icon){display:grid;place-items:center;}
+.pocket{display:inline-flex;align-items:center;justify-content:center;gap:4px;}
+.pocket .n{margin-left:5px;}
+.pocket .pixel-small-icon{width:30px;height:30px;margin-right:0;}
+.chip{display:inline-flex;align-items:center;gap:3px;}
+.chip .pixel-small-icon{width:25px;height:25px;margin:0;}
+.sec-h{display:flex;align-items:center;gap:8px;}
+.sec-h .pixel-small-icon{width:40px;height:40px;margin:0;filter:drop-shadow(0 2px 0 rgba(44,49,73,.12));}
+.sec-h small{margin-left:4px;}
+.grid{grid-template-columns:repeat(auto-fill,minmax(167px,1fr));gap:18px 15px;}
+.slot{min-height:226px;border:3px solid #a47745;border-radius:11px;overflow:visible;background:#fff9e9;
+ box-shadow:0 4px 0 #6b4937,0 7px 0 #293e59, inset 0 0 0 2px #f6dba0;}
+.slot:hover{border-color:#ffe09c;transform:translateY(-3px);box-shadow:0 7px 0 #815330,0 10px 0 #293e59,0 0 0 2px rgba(247,197,104,.25);}
+.slot-art{display:block;position:relative;height:auto;aspect-ratio:120/78;overflow:hidden;background:#253c5a;border:0;border-radius:7px 7px 0 0;}
+.slot-art::before,.slot-art::after{display:none;}
+.pixel-poster{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;}
+.slot-card-info{border-top:3px solid #d5a866;min-height:89px;padding:11px 10px 13px;background:linear-gradient(#fff9ea,#f3e2bd);border-radius:0 0 8px 8px;}
+.slot-name{font-size:17.5px;line-height:1.18;letter-spacing:-.01em;}
+.slot-sub{font-size:12.5px;color:#637085;line-height:1.3;}
+.slot .tag{z-index:5;box-shadow:0 2px 0 rgba(21,30,50,.36);}
+.slot .tag.new{background:#d04f61;}.slot .tag.fav{background:#ffda77;}
+.sheet-head{align-items:center;min-width:0;flex-wrap:wrap;}
+.pixel-sheet-art{width:145px;height:100px;min-width:145px;border:3px solid #d6a567!important;border-radius:9px;overflow:hidden;box-shadow:0 4px 0 #725337!important;padding:0!important;background:#172b44!important;}
+.pixel-modal-poster{display:block;height:100%;width:100%;object-fit:contain;image-rendering:pixelated;}
+.sheet-head>div:nth-child(2){flex:1;min-width:175px;}
+.sheet-head h3{overflow-wrap:anywhere;}
+.pill{display:inline-flex;align-items:center;gap:4px;}
+.pill .pixel-small-icon{width:22px;height:22px;margin-right:0;}
+.class-pick .e:has(.pixel-world-icon){display:grid;place-items:center;line-height:1;min-height:60px;}
+.prof-item label{display:flex;align-items:center;gap:5px;}
+.pixel-prof-art{width:37px;height:27px;object-fit:contain;image-rendering:pixelated;}
+.pixel-quest-icon{width:48px;height:48px;}
+.pixel-journal-icon{width:85px;height:85px;}
+.journal-icon:has(.pixel-journal-icon){padding:0;display:grid;place-items:center;flex:none;}
+.hb-slot{padding:2px;}
+.pixel-shortcut-art{width:42px;height:39px;object-fit:contain;}
+.journal-card .journal-body{min-width:220px;}
+@media(max-width:650px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 9px;}
+ .slot{min-height:0;}.slot-art{height:auto;aspect-ratio:120/78;}
+ .slot-card-info{min-height:90px;padding:9px;}
+ .slot-name{font-size:15px;}.slot-sub{font-size:11px;}
+ .sec-h{gap:5px;}.sec-h .pixel-small-icon{width:32px;height:32px;}
+ .pocket .pixel-small-icon{width:25px;height:25px;}
+ .chip .pixel-small-icon{width:22px;height:22px;}
+ .pixel-brand-icon{width:32px;height:32px;}
+ .pixel-sheet-art{width:120px;height:82px;min-width:120px;}
+ .sheet-head>div:nth-child(2){min-width:145px;}
+}
+@media(max-width:360px){
+ .slot-card-info{min-height:95px;padding:7px;}
+ .slot-name{font-size:14px;}.slot-sub{font-size:10.5px;}
+ .sheet-head>div:nth-child(2){min-width:140px;}
+}
+@media(prefers-reduced-motion:reduce){.slot{transition:none!important;}}
+
+/* ===== pixel-v4.css ===== */
+/* SAC'ADOS — PIXEL KINGDOM DELUXE V4
+   Premium painted pixel-art direction, rebuilt from the approved V4 concept.
+   All labels/links are live HTML elements, not burned into a screenshot. */
+:root{--v4-night:#0c1d34;--v4-blue:#1c3859;--v4-stone:#354e65;--v4-gold:#f3c16c;--v4-gold2:#d9923b;--v4-paper:#fff0c8;--v4-paper2:#e9c992;}
+body{background:#0b1c30 url('../assets/worlds/forest.webp') center top/cover fixed;color:#fef0cf;padding-bottom:clamp(105px,11vw,170px)!important;}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(125deg,rgba(7,20,39,.95),rgba(11,32,56,.88) 60%,rgba(8,17,32,.91));pointer-events:none;}
+.top{min-height:72px;background:linear-gradient(180deg,#304662,#152947 84%,#0d192d)!important;border-top:2px solid #9a7140;border-bottom:4px solid #c18b46;box-shadow:0 5px 0 #071424,0 9px 25px rgba(0,0,0,.35);}
+.top::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background:repeating-linear-gradient(90deg,transparent 0 44px,#9db3c5 45px 46px);}
+.brand{position:relative;z-index:1}
+.brand-name{font-size:clamp(20px,2.2vw,32px);font-family:'Fredoka',system-ui,sans-serif;letter-spacing:.01em;color:#ffd774;text-shadow:2px 3px 0 #633c25,-1px -1px 0 #fff1ac;}
+.brand-sub{font-size:12px;text-transform:uppercase;font-weight:700;letter-spacing:.1em;color:#fff0d7}
+.shortcut-toggle,.loot,.icon-btn{position:relative;z-index:1;}
+.loot{color:#ffe4a5!important;background:linear-gradient(#243f60,#132742)!important;border:2px solid #dca251!important;box-shadow:inset 0 2px #537595,0 3px #060c19;}
+main#view{max-width:1800px;padding:16px 18px 35px;}
+.v4-hub{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(390px,1fr);gap:17px;align-items:start;}
+.v4-worldside{min-width:0;}
+.v4-map-panel{position:relative;overflow:hidden;border:5px solid #3e5e7e;border-radius:11px;background:#0a426c;box-shadow:0 0 0 3px #a77c43,inset 0 0 0 3px #9bbac3,0 9px 0 #08162a,0 15px 28px rgba(0,0,0,.32);}
+.v4-map-panel::after{content:"";pointer-events:none;position:absolute;inset:0;box-shadow:inset 0 0 22px rgba(4,17,32,.5);}
+.v4-map-panel img{width:100%;height:auto;aspect-ratio:1536/875;display:block;object-fit:cover;user-select:none;}
+.v4-map-panel .map-hit{z-index:2;border-radius:9px;transform:none!important;}
+.v4-map-panel .map-hit:hover,.v4-map-panel .map-hit:focus-visible{outline:3px dashed #fff3a1;outline-offset:-6px;box-shadow:inset 0 0 0 3px #ffb642;background:rgba(255,234,143,.10)!important;}
+.v4-map-panel .hit-6{left:30%;top:17%;width:19%;height:25%;}
+.v4-map-panel .hit-5{left:69%;top:17%;width:22%;height:25%;}
+.v4-map-panel .hit-4{left:12%;top:66%;width:22%;height:24%;}
+.v4-map-panel .hit-3{left:77%;top:67%;width:20%;height:22%;}
+.v4-map-status{margin-top:13px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;border:2px solid #b78e56;background:linear-gradient(#193d62,#0d2440);box-shadow:0 4px #091728;border-radius:8px;font-family:'Fredoka',sans-serif;font-size:13px;color:#ffe7b6;letter-spacing:.03em;}
+.v4-map-status button{border:2px solid #ffe3a6;border-radius:7px;padding:7px 11px;color:#2c3340;background:linear-gradient(#fff4c2,#e0a54f);font-weight:700;white-space:nowrap;}
+.v4-inventory{border:5px solid #b1864b;outline:3px solid #14263c;border-radius:14px;overflow:hidden;background:#172c47;box-shadow:inset 0 0 0 2px #60738b,0 7px 0 #0a1322,0 12px 22px #020911aa;min-width:0;}
+.v4-inventory-banner{height:132px;position:relative;display:flex;align-items:flex-start;justify-content:center;padding:23px 8px;background:#251c21 url('../assets/premium/decor/sac-banner.webp') center/100% 100% no-repeat;border-bottom:5px solid #c08f4f;}
+.v4-inventory-banner h2{margin:3px auto 0;font-family:'Fredoka',system-ui,sans-serif;font-size:clamp(19px,2vw,28px);line-height:1.12;text-align:center;white-space:nowrap;color:#402716;text-shadow:0 1px 0 #ffe3a1;letter-spacing:.02em;}
+.v4-inventory-banner>span{position:absolute;bottom:13px;font-size:12px;color:#fff5c3;font-weight:700;background:rgba(16,32,51,.72);padding:3px 10px;border-radius:8px;letter-spacing:.05em;}
+.v4-inventory-body{padding:12px 12px 14px;background:linear-gradient(#1d334f,#172b45 80%,#101c33);}
+.v4-filter-preview{display:flex;gap:4px;min-width:0;justify-content:space-between;}
+.v4-filter-short{flex:1 1 auto;min-width:0;border:2px solid #5e7894;border-radius:6px;background:linear-gradient(#294564,#1b2d48);color:#fff6e2;min-height:37px;font-size:clamp(9px,.8vw,13px);font-weight:700;padding:5px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 1px #86a0b5,0 2px #0b1627;}
+.v4-filter-short.active,.v4-filter-short:focus-visible,.v4-filter-short:hover{background:linear-gradient(#ffde7a,#e3a93f);border-color:#fff0a8;color:#312635;}
+.v4-search-preview{height:41px;width:100%;margin:12px 0;border:2px solid #758ca5;box-shadow:inset 0 1px 2px #999cb2;border-radius:9px;text-align:left;padding:6px 14px;color:#526176;background:#fff9ee;font-size:14px;}
+.v4-preview-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 7px;padding:4px 3px 13px;}
+.v4-game-card{display:flex;min-width:0;min-height:0;flex-direction:column;align-items:stretch;background:linear-gradient(#fff0cb,#f5d69c);border:3px solid #dba855;border-radius:8px;padding:3px 3px 7px;box-shadow:0 2px 0 #88562c,inset 0 0 0 1px #fdf1c5;color:#182a3b;text-align:center;transition:transform .13s ease,filter .13s ease;}
+.v4-game-card:hover,.v4-game-card:focus-visible{transform:translateY(-2px);filter:brightness(1.06);outline:2px solid #ffdb70;outline-offset:1px;}
+.v4-game-card.selected{box-shadow:0 0 0 2px #fff5c0,0 0 15px #eabc6980,0 3px 0 #875b36;border-color:#ffd27a;}
+.v4-game-picture{display:block;position:relative;aspect-ratio:1/1;width:100%;overflow:hidden;border:2px solid #936939;border-radius:3px;background:#173553;}
+.v4-game-art{display:block;width:100%;height:100%;object-fit:cover;image-rendering:auto;}
+.v4-card-star{position:absolute;right:2px;top:1px;font-family:'Fredoka',sans-serif;font-size:21px;line-height:1;color:#ffca41;text-shadow:-2px 0 #745227,0 2px #745227,2px 0 #745227,0 -2px #745227;}
+.v4-game-card strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:5px 0 5px;font-family:'Fredoka',sans-serif;font-size:clamp(10px,1vw,14px);line-height:1.12;min-height:2.2em;overflow-wrap:anywhere;}
+.v4-game-pill{margin:auto 2px 0;display:block;border-radius:6px;padding:3px 2px;font-size:clamp(8px,.73vw,10px);line-height:1.15;font-weight:700;background:#fbc472;color:#443320;box-shadow:inset 0 -2px #dc9850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.v4-game-card:nth-child(3n) .v4-game-pill{background:#65d4ae;box-shadow:inset 0 -2px #309b8f;}
+.v4-game-card:nth-child(4n) .v4-game-pill{background:#f5a77c;box-shadow:inset 0 -2px #ca7f5a;}
+.v4-feature{display:grid;grid-template-columns:41% minmax(0,1fr);gap:10px;overflow:hidden;border:3px solid #b88a52;border-radius:10px;background:linear-gradient(#223957,#162842);box-shadow:inset 0 0 0 2px #425f79,0 5px 0 #091528;color:#fff3d3;}
+.v4-feature-image{min-width:0;overflow:hidden;min-height:225px;background:#142e58;}
+.v4-feature-art{width:100%;height:100%;max-height:320px;object-fit:cover;display:block;}
+.v4-feature-copy{padding:11px 9px 10px 0;display:flex;flex-direction:column;min-width:0;gap:9px;}
+.v4-feature-top{display:flex;gap:9px;align-items:center;}
+.v4-medal{display:grid;place-items:center;flex:none;width:33px;height:33px;font-size:24px;color:#ffcb55;text-shadow:1px 2px #653918;border-radius:7px;border:2px solid #ca8c32;background:#6b471f;}
+.v4-feature-top h3{margin:0;color:white;text-shadow:0 2px #081428;font-family:'Fredoka',sans-serif;font-size:clamp(17px,1.5vw,22px);line-height:1.1;overflow-wrap:anywhere;}
+.v4-feature-meta{color:#f5cdb5;font-size:11px;}
+.v4-feature-text{background:#ffe3a6;color:#473822;border:2px solid #a77e49;box-shadow:inset 0 0 0 2px #fdf0bd;margin:0;padding:10px 11px;border-radius:5px;font-size:clamp(11px,.9vw,13px);line-height:1.3;flex:1;}
+.v4-launch{width:100%;min-height:38px;border-radius:7px;display:flex;align-items:center;justify-content:center;border:2px solid #ffe1a0;background:linear-gradient(#ffe17c,#f9b634);font-family:'Fredoka',sans-serif;color:#432c1d;font-weight:700;font-size:12px;text-decoration:none;text-align:center;box-shadow:0 3px #8b5326;}
+.v4-launch[disabled]{opacity:.67;cursor:not-allowed;}
+.v4-feature-actions{display:flex;gap:5px;}
+.v4-feature-actions button{flex:1;min-width:0;min-height:30px;border:2px solid #688caa;border-radius:6px;color:#f8e5c3;background:linear-gradient(#2c577f,#183754);font-size:10px;font-weight:700;padding:4px 2px;}
+.v4-extra-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.9fr) minmax(0,.9fr);gap:15px;align-items:stretch;margin:20px 0 5px;}
+.v4-subjects,.v4-sidequest,.v4-tracker{position:relative;min-width:0;border:3px solid #8e6e47;border-radius:8px;background:linear-gradient(120deg,rgba(22,48,59,.93),rgba(30,78,66,.86)),url('../assets/worlds/forest.webp') center/cover;box-shadow:0 6px 0 #0a1828;padding:25px 9px 10px;}
+.v4-sidequest{background:linear-gradient(120deg,rgba(35,48,55,.73),rgba(56,80,71,.69)),url('../assets/worlds/prairie.webp') center/cover;}
+.v4-tracker{background:linear-gradient(120deg,rgba(35,48,55,.70),rgba(56,80,71,.75)),url('../assets/worlds/desert.webp') center/cover;}
+.v4-scroll-title{position:absolute;z-index:1;left:50%;top:-5px;transform:translateX(-50%);max-width:94%;white-space:nowrap;padding:5px 14px;border:2px solid #aa6e3e;border-radius:0 0 10px 10px;background:linear-gradient(#ffe8ad,#dfb77a);box-shadow:0 3px #714829;text-align:center;font-family:'Fredoka',sans-serif;color:#56351d;font-weight:700;font-size:15px;}
+.v4-subject-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;margin-top:17px;}
+.v4-subject{display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-width:0;min-height:91px;border:3px solid #dbaa60;border-bottom:6px solid #a96d33;border-radius:6px;padding:6px 1px 5px;background:linear-gradient(#213d67,var(--disc-color));color:#fff5ce;box-shadow:inset 0 0 0 1px #ecdbad,0 4px #0a1e31;font-weight:700;font-size:clamp(8px,.75vw,12px);text-shadow:1px 2px 2px #10213b;}
+.v4-subject:hover{filter:brightness(1.17);transform:translateY(-2px)}
+.v4-subject img{width:min(44px,88%);height:50px;object-fit:contain;filter:drop-shadow(0 3px 2px #06152c88);image-rendering:auto;}
+.v4-subject span{display:block;max-width:100%;overflow-wrap:anywhere;line-height:1.05;text-align:center;}
+.v4-parchment{background:linear-gradient(#fff0c6,#e5c58d);border:3px solid #a37348;box-shadow:inset 0 0 0 2px #f8dfaa;color:#4c351f;min-height:117px;margin:18px 7px 0;padding:11px 12px;display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:9px;font-size:13px;}
+.v4-parchment p{margin:0;line-height:1.25;font-weight:700;text-align:center;}
+.v4-parchment button{border:0;border-radius:5px;background:#d99b40;color:#493018;padding:5px 8px;font-size:12px;font-weight:700;}
+.v4-progress{height:11px;border:3px solid #634e40;border-radius:8px;background:#99886f;overflow:hidden;}
+.v4-progress span{display:block;height:100%;background:linear-gradient(#6dcdff,#139ed0);}
+/* World inventory: graphic fiction remains, but every title/filter is live and sharp HTML. */
+.v4-world-intro{display:flex;align-items:center;gap:22px;margin:10px 0 12px;}
+.v4-world-intro>div{min-width:0}
+.v4-return{flex:none;border:3px solid #e5b674;background:linear-gradient(#263e5c,#132843);color:#f8e7c4;padding:11px;border-radius:8px;box-shadow:0 3px #061222;font-weight:700;}
+.v4-world-intro h1{font-family:'Fredoka',sans-serif;font-size:clamp(25px,3vw,38px);margin:1px 0;color:#fff1c8;text-shadow:1px 3px #0a1629}
+.v4-world-intro p{margin:0;color:#d4e3ed;font-size:14px}
+.v4-world-kicker{font-family:'Fredoka';font-size:12px;letter-spacing:.16em;color:#f5c783;}
+.v4-world-banner{border:4px solid #bc995e;box-shadow:0 4px 0 #091526;border-radius:8px;height:200px;margin:0 0 16px;overflow:hidden;}
+.v4-world-banner img{width:100%;height:100%;object-fit:cover;}
+.pack{padding:0 0 20px!important;border:4px solid #bb9258;border-radius:12px!important;background:linear-gradient(#1c3855,#132a45);box-shadow:inset 0 0 0 3px #496580,0 10px 0 #0a182c!important;}
+.pack>.v4-inventory-banner{height:136px;}
+.pack .pack-body{margin:0 14px 14px;background:linear-gradient(#203b5b,#142b47);color:#fff2dc;padding:14px;border-radius:0 0 10px 10px;box-shadow:inset 0 0 0 2px #71869b;}
+.v4-quest-inline{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#f8e5b5;padding:8px 11px;margin:0 0 9px;border:2px solid #b88949;background:linear-gradient(90deg,#385777,#182a45);border-radius:7px;font-size:13px;font-weight:700;}
+.v4-quest-inline button{border:2px solid #f8d68a;background:linear-gradient(#ffe1a5,#d8a34f);padding:5px 10px;border-radius:6px;font-weight:700;color:#472c19;}
+.pack .pockets{margin:3px 0 10px;padding:6px 1px 10px;}
+.pack .pocket{border-radius:7px;border:2px solid #66809a;color:#fdf1d7;background:linear-gradient(#304c6c,#1b304b);box-shadow:inset 0 2px #7897b5,0 3px #071626;font-size:13px;padding:7px 11px;}
+.pack .pocket[aria-selected="true"]{background:linear-gradient(#ffe093,#ddaa57);color:#352c2c;border-color:#ffeba5;box-shadow:inset 0 2px #fff4c8,0 3px #835b31;}
+.pack .pocket .n{background:#102742;color:#ffe6ac;padding:2px 6px;border-radius:6px;}
+.pack .pocket[aria-selected="true"] .n{background:#bb7d35;color:white;}
+.v4-inventory-controls{display:flex;flex-direction:column;gap:10px;padding:3px 1px 15px;}
+.pack .search{background:#fff5e3;color:#344459;border:2px solid #8ca1b1;box-shadow:inset 0 2px #c8c5bd;flex:auto;width:100%;min-height:43px;border-radius:8px;}
+.pack .search input{font-size:15px;}
+.pack .chips{padding:1px 0 6px;max-width:100%;gap:7px;}
+.pack .chip{display:flex;align-items:center;gap:4px;background:linear-gradient(#2d506f,#152d4a);color:#fff3d5;border-radius:7px;box-shadow:0 2px #0b1a2b,inset 0 0 0 2px #7388a0;padding:4px 9px;min-height:41px;}
+.pack .chip[aria-pressed="true"]{background:linear-gradient(#ffe49b,#dfa448);color:#48311a;box-shadow:0 2px #8e5a2e,inset 0 0 0 2px #f5e0ab;}
+.pack .chip .pixel-small-icon{width:30px;height:29px;}
+.pack .sec-h{font-family:'Fredoka',sans-serif;font-size:21px;color:#ffe0ab;margin:22px 0 12px;}
+.pack .sec-h small{font-size:13px;color:#b7cfe5;}
+.pack .grid,.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:17px 13px;padding:2px 2px 14px;}
+.pack .slot,.slot{border:4px solid #d5a05b;outline:1px solid #80502b;background:#f5ddb0;border-radius:8px;box-shadow:0 4px #8d542f,inset 0 0 0 2px #fff1bb;padding:3px 3px 7px;min-height:0;overflow:visible;text-align:center;color:#243143;}
+.pack .slot:hover,.slot:hover{border-color:#ffe5a2;outline:2px solid #ffc66c;box-shadow:0 6px #83552c,0 0 16px #f5c86b88;}
+.pack .slot-art,.slot-art{display:block;width:100%;height:auto;aspect-ratio:1/1;background:#24486b;border:2px solid #966934;border-radius:4px;overflow:hidden;}
+.pack .slot-art .pixel-poster,.slot-art .pixel-poster{width:100%;height:100%;display:block;object-fit:cover;image-rendering:auto;}
+.v4-slot-star{position:absolute;top:5px;right:6px;color:#ffe170;text-shadow:0 2px 1px #724c24,-1px 0 #553e25,1px 0 #553e25;font-size:24px;}
+.pack .slot-card-info,.slot-card-info{display:flex;flex-direction:column;align-items:center;padding:9px 4px 4px;min-height:81px;background:none;border:0;}
+.pack .slot-name,.slot-name{font-family:'Fredoka',sans-serif;font-size:clamp(13px,1.2vw,16px);color:#29364a;line-height:1.1;overflow-wrap:anywhere;}
+.pack .slot-sub,.slot-sub{display:inline-block;background:#f2c278;border-radius:7px;padding:3px 6px;color:#523c2b;font-size:11px;line-height:1.18;margin:8px 0 0;}
+.pack .tag,.slot .tag{z-index:5;font-size:10px;top:-8px;right:-8px;}
+.pack .tag.fav{left:-6px;right:auto;}
+/* New modal rhythm: large image plus parchment texts. */
+.sheet{max-width:610px!important;overflow:auto;max-height:min(88vh,920px);background:linear-gradient(#fff2d2,#e8cf9f);border:5px solid #bf8b4e;outline:3px solid #132e48;box-shadow:inset 0 0 0 2px #fff4c4,0 16px 0 #0e1b30,0 25px 60px #030b18b0;border-radius:12px;}
+.sheet .pixel-sheet-art{width:180px!important;height:180px!important;min-width:130px!important;max-width:46%;border:4px solid #e9ba74!important;box-shadow:0 5px #89572e!important;}
+.sheet .pixel-modal-poster{width:100%;height:100%;object-fit:cover;image-rendering:auto;}
+.sheet h3{color:#342b29;font-size:clamp(24px,3vw,34px);}
+.sheet p{color:#3a3e47;}
+.sheet .btn.primary{border:2px solid #fff0b7;background:linear-gradient(#ffe69b,#edb449);}
+.journal-card,.discover-totals{border-color:#d2a05d!important;box-shadow:0 6px #6b4528;background:linear-gradient(#ffedbd,#e8c38c)!important;}
+/* For accessibility and smaller devices. */
+@media(max-width:1280px){
+ .v4-hub{grid-template-columns:minmax(0,1.5fr) minmax(345px,1fr);gap:12px;}
+ .v4-game-card strong{font-size:11px;}.v4-game-pill{font-size:9px;}.v4-inventory-banner{height:113px;padding-top:19px;}.v4-feature-text{font-size:11px;padding:8px;}
+ .v4-feature{grid-template-columns:40% 1fr;}.v4-preview-grid{gap:6px 5px;}.v4-inventory-body{padding:10px 8px;}
+ .v4-subject img{height:41px}.v4-subject{min-height:81px;}
+}
+@media(max-width:930px){
+ .v4-hub{grid-template-columns:1fr;}
+ .v4-inventory{max-width:100%;}
+ .v4-inventory-banner{height:124px;}.v4-game-card strong{font-size:14px;}.v4-game-pill{font-size:11px;}.v4-feature-text{font-size:13px;}
+ .v4-feature{grid-template-columns:35% 1fr;}.v4-preview-grid{gap:11px;}
+ .v4-extra-row{grid-template-columns:1fr 1fr;}.v4-subjects{grid-column:1/-1;}
+ .v4-subject img{height:49px;}
+}
+@media(max-width:600px){
+ body{background-attachment:scroll;}
+ main#view{padding:10px 8px 22px;}
+ .top{min-height:62px;padding:8px 9px;gap:6px;}.brand-ico{width:38px;height:38px;}.brand-name{font-size:21px;}.brand-sub{font-size:9px;}.loot{font-size:12px;padding:6px;}
+ .v4-map-panel{border-width:3px;}
+ .v4-map-status{font-size:10px;padding:6px 8px;gap:6px;}.v4-map-status button{font-size:11px;}
+ .v4-preview-grid{gap:6px;}.v4-game-card{padding:2px 2px 5px;border-width:2px;}
+ .v4-game-card strong{font-size:clamp(10px,2.6vw,13px);min-height:2em;margin:4px 1px;}.v4-game-pill{font-size:8px;margin:0;}
+ .v4-filter-preview{overflow:auto;justify-content:flex-start;scrollbar-width:thin;padding-bottom:4px;}.v4-filter-short{flex:0 0 auto;padding:7px 12px;font-size:12px;}
+ .v4-inventory-banner{height:110px;}.v4-inventory-banner h2{font-size:clamp(20px,5.2vw,26px);}
+ .v4-feature{grid-template-columns:37% 1fr;gap:6px;}.v4-feature-image{min-height:210px;}.v4-feature-copy{padding:8px 7px 7px 0;gap:5px;}
+ .v4-feature-text{font-size:11px;line-height:1.2;padding:7px;}
+ .v4-feature-top h3{font-size:15px}.v4-feature-meta{font-size:9px}.v4-medal{width:23px;height:23px;font-size:17px;}
+ .v4-launch{font-size:10px;min-height:32px;}.v4-feature-actions button{font-size:9px;padding:3px 1px;}
+ .v4-extra-row{gap:15px;}.v4-subjects{grid-column:1/-1;}
+ .v4-subject-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;}
+ .v4-subject img{width:48px;height:46px;}.v4-subject{min-height:75px;font-size:11px;}
+ .v4-sidequest,.v4-tracker{grid-column:1/-1;}.v4-parchment{min-height:100px;}
+ .v4-world-intro{gap:8px;flex-wrap:wrap;margin-top:4px;}.v4-return{font-size:12px;padding:7px 9px;}.v4-world-banner{height:120px;}
+ .pack{border-width:3px}.pack .pack-body{margin:0 6px 8px;padding:7px;}
+ .v4-quest-inline{font-size:11px;}.v4-quest-inline button{font-size:10px;padding:4px;}
+ .pack .grid,.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 8px;}.slot-name{font-size:14px!important;}
+ .pack .sec-h{font-size:17px;flex-wrap:wrap;}.pack .sec-h small{display:block;flex-basis:100%;margin-left:2px;}
+ .sheet .pixel-sheet-art{width:130px!important;height:130px!important;min-width:130px!important;}
+}
+@media(max-width:360px){.v4-feature{grid-template-columns:34% 1fr;}.v4-feature-text{font-size:10px;}.v4-game-card strong{font-size:10px}.v4-inventory-banner{height:95px}.v4-game-pill{font-size:8px}.v4-map-status span{font-size:9px}.v4-subject{font-size:10px}.v4-feature-actions{flex-wrap:wrap;}}
+@media(prefers-reduced-motion:reduce){.v4-game-card,.v4-subject{transition:none;}}
+/* The painterly inventory banner already contains its own beautiful engraved lettering.
+   Keep a screen-reader title, but never duplicate text above it. */
+.v4-inventory-banner h2{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+body{background:#0d1d33!important;}
+@media(min-width:931px){
+ .rpg-bottom-nav{left:18px;transform:none;width:calc((100vw - 52px)*.635);max-width:1120px;bottom:12px;}
+}
+/* World screens use a scalable independent heading rather than stretching the engraved
+   inventory illustration beyond its original aspect ratio. */
+.pack>.v4-inventory-banner{height:112px;align-items:center;justify-content:center;
+ background:linear-gradient(90deg,#182b45,#3f2c29 47%,#192f48);border-bottom:4px solid #c89c60;}
+.pack>.v4-inventory-banner::before{content:'';position:absolute;left:12px;top:10px;width:55px;height:85px;
+ background:url('../assets/premium/decor/lantern.webp') center/contain no-repeat;}
+.pack>.v4-inventory-banner::after{content:'';position:absolute;right:15px;top:3px;width:110px;height:100px;
+ background:url('../assets/premium/decor/backpack.webp') center/contain no-repeat;}
+.pack>.v4-inventory-banner h2{position:relative!important;width:auto!important;height:auto!important;margin:0 0 13px!important;
+ clip:auto!important;overflow:visible!important;border:4px solid #a5733e!important;border-radius:8px;
+ background:linear-gradient(#fff0c5,#e5bd81);padding:13px 30px!important;box-shadow:inset 0 0 0 2px #ffe7ac,0 4px #70482b;
+ font-size:clamp(22px,2.7vw,36px);color:#4d2f18;text-shadow:0 2px #ffe7ad;letter-spacing:.03em;z-index:1;}
+.pack>.v4-inventory-banner>span{bottom:6px;z-index:2;}
+@media(max-width:600px){.pack>.v4-inventory-banner{height:102px;}.pack>.v4-inventory-banner h2{font-size:19px;padding:11px 9px!important;}.pack>.v4-inventory-banner::before{width:29px;height:52px;left:2px;top:20px}.pack>.v4-inventory-banner::after{width:41px;height:56px;right:2px;top:18px}}
+.v4-mobile-worlds{display:none;}
+@media(max-width:650px){
+.v4-mobile-worlds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0 0;}
+.v4-grade{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:48px;padding:5px 2px;border:2px solid #dbad65;border-radius:7px;background:linear-gradient(#244d72,#112946);color:#ffe6a6;font-family:'Fredoka',sans-serif;font-size:15px;box-shadow:0 3px 0 #071423;}
+.v4-grade span{font-family:'Atkinson Hyperlegible',sans-serif;font-size:9px;color:#fff5dd;line-height:1.04;max-width:100%;}
+.v4-grade.grade-6{border-color:#81ca7b}.v4-grade.grade-5{border-color:#e8c26d}.v4-grade.grade-4{border-color:#bc93d1}.v4-grade.grade-3{border-color:#99cff4}
+.v4-grade:focus-visible{outline:3px solid #ffe4a8}
+}
+/* On the desktop map, the five RPG controls belong to the scenery panel,
+   like the approved illustration, not floating over the discipline panels. */
+@media(min-width:931px){
+ .v4-worldside .rpg-bottom-nav{position:relative;left:auto;right:auto;top:auto;bottom:auto;
+   transform:none;width:100%;max-width:none;margin-top:36px;aspect-ratio:1307/131;}
+}
+
+/* ===== pixel-v4.2.css ===== */
+/* V4.2 — cadrage non destructif + inventaire lisible + fenêtre RPG.
+   N'écrase PAS la carte principale ni le menu inférieur V2.2 validés. */
+.v4-game-picture,.slot-art{isolation:isolate;background:#102b4a!important;}
+.v4-game-picture .v4-game-art,.pack .slot-art .pixel-poster,.slot-art .pixel-poster,.v4-feature-art,.sheet .pixel-modal-poster{
+  object-fit:contain!important;object-position:center center!important;display:block;width:100%;height:100%;
+}
+.v4-game-picture .v4-game-art{padding:1px;}
+.v4-game-card{overflow:visible;}
+.v4-card-star{display:none!important;} /* Some paintings already contain their own star. */
+.v4-game-card strong{display:block!important;overflow:visible!important;-webkit-line-clamp:unset!important;min-height:2.5em;line-height:1.12;
+  font-size:clamp(11px,1vw,14px)!important;overflow-wrap:break-word;hyphens:auto;}
+.v4-game-pill{min-height:25px;display:flex;align-items:center;justify-content:center;white-space:normal;overflow:visible;text-overflow:clip;}
+.v4-feature-image{display:flex;align-items:center;min-height:205px;aspect-ratio:1/1;}
+.v4-feature-image img{aspect-ratio:1/1;max-height:none!important;}
+.pack .grid,.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));align-items:stretch;gap:20px 15px;}
+.pack .slot,.slot{height:100%;display:flex;flex-direction:column;padding:5px 5px 9px;}
+.pack .slot-art,.slot-art{width:100%;flex:none;aspect-ratio:1/1;}
+.pack .slot-card-info,.slot-card-info{width:100%;height:auto;min-height:72px;display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:10px 3px 3px;}
+.pack .slot-name,.slot-name{font-size:clamp(13px,1.1vw,16px);line-height:1.18;overflow-wrap:anywhere;hyphens:auto;}
+.pack .slot-sub,.slot-sub{white-space:normal;overflow-wrap:anywhere;margin-top:auto;}
+.v4-subject{height:100%;}
+.v4-subject img{aspect-ratio:1/1;width:min(58px,90%);height:auto;object-fit:contain;}
+.sheet:has(.v42-detail){max-width:840px!important;width:min(94vw,840px);padding:23px!important;background:linear-gradient(140deg,#fff3d7,#e8ce9d)!important;}
+.v42-detail{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:start;padding:24px 3px 5px;}
+.v42-detail-cover{aspect-ratio:1/1;width:100%;min-width:0;overflow:hidden;border:6px solid #c18b46;outline:2px solid #4a3529;
+ background:#112d4e;box-shadow:inset 0 0 0 3px #f8d78b,0 8px 0 #785029,0 13px 18px #27261e52;padding:7px;}
+.v42-detail-cover .pixel-modal-poster{display:block;width:100%;height:100%;object-fit:contain;}
+.v42-detail-info{min-width:0;color:#3c2e21;}
+.v42-overline{display:block;font-family:'Fredoka',sans-serif;color:#79511d;font-size:12px;letter-spacing:.05em;}
+.v42-detail-info h3{margin:6px 0 12px;line-height:1.05;font-size:clamp(23px,2.1vw,34px);overflow-wrap:anywhere;}
+.v42-badges{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px;}
+.v42-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 9px 4px 5px;border:2px solid #ba8d55;
+ background:#f9e1b2;border-radius:7px;font-size:12px;font-weight:700;}
+.v42-tag img{width:24px;height:24px;object-fit:contain;margin:0;}
+.v42-detail-desc{background:#fff0ca;border:2px solid #cd9b55;border-radius:7px;padding:13px 14px;
+ box-shadow:inset 0 0 0 2px #fffae7;font-size:clamp(14px,1.1vw,16px);line-height:1.42;color:#3b3026!important;}
+.v42-grades{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:14px;margin:14px 0 6px;}
+.v42-grade{display:inline-grid;place-items:center;min-width:37px;min-height:34px;color:#fff5dc;
+ background:linear-gradient(#315a7b,#142e4c);border:2px solid #cfaa6b;border-radius:6px;font-weight:700;}
+.v42-duration{font-size:13px;margin:11px 0!important;color:#5f543e!important;}
+.v42-play,.v42-favorite{box-sizing:border-box;width:100%;min-height:49px;display:flex;align-items:center;justify-content:center;
+ border:2px solid #a87532;border-radius:7px;box-shadow:0 4px 0 #70502c;font-family:'Fredoka',sans-serif;font-size:14px;
+ text-align:center;cursor:pointer;line-height:1.2;padding:9px;text-decoration:none;margin:10px 0;color:#41291a;}
+.v42-play{background:linear-gradient(#ffeaa2,#edb747);}
+.v42-play:disabled{cursor:not-allowed;opacity:.70;}
+.v42-favorite{color:#fff3d6;border-color:#627f9b;background:linear-gradient(#315775,#152f4c);}
+.v42-opened{font-size:12px;color:#527242!important;font-weight:700;}
+.v42-close{position:relative;z-index:2;}
+@media(max-width:930px){.v4-feature-image{min-height:180px;}.v42-detail{gap:14px;}}
+@media(max-width:650px){
+ .v4-preview-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px!important;}
+ .v4-game-card strong{font-size:13px!important;min-height:2.5em;}
+ .v4-game-pill{font-size:10px;}
+ .pack .grid,.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 9px;}
+ .v42-detail{display:flex;flex-direction:column;padding-top:17px;gap:16px;}
+ .v42-detail-cover{max-width:250px;align-self:center;border-width:4px;}
+ .sheet:has(.v42-detail){padding:13px 14px 22px!important;}
+ .v42-detail-info{width:100%;}
+ .v42-detail-info h3{font-size:26px;}
+ .v42-detail-desc{padding:10px 11px;}
+ .v42-grades{font-size:13px;}
+ .v4-feature{grid-template-columns:39% minmax(0,1fr);}
+}
+@media(max-width:360px){.v4-game-card strong{font-size:11px!important;}.v42-detail-cover{max-width:215px;}}
+@media(prefers-reduced-motion:reduce){.v42-detail *{animation:none!important;transition:none!important;}}
+
+/* ===== home-v4.4.css ===== */
+/* Sac’Ados V4.4 — La carte seule sur la page d’accueil, comme au début.
+   Aucun panneau d’apps, de disciplines ni de statistiques sur cet écran.
+   Tous les autres écrans et leurs contrôles sont conservés sans changement. */
+body:has(.v44-home){background:#0c1d33!important;}
+body:has(.v44-home)::after{display:none;}
+body:has(.v44-home) #view{
+  width:100%;max-width:1600px; margin:0 auto; padding:clamp(12px,2.2vw,24px) 14px 22px;
+}
+.v44-home{
+  width:min(100%,1320px);min-width:0;margin:0 auto;
+  /* desktop: keep illustration and the menu in the first screen */
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.v44-home .v44-world-map{
+  width:100%; min-width:0; aspect-ratio:1536/875;
+  position:relative; overflow:hidden;
+  border:5px solid #3e5e7e;border-radius:13px;
+  box-shadow:0 0 0 3px #bb8c4f,inset 0 0 0 2px #a7c5ce,0 11px 0 #071527,0 20px 38px #030d1e80;
+}
+.v44-home .v44-world-map>img{
+  display:block;width:100%;height:100%;object-fit:contain;
+  user-select:none;-webkit-user-drag:none;
+}
+.v44-home .v44-world-map .map-hit{position:absolute;min-width:42px;min-height:42px;}
+.v44-home .v44-zone-label{display:none;}
+/* The original beautifully cut-out bar belongs under the map on desktop. */
+@media(min-width:931px){
+  body:has(.v44-home) #view{padding-top:clamp(11px,1.5vh,22px)}
+  .v44-home{max-width:min(1320px,calc((100dvh - 235px) * 1.755));}
+  .v44-home>.rpg-bottom-nav{
+    position:relative;left:auto;right:auto;top:auto;bottom:auto;
+    transform:none;width:min(100%,1110px);max-width:1110px;
+    aspect-ratio:1307/131;height:auto;flex:none;margin:22px auto 0;
+  }
+  body:has(.v44-home){padding-bottom:28px!important;}
+}
+@media(max-width:930px){
+  .v44-home{width:min(100%,800px)}
+  .v44-home .v44-world-map{border-width:4px}
+  /* menu fixed on smaller screens as in validated V2.2 */
+  body:has(.v44-home){padding-bottom:112px!important;}
+}
+@media(max-width:600px){
+  body:has(.v44-home) #view{padding:clamp(9px,3vw,14px) 7px 25px}
+  .v44-home .v44-world-map{border-width:3px;border-radius:10px;}
+  .v44-home .v44-world-map .map-hit{min-height:42px;min-width:42px;}
+  /* The 4 small level tabs are ON the map, not another panel below it. */
+  .v44-home .v44-zone-label{
+    display:inline-grid;place-items:center;min-width:35px;height:25px;
+    background:#0f3158; border:2px solid #ffd47f;border-radius:5px;
+    box-shadow:0 2px #081c2b; color:#fff1b5;
+    font-family:'Fredoka',system-ui,sans-serif;font-size:15px;font-weight:700;
+    text-shadow:0 1px #112b48;pointer-events:none;
+  }
+  .v44-home .map-hit.hit-6 .v44-zone-label{position:absolute;left:15%;top:12%;}
+  .v44-home .map-hit.hit-5 .v44-zone-label{position:absolute;left:8%;top:12%;}
+  .v44-home .map-hit.hit-4 .v44-zone-label{position:absolute;left:18%;top:15%;}
+  .v44-home .map-hit.hit-3 .v44-zone-label{position:absolute;left:12%;top:12%;}
+  .v44-home .v44-world-map .map-hit:focus-visible{
+    outline:3px solid #ffe28b;outline-offset:0;background:#ffe89c22!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){.v44-home .map-hit{transition:none!important;}}
+
+/* V168 — Sélection À la une sous la carte. Respecte le menu RPG et le mode calme. */
+.sac-featured{width:100%;max-width:1220px;margin:28px auto 4px;color:#fff5df;font-family:'Fredoka',system-ui,sans-serif}
+.sac-featured-heading{text-align:center;margin:0 0 18px}
+.sac-featured-kicker{display:inline-block;color:#f9d78a;font-size:.85rem;font-weight:800;letter-spacing:.14em}
+.sac-featured-heading h2{font-size:clamp(23px,3.2vw,38px);line-height:1.15;margin:7px 0;color:#ffe6a7;text-shadow:0 3px #09213d}
+.sac-featured-heading p{font-family:'Nunito',system-ui,sans-serif;color:#e6edfa;font-size:1rem;margin:5px 0}
+.sac-featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sac-featured-card{min-width:0;display:flex;align-items:stretch;gap:14px;border:3px solid #e3b966;border-radius:14px;background:linear-gradient(135deg,#183857,#0b2342);padding:12px;text-align:left;color:#fff9eb;box-shadow:0 5px 0 #745025,0 10px 20px #02091470;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.sac-featured-card:hover{transform:translateY(-3px);box-shadow:0 8px 0 #745025,0 14px 20px #02091470}
+.sac-featured-card:focus-visible{outline:4px solid #fff2a9;outline-offset:4px}
+.sac-featured-art{flex:0 0 38%;min-width:0;align-self:center;display:block;aspect-ratio:1/1;border:2px solid #f7ca73;border-radius:9px;overflow:hidden;background:#16253c;box-shadow:2px 3px #050f1c}
+.sac-featured-img{display:block;width:100%;height:100%;object-fit:cover;image-rendering:auto}
+.sac-featured-info{min-width:0;display:flex;flex:1;flex-direction:column;justify-content:center;gap:5px}
+.sac-featured-topic{font:800 .75rem 'Nunito',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.045em;color:#f2cf89}
+.sac-featured-info strong{font-size:clamp(17px,1.6vw,23px);line-height:1.13;color:#fff5cc;overflow-wrap:anywhere}
+.sac-featured-text{font:600 .88rem/1.45 'Nunito',system-ui,sans-serif;color:#e4eaf1}
+.sac-featured-cta{font:800 .88rem 'Nunito',system-ui,sans-serif;color:#ffdb88;margin-top:6px}
+.sac-featured-edit{background:#f8efd9;border:2px solid #bc9154;border-radius:12px;padding:14px;margin:12px 0;color:#14233c}
+.sac-featured-edit label{display:block;margin:6px 0;font-weight:800}
+.sac-featured-edit select,.sac-featured-edit textarea{display:block;width:100%;max-width:100%;box-sizing:border-box;padding:10px;border:2px solid #b6a481;border-radius:8px;background:white;color:#15283f;font:600 15px/1.4 system-ui,sans-serif}
+.sac-featured-edit textarea{resize:vertical;min-height:84px}
+@media(max-width:1050px){.sac-featured-grid{gap:12px}.sac-featured-card{flex-direction:column}.sac-featured-art{width:100%;max-width:240px;align-self:center;flex:auto}.sac-featured-info{width:100%}}
+@media(max-width:620px){.sac-featured{margin:24px auto 16px;padding:0 5px}.sac-featured-grid{grid-template-columns:1fr;gap:14px}.sac-featured-card{flex-direction:row;gap:12px;padding:10px}.sac-featured-art{width:34%;max-width:125px;flex:0 0 34%}.sac-featured-info{width:auto}.sac-featured-info strong{font-size:19px}.sac-featured-text{font-size:13px}.sac-featured-heading p{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.sac-featured-card{transition:none}}
+
+/* V169: À la une se trouve dans Mon sac, pas sur la carte d'accueil. */
+.pack-body .sac-featured{width:100%;max-width:none;margin:16px 0 26px;color:#243047}
+.pack-body .sac-featured-heading h2{color:#76471a;text-shadow:none}
+.pack-body .sac-featured-heading p{color:#635743}
+.pack-body .sac-featured-kicker{color:#996623}
+.pack-body .sac-featured-info{color:#fff9eb}
+
+/* V170 : cartes À la une dans le journal Mes quêtes (et non sur la carte ou dans Mon sac). */
+#view > .sac-featured{max-width:1200px;margin:20px auto 28px;padding:0 10px}
+#view > .sac-featured .sac-featured-heading h2{color:#f0cd80}
+#view > .sac-featured .sac-featured-card{background:linear-gradient(135deg,#233d5b,#112842)}
+@media(max-width:620px){#view > .sac-featured{padding:0 2px;margin:18px auto 28px}}
+
+/* V171 — jaquette de la suggestion du jour, lisible sur mobile. */
+.journal-body{display:flow-root}
+.quest-daily-art{float:right;width:clamp(96px,17vw,160px);aspect-ratio:1;margin:2px 0 12px 18px;overflow:hidden;border:3px solid #c4944e;border-radius:12px;background:#16375c;box-shadow:3px 4px 0 #78532b}
+.quest-daily-image{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:520px){.quest-daily-art{width:100px;margin:0 0 10px 12px;border-width:2px}}
+
+/* ===== finish-v4.5.css ===== */
+/* SAC’ADOS V4.5 — centrage partout, lueurs or, détourage sans coupe */
+/* The desktop inventory pages used a left-aligned override in pixel-v4.css. */
+@media (min-width:931px){
+ body:not(:has(.v44-home)) > .rpg-bottom-nav {
+   position:fixed!important;left:50%!important;right:auto!important;
+   transform:translateX(-50%)!important;bottom:12px!important;
+   width:min(1130px,calc(100vw - 20px))!important;
+   margin:0!important;
+ }
+ /* Preserve the original centered bar right under the home map. */
+ body:has(.v44-home) .v44-home>.rpg-bottom-nav {
+   left:auto!important;right:auto!important;transform:none!important;
+   position:relative!important;margin:22px auto 0!important;
+   width:min(100%,1110px)!important;
+ }
+}
+@media(max-width:930px){
+ body>.rpg-bottom-nav, .v44-home>.rpg-bottom-nav {
+   position:fixed!important;left:50%!important;right:auto!important;
+   transform:translateX(-50%)!important;
+   margin:0!important;
+ }
+}
+/* No hard image crops: full content from the new, padded source paintings. */
+.slot-art img,.v42-detail-cover img,.v4-feature-image img,
+.pixel-small-icon,.v4-subject img,.pixel-shortcut-art,.pixel-prof-art {
+ object-fit:contain!important;object-position:center!important;
+}
+.pack .slot-art,.slot-art,.v4-game-picture,.v42-detail-cover {
+ background:radial-gradient(circle at 50% 38%,#285784,#10233f 84%)!important;
+}
+/* Metallic golden framing with true bright highlights and depth. */
+.pack .slot,.slot,.v4-subject,.v4-game-card {
+ border-color:#dba247!important;
+ box-shadow:inset 0 0 0 1px #fff6c9,0 4px 0 #8c511e,0 0 0 1px #71471d,0 0 12px #ffd56b35!important;
+ transition:transform .17s ease,filter .2s ease,box-shadow .2s ease;
+}
+.pack .slot:hover,.slot:hover,.v4-subject:hover,.v4-game-card:hover{
+ filter:brightness(1.13);transform:translateY(-2px);
+ box-shadow:inset 0 0 0 2px #fff9d9,0 6px 0 #85521f,0 0 24px #ffd9779b!important;
+}
+.pack .slot-art,.slot-art,.v4-game-picture,.v4-subject{
+ position:relative;isolation:isolate;overflow:hidden;
+}
+/* Reflection is CSS-only so the artwork remains full, readable, and clickable. */
+.pack .slot-art::after,.slot-art::after,.v4-game-picture::after,.v4-subject::after{
+ content:'';pointer-events:none;position:absolute;inset:-55%;z-index:4;
+ background:linear-gradient(110deg,transparent 41%,rgba(255,255,255,.04) 45%,rgba(255,245,180,.64) 49%,rgba(255,255,255,.19) 52%,transparent 56%);
+ transform:translateX(-92%);animation:sacGoldShine 7s ease-in-out infinite;
+}
+.slot:nth-child(3n) .slot-art::after {animation-delay:-2.5s;}
+.slot:nth-child(3n + 1) .slot-art::after {animation-delay:-4.5s;}
+@keyframes sacGoldShine{0%,52%{transform:translateX(-92%)}70%,100%{transform:translateX(92%)}}
+.pack .chip[aria-pressed='true'],.pocket[aria-selected='true'],.v42-play{
+ background:linear-gradient(125deg,#ffefb2 0%,#d89939 30%,#ffe9a0 54%,#ad6821 100%)!important;
+ box-shadow:inset 0 2px 0 #fff9e5,0 3px 0 #7c471c,0 0 14px #fbd37174!important;
+ color:#352617!important;
+}
+.pack .pixel-small-icon,.v42-tag img{
+ filter:drop-shadow(0 0 4px rgba(255,213,104,.6)) drop-shadow(0 2px 1px #1e1624);
+}
+/* Original RPG bottom-menu buttons also glow on selection. */
+.rpg-nav-button[aria-current='page']{filter:drop-shadow(0 0 5px #ffdb76)!important;}
+/* Audio toggle remains visible without crowding the mobile header. */
+.sound-toggle{min-width:43px;width:43px;height:43px;display:grid;place-items:center;
+ border:2px solid #e4b95c;border-radius:10px;
+ color:#ffe9a7;background:linear-gradient(150deg,#244f70,#112440);
+ box-shadow:inset 0 1px 0 #fff0a3,0 3px 0 #09182c;font-size:20px;cursor:pointer;flex:none;
+}
+.sound-toggle[aria-pressed='false']{opacity:.74;filter:grayscale(.35);}
+.sound-toggle:focus-visible{outline:3px solid #ffeb9b;outline-offset:2px;}
+@media(max-width:540px){.sound-toggle{min-width:36px;width:36px;height:37px;font-size:18px;}}
+html.calme .slot-art::after,html.calme .v4-game-picture::after,html.calme .v4-subject::after,
+html.calme .slot::after {animation:none!important;display:none!important;}
+@media(prefers-reduced-motion:reduce){
+ .slot-art::after,.v4-game-picture::after,.v4-subject::after {animation:none!important;display:none!important;}
+}
+
+/* ===== fix-v4.6.css ===== */
+/* SAC’ADOS V4.6 — centrage vérifiable sur TOUTES les pages.
+   L’accueil conserve la barre sous la carte sur ordinateur ; autres pages : centrée dans la fenêtre.
+   Le centrage utilise inset-inline + marges auto, sans transform ni alignement conditionnel :has(). */
+#mainTabs.rpg-bottom-nav { box-sizing:border-box; }
+@media (min-width:931px) {
+ body > #mainTabs.rpg-bottom-nav {
+   position:fixed!important;left:0!important;right:0!important;
+   transform:none!important;margin:0 auto!important;
+   bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+   width:min(1130px,calc(100vw - 24px))!important;max-width:1130px!important;
+ }
+ .v44-home > #mainTabs.rpg-bottom-nav {
+   position:relative!important;left:auto!important;right:auto!important;
+   top:auto!important;bottom:auto!important;transform:none!important;
+   margin:22px auto 0!important;width:min(100%,1110px)!important;
+   max-width:1110px!important;
+ }
+}
+@media (max-width:930px) {
+ body > #mainTabs.rpg-bottom-nav,
+ .v44-home > #mainTabs.rpg-bottom-nav {
+   position:fixed!important;left:0!important;right:0!important;
+   transform:none!important;margin:0 auto!important;
+   width:calc(100% - 12px)!important;max-width:1130px!important;
+   bottom:calc(5px + env(safe-area-inset-bottom,0px))!important;
+ }
+}
+/* Source covers are already squared, golden framed, and padded with transparent outer margins. */
+.pack .slot-art .pixel-poster,.slot-art .pixel-poster,
+.v4-feature-image img,.v4-game-picture .v4-game-art,
+.v42-detail-cover .pixel-modal-poster,.pixel-shortcut-art {
+ object-fit:contain!important;object-position:center!important;
+ image-rendering:auto!important;
+}
+.pack .slot-art,.slot-art,.v4-game-picture,.v42-detail-cover {
+ background: #142c4a!important;
+}
+/* Avoid cropping the transparent safe margins at any breakpoint. */
+.v4-game-picture .v4-game-art{padding:0!important;}
+@media (prefers-reduced-motion: reduce) {
+ #mainTabs.rpg-bottom-nav{transition:none!important;}
+}
+
+/* ===== fix-icons-v4.8.css ===== */
+/* SAC'ADOS V4.8 — two redesigned transparent icons; leave navigation and all other artwork untouched. */
+.journal-icon:has(.pixel-journal-icon){
+  display:grid;place-items:center;flex:0 0 auto;
+  width:112px;height:112px;padding:9px;overflow:visible;
+  background:linear-gradient(145deg,#1d4060,#102744);
+  border:3px solid #d6aa66;border-radius:14px;
+}
+.journal-icon .pixel-journal-icon{
+  display:block;width:90px;height:90px;max-width:100%;max-height:100%;
+  object-fit:contain;object-position:center;image-rendering:auto;
+  filter:drop-shadow(0 3px 5px rgba(37,25,12,.36));
+}
+.pack>.v4-inventory-banner::after{
+  content:'';position:absolute;right:18px;top:7px;
+  width:108px;height:98px;
+  background:url('../assets/premium/decor/backpack.webp?v=48') center center/contain no-repeat;
+  filter:drop-shadow(0 3px 5px rgba(10,10,24,.45));
+  pointer-events:none;z-index:1;
+}
+@media(max-width:650px){
+ .pack>.v4-inventory-banner::after{right:4px;top:17px;width:50px;height:65px;}
+ .journal-icon:has(.pixel-journal-icon){width:94px;height:94px;padding:7px;}
+ .journal-icon .pixel-journal-icon{width:76px;height:76px;}
+}
+@media(max-width:370px){
+ .pack>.v4-inventory-banner::after{width:38px;height:53px;top:19px;right:2px;}
+}
+
+/* ===== fix-v4.9.css ===== */
+/* Sac’Ados V4.9 — corrections vérifiées sur les causes des anciennes illustrations.
+   La bannière sac-banner.webp contenait EN DUR un vieux sac tronqué et une lanterne.
+   Et .pack::before/.pack::after (style historique) ajoutaient deux vieilles bretelles jaunes.
+   On neutralise ces trois résidus et on pose l’icône indépendante cadrée à droite. */
+
+/* Les bretelles décoratives de l’ancien sac jaune ne doivent plus apparaître. */
+.pack::before, .pack::after {content:none !important;display:none !important; background:none !important;}
+
+/* Aucun sac, aucune lanterne issus de la vieille photo de bannière. */
+.v4-inventory-banner,
+.pack > .v4-inventory-banner {
+  background-color:#192a42 !important;
+  background-image:
+    radial-gradient(circle at 16% 46%,rgba(255,204,112,.13) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 82% 64%,rgba(255,224,156,.10) 0 1.5px,transparent 2.5px),
+    linear-gradient(105deg,#10243b 0%,#253c50 43%,#3b3037 70%,#162941 100%) !important;
+  background-size:38px 38px,56px 56px,100% 100% !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+}
+.pack > .v4-inventory-banner {
+  height:132px !important; box-sizing:border-box;
+  position:relative !important; overflow:hidden !important;
+  border-bottom:4px solid #c99d56 !important;
+  display:flex !important;align-items:center !important;justify-content:center !important;
+  padding:10px 110px 26px 22px !important;
+  box-shadow:inset 0 0 0 2px #5a6c74,inset 0 -7px 15px rgba(0,0,0,.30);
+}
+.pack > .v4-inventory-banner::before {
+  content:none !important; display:none !important; background:none !important;
+}
+.pack > .v4-inventory-banner::after {
+  content:'' !important; display:block !important;
+  position:absolute !important; top:8px !important;right:16px !important;
+  width:106px !important;height:106px !important;
+  background:url('../assets/premium/decor/backpack-v49.webp?v=6') center center / contain no-repeat !important;
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.45));
+  z-index:1 !important; pointer-events:none !important;
+}
+.pack > .v4-inventory-banner h2 {
+  position:relative !important;z-index:2 !important;
+  display:block !important;width:auto !important;height:auto !important;max-width:100% !important;
+  margin:0 auto 8px !important; padding:12px 21px !important;
+  clip:auto !important;clip-path:none !important;overflow:visible !important;
+  font-family:'Fredoka',system-ui,sans-serif;
+  font-size:clamp(19px,2.7vw,32px) !important;
+  line-height:1.1 !important;white-space:normal !important;text-wrap:balance;
+  text-align:center !important;color:#493019 !important;
+  background:linear-gradient(180deg,#fff2cc 0%,#e2b978 100%) !important;
+  border:3px solid #ae7c42 !important;border-radius:9px !important;
+  box-shadow:inset 0 0 0 2px #fff0b6,0 4px 0 #603d27 !important;
+  text-shadow:0 1px #fff1c8 !important;
+}
+.pack > .v4-inventory-banner > span {
+  z-index:3 !important;bottom:5px !important;
+  max-width:calc(100% - 14px);
+  text-align:center;white-space:normal;
+}
+
+/* L’étoile du journal des quêtes charge uniquement le nouveau PNG bien centré. */
+.journal-card .journal-icon {overflow:hidden !important;}
+.journal-icon .pixel-journal-icon {
+  object-fit:contain !important;object-position:center !important;
+  display:block !important;image-rendering:auto !important;
+}
+@media(max-width:650px){
+  .pack > .v4-inventory-banner {height:112px !important;padding:8px 52px 25px 7px !important;}
+  .pack > .v4-inventory-banner::after {right:3px !important;top:19px !important;width:53px !important;height:67px !important;}
+  .pack > .v4-inventory-banner h2 {font-size:clamp(15px,4vw,20px) !important;padding:9px 7px !important;}
+  .pack > .v4-inventory-banner > span {font-size:10px !important;bottom:2px !important;}
+}
+@media(max-width:350px){
+  .pack > .v4-inventory-banner {padding-right:43px !important;}
+  .pack > .v4-inventory-banner::after{right:1px !important;width:43px !important;height:55px !important;}
+  .pack > .v4-inventory-banner h2{font-size:15px !important;padding:8px 4px !important;}
+}
+
+/* ===== category-gold-v5.2.css ===== */
+/* Sac’Ados V5.2 — Golden Glow: five quest categories & inventory icons.
+   Purely decorative, does not alter images, hit areas, the map or the RPG bottom menu. */
+:root { --sac-gold-light:#fff2ac; --sac-gold:#ffd064; }
+
+/* Subtle golden halo around each illustrated category on the Quests screen. */
+.quest-category-button {
+  position:relative; isolation:isolate; overflow:hidden;
+  background:radial-gradient(circle at 50% 36%, rgba(255,194,77,.16), transparent 57%),
+    linear-gradient(145deg,#1c3856,#152942 70%,#0e233a);
+  border-color:#daa85b;
+  box-shadow:inset 0 0 0 2px #53617a, 0 4px 0 #92612d, 0 0 13px rgba(249,196,84,.12);
+}
+.quest-category-button::before {
+  content:""; pointer-events:none; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(112deg, transparent 32%, rgba(255,244,182,.025) 41%,
+    rgba(255,248,192,.33) 48%, rgba(255,255,255,.12) 51%, transparent 60%);
+  background-size:240% 100%; background-position:170% 0;
+  animation:sac-category-sweep 9.6s ease-in-out infinite;
+}
+.quest-category-button::after {
+  content:"✦"; pointer-events:none; position:absolute; z-index:3;
+  top:6px;right:11px; font-family:Georgia,serif;font-size:17px;line-height:1;
+  color:#fff2b4; text-shadow:0 0 6px #ffde6a,0 0 13px #f9b64d;
+  animation:sac-category-sparkle 4.8s ease-in-out infinite;
+}
+.quest-category-button > span { position:relative; z-index:2; }
+.quest-category-button .sac-category-icon {
+  position:relative; z-index:2;
+  filter:drop-shadow(0 0 6px rgba(255,225,130,.48)) drop-shadow(0 3px 3px rgba(14,17,37,.47));
+  transform-origin:center center;
+  animation:sac-category-icon-glow 4.8s ease-in-out infinite;
+  transition:filter .23s ease,transform .23s ease;
+}
+.quest-category-button:nth-child(5n + 2) .sac-category-icon,
+.quest-category-button:nth-child(5n + 2)::after {animation-delay:-1.3s;}
+.quest-category-button:nth-child(5n + 3) .sac-category-icon,
+.quest-category-button:nth-child(5n + 3)::after {animation-delay:-2.5s;}
+.quest-category-button:nth-child(5n + 4) .sac-category-icon,
+.quest-category-button:nth-child(5n + 4)::after {animation-delay:-3.5s;}
+.quest-category-button:nth-child(5n) .sac-category-icon,
+.quest-category-button:nth-child(5n)::after {animation-delay:-4.2s;}
+.quest-category-button:nth-child(2)::before {animation-delay:-1.7s;}
+.quest-category-button:nth-child(3)::before {animation-delay:-3.4s;}
+.quest-category-button:nth-child(4)::before {animation-delay:-5.1s;}
+.quest-category-button:nth-child(5)::before {animation-delay:-6.8s;}
+
+/* The same gold highlights continue in the Adventure Bag and group headings. */
+.pocket .sac-category-icon,
+.sec-h .sac-category-icon {
+  filter:drop-shadow(0 0 4px rgba(255,204,89,.45)) drop-shadow(0 2px 2px rgba(0,0,0,.22));
+  transition:filter .25s ease, transform .25s ease;
+}
+.pocket[aria-selected="true"] .sac-category-icon {
+  filter:drop-shadow(0 0 7px rgba(255,231,140,.85)) brightness(1.10);
+}
+/* Discipline pictograms have a cohesive subdued gold edge too. */
+.chip .pixel-small-icon {
+  filter:drop-shadow(0 0 3px rgba(251,196,78,.4));
+  transition:filter .2s ease;
+}
+.chip[aria-pressed="true"] .pixel-small-icon {
+  filter:drop-shadow(0 0 6px rgba(255,233,158,.85)) brightness(1.12);
+}
+@media (hover:hover) and (pointer:fine) {
+  .quest-category-button:hover .sac-category-icon,
+  .quest-category-button:focus-visible .sac-category-icon {
+    transform:scale(1.045);
+    filter:brightness(1.16) drop-shadow(0 0 10px rgba(255,228,128,.94));
+  }
+  .pocket:hover .sac-category-icon,
+  .chip:hover .pixel-small-icon {
+    filter:brightness(1.15) drop-shadow(0 0 7px rgba(255,221,117,.84));
+  }
+}
+.quest-category-button:focus-visible .sac-category-icon {
+  filter:brightness(1.15) drop-shadow(0 0 9px rgba(255,227,130,.94));
+}
+@keyframes sac-category-icon-glow {
+  0%,100% {filter:brightness(1) drop-shadow(0 0 5px rgba(255,207,93,.39)) drop-shadow(0 3px 3px rgba(14,17,37,.4));}
+  49% {filter:brightness(1.10) drop-shadow(0 0 10px rgba(255,224,120,.81)) drop-shadow(0 3px 3px rgba(14,17,37,.36));}
+}
+@keyframes sac-category-sparkle {
+  0%,38%,100% {opacity:.26;transform:scale(.75) rotate(0);}
+  50% {opacity:1;transform:scale(1.2) rotate(13deg);}
+  65% {opacity:.35;transform:scale(.86) rotate(22deg);}
+}
+@keyframes sac-category-sweep {
+  0%,47% {background-position:170% 0;opacity:0;}
+  52% {opacity:.62;}
+  74% {background-position:-135% 0;opacity:.55;}
+  76%,100% {background-position:-135% 0;opacity:0;}
+}
+
+/* Quiet mode and operating-system reduced-motion are strictly respected. */
+html.calme .quest-category-button::before,
+html.calme .quest-category-button::after,
+html.calme .quest-category-button .sac-category-icon {
+  animation:none!important;
+}
+html.calme .quest-category-button::before {opacity:0!important;}
+html.calme .quest-category-button::after {opacity:.65;}
+@media (prefers-reduced-motion:reduce) {
+  .quest-category-button::before,
+  .quest-category-button::after,
+  .quest-category-button .sac-category-icon {animation:none!important;}
+  .quest-category-button::before {opacity:0!important;}
+  .quest-category-button::after {opacity:.65;}
+}
+
+/* ===== brand-v5.3.css ===== */
+/* Sac'Ados V5.3: dedicated gold-trimmed adventure backpack as header emblem.
+   The image has transparent padding so its outline never touches the edge. */
+header.top .brand .brand-ico.brand-new-logo {
+  display:grid!important;
+  place-items:center!important;
+  width:58px!important;
+  height:58px!important;
+  min-width:58px!important;
+  min-height:58px!important;
+  padding:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:visible!important;
+  filter:none!important;
+}
+header.top .brand .brand-ico.brand-new-logo .brand-app-icon {
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  image-rendering:auto!important;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.34));
+}
+@media (max-width:650px) {
+  header.top .brand .brand-ico.brand-new-logo { width:44px!important; height:44px!important; min-width:44px!important; min-height:44px!important; }
+}
+@media (max-width:380px) {
+  header.top .brand .brand-ico.brand-new-logo { width:38px!important; height:38px!important; min-width:38px!important; min-height:38px!important; }
+}
+
+/* Brick It Up : jaquette pleine surface, sans bandes vides */
+img.brick-cover{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;display:block!important;}
+
+/* V69 — Brick It Up : remplissage intégral dans tous les cadres de jaquettes */
+.v4-game-picture img.v4-game-art.brick-cover,
+.pack .slot-art img.pixel-poster.brick-cover,
+.slot-art img.pixel-poster.brick-cover,
+.v4-feature-image img.v4-feature-art.brick-cover,
+.sheet img.pixel-modal-poster.brick-cover,
+.v42-detail-cover img.pixel-modal-poster.brick-cover,
+img.pixel-shortcut-art.brick-cover,
+img.pixel-prof-art.brick-cover {
+  width:100%!important;height:100%!important;
+  min-width:100%!important;min-height:100%!important;
+  max-width:none!important;max-height:none!important;
+  object-fit:cover!important;object-position:center!important;
+  padding:0!important;margin:0!important;
+  transform:none!important;
+}
+
+/* V73 : Grammar Arena — jaquette bord à bord dans tous les cadres */
+.v4-game-picture img.v4-game-art.arena-cover,
+.pack .slot-art img.pixel-poster.arena-cover,
+.slot-art img.pixel-poster.arena-cover,
+.v4-feature-image img.v4-feature-art.arena-cover,
+.sheet img.pixel-modal-poster.arena-cover,
+.v42-detail-cover img.pixel-modal-poster.arena-cover,
+img.pixel-shortcut-art.arena-cover,
+img.pixel-prof-art.arena-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V74 : Case Files — remplir les jaquettes sans étirer l'image */
+.v4-game-picture img.v4-game-art.case-files-cover,
+.pack .slot-art img.pixel-poster.case-files-cover,
+.slot-art img.pixel-poster.case-files-cover,
+.v4-feature-image img.v4-feature-art.case-files-cover,
+.sheet img.pixel-modal-poster.case-files-cover,
+.v42-detail-cover img.pixel-modal-poster.case-files-cover,
+img.pixel-shortcut-art.case-files-cover,
+img.pixel-prof-art.case-files-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V76 : Verb Dojo — image pixel art pleine surface */
+.v4-game-picture img.v4-game-art.dojo-cover,
+.pack .slot-art img.pixel-poster.dojo-cover,
+.slot-art img.pixel-poster.dojo-cover,
+.v4-feature-image img.v4-feature-art.dojo-cover,
+.sheet img.pixel-modal-poster.dojo-cover,
+.v42-detail-cover img.pixel-modal-poster.dojo-cover,
+img.pixel-shortcut-art.dojo-cover,
+img.pixel-prof-art.dojo-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V77 — nouvelle illustration pixel art du bandeau Mon sac */
+.v4-inventory-banner,
+.pack > .v4-inventory-banner {
+ background:#192a42 url('../assets/sac.webp?v=6') center center / cover no-repeat !important;
+ background-size:cover!important;
+ background-position:center center!important;
+}
+.pack > .v4-inventory-banner::after {
+ content:none!important;display:none!important;background:none!important;
+}
+.pack > .v4-inventory-banner::before {
+ content:none!important;display:none!important;
+}
+@media(max-width:650px){
+ .v4-inventory-banner,.pack > .v4-inventory-banner {background-position:50% center!important;}
+}
+
+/* V79 Arts Attack : jaquette pixel art verticale bord à bord */
+.v4-game-picture img.v4-game-art.arts-cover,
+.pack .slot-art img.pixel-poster.arts-cover,
+.slot-art img.pixel-poster.arts-cover,
+.v4-feature-image img.v4-feature-art.arts-cover,
+.sheet img.pixel-modal-poster.arts-cover,
+.v42-detail-cover img.pixel-modal-poster.arts-cover,
+img.pixel-shortcut-art.arts-cover,
+img.pixel-prof-art.arts-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V82 Bioquest — jaquette pixel art en plein cadre */
+.v4-game-picture img.v4-game-art.bioquest-cover,
+.pack .slot-art img.pixel-poster.bioquest-cover,
+.slot-art img.pixel-poster.bioquest-cover,
+.v4-feature-image img.v4-feature-art.bioquest-cover,
+.sheet img.pixel-modal-poster.bioquest-cover,
+.v42-detail-cover img.pixel-modal-poster.bioquest-cover,
+img.pixel-shortcut-art.bioquest-cover,
+img.pixel-prof-art.bioquest-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V84 Musicollège : illustration pixel art pleine surface */
+.v4-game-picture img.v4-game-art.musicollege-cover,
+.pack .slot-art img.pixel-poster.musicollege-cover,
+.slot-art img.pixel-poster.musicollege-cover,
+.v4-feature-image img.v4-feature-art.musicollege-cover,
+.sheet img.pixel-modal-poster.musicollege-cover,
+.v42-detail-cover img.pixel-modal-poster.musicollege-cover,
+img.pixel-shortcut-art.musicollege-cover,
+img.pixel-prof-art.musicollege-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V85 ÉLÉMENTAIRE ! — jaquette pixel art pleine surface */
+.v4-game-picture img.v4-game-art.elementaire-cover,
+.pack .slot-art img.pixel-poster.elementaire-cover,
+.slot-art img.pixel-poster.elementaire-cover,
+.v4-feature-image img.v4-feature-art.elementaire-cover,
+.sheet img.pixel-modal-poster.elementaire-cover,
+.v42-detail-cover img.pixel-modal-poster.elementaire-cover,
+img.pixel-shortcut-art.elementaire-cover,
+img.pixel-prof-art.elementaire-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V89 — frise panoramique Mon sac, visible intégralement sans rognage */
+.pack > .v4-inventory-banner,
+.v4-inventory-banner {
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio: 3 / 1!important;
+  padding:0!important;
+  margin:0!important;
+  background-color:#143459!important;
+  background-image:url('../assets/illustrations/banniere-mon-sac.webp?v=6')!important;
+  background-repeat:no-repeat!important;
+  background-position:center center!important;
+  background-size:contain!important;
+  overflow:hidden!important;
+}
+/* Le titre figure déjà dans l'illustration : éviter un doublon par-dessus. */
+.pack > .v4-inventory-banner h2,
+.v4-inventory-banner h2 {
+  position:absolute!important;width:1px!important;height:1px!important;
+  overflow:hidden!important;clip-path:inset(50%)!important;
+  padding:0!important;border:0!important;margin:0!important;
+}
+.pack > .v4-inventory-banner > span,
+.v4-inventory-banner > span {
+  position:absolute!important;left:50%!important;bottom:3%!important;
+  transform:translateX(-50%)!important;
+  z-index:3!important;max-width:94%!important;
+  width:max-content!important;white-space:nowrap!important;
+  font-size:clamp(8px,1.1vw,13px)!important;
+  padding:3px 10px!important;border-radius:5px!important;
+  color:#fff5cf!important;background:rgba(12,30,48,.84)!important;
+}
+.pack > .v4-inventory-banner::before,
+.pack > .v4-inventory-banner::after {content:none!important;display:none!important;}
+
+/* V90 — icônes plus grandes et lisibles dans les filtres Mon sac */
+.pack .pockets .pocket,
+.pack .chips .chip {
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-height:48px!important;
+  padding:7px 12px!important;
+}
+.pack .pockets .pocket .pixel-small-icon,
+.pack .pockets .pocket .sac-category-icon,
+.pack .chips .chip .pixel-small-icon {
+  display:inline-block!important;
+  flex:0 0 auto!important;
+  width:34px!important;
+  height:34px!important;
+  max-width:34px!important;
+  max-height:34px!important;
+  min-width:34px!important;
+  min-height:34px!important;
+  object-fit:contain!important;
+  font-size:29px!important;
+  line-height:34px!important;
+  vertical-align:middle!important;
+}
+@media(max-width:600px){
+ .pack .pockets .pocket,.pack .chips .chip{gap:5px!important;min-height:43px!important;padding:6px 9px!important;}
+ .pack .pockets .pocket .pixel-small-icon,.pack .pockets .pocket .sac-category-icon,.pack .chips .chip .pixel-small-icon{
+  width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;max-width:29px!important;max-height:29px!important;font-size:25px!important;line-height:29px!important;
+ }
+}
+
+/* V91 — jaquette Mind The Sound plein cadre */
+.v4-game-picture img.v4-game-art.mind-sound-cover,
+.pack .slot-art img.pixel-poster.mind-sound-cover,
+.slot-art img.pixel-poster.mind-sound-cover,
+.v4-feature-image img.v4-feature-art.mind-sound-cover,
+.sheet img.pixel-modal-poster.mind-sound-cover,
+.v42-detail-cover img.pixel-modal-poster.mind-sound-cover,
+img.pixel-shortcut-art.mind-sound-cover,
+img.pixel-prof-art.mind-sound-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V92 — jaquette Technova pleine surface */
+.v4-game-picture img.v4-game-art.technova-cover,
+.pack .slot-art img.pixel-poster.technova-cover,
+.slot-art img.pixel-poster.technova-cover,
+.v4-feature-image img.v4-feature-art.technova-cover,
+.sheet img.pixel-modal-poster.technova-cover,
+.v42-detail-cover img.pixel-modal-poster.technova-cover,
+img.pixel-shortcut-art.technova-cover,
+img.pixel-prof-art.technova-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V93 — identité commune pour les 16 icônes disciplinaires */
+.pack .pockets .pocket img.sac-disc-icon,
+.pack .chips .chip img.sac-disc-icon,
+img.sac-disc-icon {
+ image-rendering:pixelated!important;image-rendering:crisp-edges;
+ object-fit:contain!important;aspect-ratio:1/1!important;
+ border:0!important;border-radius:0!important;
+ box-shadow:none!important;background:transparent!important;
+}
+
+/* V96 — jaquettes disciplinaires V95, netteté sans recadrage */
+.pack .pockets .pocket img.sac-disc-v95,
+.pack .chips .chip img.sac-disc-v95,
+img.sac-disc-v95 {object-fit:contain!important;image-rendering:pixelated!important;image-rendering:crisp-edges!important;}
+
+/* V97 — matières : titres masqués, icônes deux fois plus grandes */
+.pack .chips .chip[data-d]:not([data-d="tout"]){padding:7px!important;min-width:82px!important;min-height:82px!important;gap:0!important;}
+.pack .chips .chip img.sac-disc-icon{width:68px!important;height:68px!important;min-width:68px!important;min-height:68px!important;max-width:68px!important;max-height:68px!important;}
+.v4-subject-grid .v4-subject{display:flex!important;align-items:center!important;justify-content:center!important;min-height:110px!important;padding:10px!important;}
+.v4-subject-grid .v4-subject img.sac-disc-icon{width:80px!important;height:80px!important;min-width:80px!important;min-height:80px!important;max-width:80px!important;max-height:80px!important;object-fit:contain!important;}
+@media(max-width:600px){.pack .chips .chip[data-d]:not([data-d="tout"]){min-width:70px!important;min-height:70px!important;padding:5px!important;}.pack .chips .chip img.sac-disc-icon{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;max-width:58px!important;max-height:58px!important;}.v4-subject-grid .v4-subject img.sac-disc-icon{width:70px!important;height:70px!important;min-width:70px!important;min-height:70px!important;max-width:70px!important;max-height:70px!important;}}
+
+/* V99 — jaquette CITÉZEN plein cadre */
+.v4-game-picture img.v4-game-art.citezen-cover,
+.pack .slot-art img.pixel-poster.citezen-cover,
+.slot-art img.pixel-poster.citezen-cover,
+.v4-feature-image img.v4-feature-art.citezen-cover,
+.sheet img.pixel-modal-poster.citezen-cover,
+.v42-detail-cover img.pixel-modal-poster.citezen-cover,
+img.pixel-shortcut-art.citezen-cover,
+img.pixel-prof-art.citezen-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V103 : nouvelle icône EMC native, sans zoom ni recadrage forcé. */
+
+/* V105 — Jaquettes Verbcraft et Grammarland, sans déformation */
+.v4-game-picture img.verbcraft-cover,.v4-game-picture img.grammarland-cover,
+.pack .slot-art img.verbcraft-cover,.pack .slot-art img.grammarland-cover,
+.v4-feature-image img.verbcraft-cover,.v4-feature-image img.grammarland-cover,
+.sheet img.verbcraft-cover,.sheet img.grammarland-cover,
+.v42-detail-cover img.verbcraft-cover,.v42-detail-cover img.grammarland-cover,
+img.pixel-shortcut-art.verbcraft-cover,img.pixel-shortcut-art.grammarland-cover,
+img.pixel-prof-art.verbcraft-cover,img.pixel-prof-art.grammarland-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V106 — jaquette Palabras */
+.v4-game-picture img.palabras-cover,
+.pack .slot-art img.palabras-cover,
+.slot-art img.palabras-cover,
+.v4-feature-image img.palabras-cover,
+.sheet img.palabras-cover,
+.v42-detail-cover img.palabras-cover,
+img.pixel-shortcut-art.palabras-cover,
+img.pixel-prof-art.palabras-cover {
+ display:block!important;width:100%!important;height:100%!important;
+ min-width:100%!important;min-height:100%!important;
+ max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:center!important;
+ padding:0!important;margin:0!important;transform:none!important;
+}
+
+/* V109 — Découpage visuel des 13 icônes depuis la planche officielle V95. */
+.pack .chips .chip .sac-disc-sprite,
+.pack .pockets .pocket .sac-disc-sprite,
+.sac-disc-sprite {
+ display:inline-block!important;
+ flex:0 0 auto!important;
+ width:34px!important;height:42px!important;
+ min-width:34px!important;min-height:42px!important;
+ max-width:34px!important;max-height:42px!important;
+ background-image:url('../assets/disciplines-v95/icones-disciplines-v95.webp?v=6')!important;
+ background-repeat:no-repeat!important;
+ background-size:1450% auto!important;
+ background-position:var(--disc-sprite-x) 30%!important;
+ image-rendering:pixelated!important;
+ border:0!important;
+ border-radius:0!important;
+ overflow:hidden!important;
+ transform:none!important;
+}
+@media(max-width:600px){
+ .pack .chips .chip .sac-disc-sprite,.pack .pockets .pocket .sac-disc-sprite,.sac-disc-sprite{
+ width:29px!important;height:36px!important;min-width:29px!important;min-height:36px!important;max-width:29px!important;max-height:36px!important;
+ }
+}
+
+/* V110 : icones individuelles extraites de la planche officielle, sans sprite ni fond blanc */
+.pack .chips .chip[data-d]:not([data-d="tout"]){
+ box-sizing:border-box!important; width:106px!important;min-width:106px!important;
+ height:108px!important;min-height:108px!important; padding:7px!important;
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ overflow:hidden!important;
+}
+.pack .chips .chip img.sac-disc-individual,
+.v4-subject-grid .v4-subject img.sac-disc-individual,
+img.sac-disc-individual{
+ display:block!important; width:72px!important;height:96px!important;
+ min-width:72px!important;min-height:96px!important;
+ max-width:72px!important;max-height:96px!important;
+ aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;
+ padding:0!important;margin:0 auto!important;border:0!important;
+ background:transparent!important;transform:none!important;image-rendering:auto!important;
+}
+@media(max-width:600px){
+ .pack .chips .chip[data-d]:not([data-d="tout"]){width:88px!important;min-width:88px!important;height:94px!important;min-height:94px!important;padding:5px!important;}
+ .pack .chips .chip img.sac-disc-individual,.v4-subject-grid .v4-subject img.sac-disc-individual,img.sac-disc-individual{width:62px!important;min-width:62px!important;max-width:62px!important;height:82px!important;min-height:82px!important;max-height:82px!important;}
+}
+
+/* V117 — Class Reward Jar: cover fills the entire application artwork frame. */
+.slot-art img.class-reward-jar-cover, .slot-art .class-reward-jar-cover, img.class-reward-jar-cover { width:100% !important; height:100% !important; max-width:none !important; max-height:none !important; object-fit:cover !important; object-position:center center !important; display:block !important; }
+
+/* V118: crop letterbox bars baked into Class Reward Jar artwork. */
+.slot-art { position:relative; }
+.slot-art img.pixel-poster.class-reward-jar-cover { width:100%!important;height:100%!important;object-fit:cover!important;transform:scale(1.36)!important;transform-origin:50% 50%!important; }
+
+/* V119 square artwork: undo legacy zoom for Class Reward Jar. */
+.slot-art img.pixel-poster.class-reward-jar-cover {transform:none!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;}
+
+/* V121: show complete square Class Reward Jar illustration, no side cropping. */
+.pack .slot-art img.pixel-poster.class-reward-jar-cover,
+.slot-art img.pixel-poster.class-reward-jar-cover {
+ width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;
+ max-width:100%!important;max-height:100%!important;object-fit:contain!important;
+ object-position:center center!important;transform:none!important;scale:1!important;
+ padding:0!important;margin:0!important;
+}
+
+/* V122 — grandes icônes des cinq activités, libellés sous l'illustration. */
+.pack .pockets {display:flex!important;flex-wrap:wrap!important;gap:10px!important;align-items:stretch!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) {display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;min-width:118px!important;min-height:116px!important;padding:10px 9px!important;text-align:center!important;white-space:normal!important;line-height:1.25!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) img.sac-category-icon {display:block!important;flex:none!important;width:70px!important;height:70px!important;min-width:70px!important;min-height:70px!important;max-width:70px!important;max-height:70px!important;object-fit:contain!important;margin:0 auto!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) > span:not(.n) {display:block!important;font-size:12px!important;font-weight:700!important;max-width:130px!important;}
+.pack .pockets .pocket[data-p]:not([data-p="tout"]) .n {font-size:11px!important;}
+@media(max-width:600px){.pack .pockets .pocket[data-p]:not([data-p="tout"]){min-width:95px!important;flex:1 1 29%!important;min-height:108px!important;padding:7px 4px!important;}.pack .pockets .pocket[data-p]:not([data-p="tout"]) img.sac-category-icon{width:60px!important;height:60px!important;min-width:60px!important;min-height:60px!important;max-width:60px!important;max-height:60px!important;}}
+
+/* V123: bouton de retrait explicite des raccourcis. */
+.hb-inner{position:relative!important;}
+.hb-remove{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:24px!important;height:24px!important;min-width:24px!important;padding:0!important;margin-right:-9px!important;position:relative!important;z-index:10!important;align-self:flex-start!important;border:2px solid #fff1bd!important;border-radius:50%!important;background:#b93543!important;color:white!important;font-size:19px!important;font-weight:bold!important;cursor:pointer!important;}
+.hb-remove:hover,.hb-remove:focus-visible{background:#e84b55!important;}
+
+/* V124 — smartphone: prevent the world/catalogue from widening and sliding sideways. */
+@media(max-width:650px){
+ html,body{width:100%!important;max-width:100%!important;overflow-x:clip!important;}
+ *,*::before,*::after{box-sizing:border-box;}
+ main,#view,.pack,.pack-body,.v4-world-intro,.v4-inventory-banner,.v4-inventory-controls{width:100%!important;max-width:100%!important;min-width:0!important;}
+ main{padding-left:10px!important;padding-right:10px!important;margin:0 auto!important;}
+ .v4-world-intro{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;}
+ .v4-world-intro>div{width:100%!important;min-width:0!important;overflow-wrap:anywhere!important;}
+ .v4-world-intro h1{font-size:clamp(24px,7vw,36px)!important;overflow-wrap:anywhere!important;}
+ .pack .pack-body{width:auto!important;max-width:calc(100% - 12px)!important;margin:0 6px 8px!important;min-width:0!important;}
+ .pack .pockets{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;width:100%!important;max-width:100%!important;overflow:visible!important;}
+ .pack .pockets .pocket{width:100%!important;max-width:100%!important;min-width:0!important;flex:none!important;white-space:normal!important;}
+ .pack .pockets .pocket[data-p]:not([data-p="tout"]){min-width:0!important;min-height:108px!important;}
+ .pack .pockets .pocket[data-p]:not([data-p="tout"]) img.sac-category-icon{width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;max-width:58px!important;max-height:58px!important;}
+ .pack .grid,.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;min-width:0!important;}
+ header.top{width:100%!important;max-width:100%!important;min-width:0!important;}
+ header.top .brand{min-width:0!important;}
+ .rpg-bottom-nav,body>.rpg-bottom-nav{max-width:calc(100vw - 12px)!important;}
+}
+
+/* V130 — Fiches applications : grandes icônes de discipline et activité, textes dessous. */
+.sheet .v42-detail-info .v42-badges{display:flex!important;align-items:stretch!important;gap:12px!important;flex-wrap:wrap!important;margin:12px 0!important;}
+.sheet .v42-detail-info .v42-badges .v42-tag{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:112px!important;min-width:112px!important;min-height:126px!important;padding:9px 8px!important;text-align:center!important;line-height:1.2!important;white-space:normal!important;font-size:13px!important;font-weight:700!important;}
+.sheet .v42-detail-info .v42-badges .v42-tag img{display:block!important;width:82px!important;height:82px!important;min-width:82px!important;min-height:82px!important;max-width:82px!important;max-height:82px!important;object-fit:contain!important;object-position:center!important;margin:0 auto!important;flex:none!important;}
+.sheet .v42-detail-info .v42-badges .v42-tag img.sac-category-icon{width:82px!important;height:82px!important;min-width:82px!important;min-height:82px!important;max-width:82px!important;max-height:82px!important;}
+.search-results-count{padding:10px 14px;margin:8px 0 14px;border-radius:9px;background:#fff1c9;color:#493016;font-weight:700;}
+@media(max-width:600px){.sheet .v42-detail-info .v42-badges{gap:8px!important;}.sheet .v42-detail-info .v42-badges .v42-tag{width:104px!important;min-width:104px!important;min-height:112px!important;}.sheet .v42-detail-info .v42-badges .v42-tag img,.sheet .v42-detail-info .v42-badges .v42-tag img.sac-category-icon{width:72px!important;height:72px!important;min-width:72px!important;min-height:72px!important;max-width:72px!important;max-height:72px!important;}}
+
+/* ===== responsive-v5.4.css ===== */
+/* SAC’ADOS V5.4 — adaptation à tous les écrans.
+   Feuille chargée en DERNIER : elle ne fait que corriger l’affichage, sans toucher aux visuels.
+   1. En-tête sans chevauchement sur petits téléphones
+   2. Accueil en portrait (téléphone, tablette) : carte panoramique qu’on fait glisser
+   3. Téléphone à l’horizontale : en-tête et menu compacts, carte entière à l’écran
+   4. Sac : poches en ruban défilant sur téléphone
+   5. Fiche d’une appli : illustration réduite pour voir les boutons */
+
+/* ---------- 1. En-tête ---------- */
+header.top{ min-width:0; }
+header.top .brand{ min-width:0!important; flex:1 1 auto!important; overflow:hidden; }
+header.top .brand > span:last-child{ min-width:0; overflow:hidden; }
+header.top .brand-name{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; }
+@media (max-width:420px){
+  header.top{ gap:5px!important; padding-left:8px!important; padding-right:8px!important; }
+  header.top .brand-sub{ display:none!important; }
+  header.top .brand .brand-ico.brand-new-logo .brand-app-icon{ width:42px!important; height:42px!important; }
+  header.top .brand-name{ font-size:21px!important; }
+  header.top .shortcut-toggle, header.top .sound-toggle, header.top .icon-btn{
+    width:38px!important; min-width:38px!important; height:38px!important; min-height:38px!important; padding:0!important; flex:none!important;
+  }
+  header.top .loot{ padding:5px 7px!important; font-size:13px!important; min-height:38px; flex:none; }
+}
+@media (max-width:350px){
+  header.top .loot{ display:none!important; } /* le compteur reste visible dans « Découvertes » */
+  header.top .brand-name{ font-size:19px!important; }
+}
+
+/* ---------- 2. Accueil en portrait : carte panoramique ---------- */
+@media (max-width:930px) and (orientation:portrait){
+  body:has(.v44-home) #view{ padding-left:0!important; padding-right:0!important; }
+  .v44-home{
+    width:100%!important; max-width:100%!important; align-items:flex-start!important;
+    overflow-x:auto!important; overflow-y:hidden!important;
+    overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; padding:6px 12px 16px!important; box-sizing:border-box;
+  }
+  .v44-home::-webkit-scrollbar{ display:none; }
+  .v44-home .v44-world-map{
+    --map-h: max(300px, min(calc(100vh - 235px), 150vw, 720px));
+    --map-h: max(300px, min(calc(100svh - 235px), 150vw, 720px));
+    height:var(--map-h)!important; width:calc(var(--map-h) * 1.7554)!important;
+    max-width:none!important; min-width:0!important; flex:0 0 auto!important; aspect-ratio:auto!important;
+  }
+  .v44-home .v44-world-map > img{ width:100%!important; height:100%!important; }
+  .v44-home .v44-world-map .map-hit{ min-width:56px!important; min-height:56px!important; }
+  /* la carte agrandie affiche déjà ses propres panneaux : on masque les petites étiquettes */
+  .v44-home .v44-zone-label{ display:none!important; }
+}
+
+/* Barre « faire glisser » ajoutée par js/responsive-v5.4.js (seulement si la carte déborde) */
+.sa-pan{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:calc(100% - 24px); max-width:520px; margin:2px auto 0; padding:6px;
+  border:2px solid #a7814e; border-radius:12px;
+  background:linear-gradient(#274d74,#122945); box-shadow:0 3px 0 #071426;
+  color:#ffe4a0; font-family:'Fredoka',Verdana,sans-serif; font-weight:600; font-size:15px; line-height:1.2; text-align:center;
+}
+.sa-pan-txt{ flex:1; min-width:0; }
+.sa-pan-btn{
+  flex:none; width:44px; height:40px; border-radius:9px; border:2px solid #cb9347; cursor:pointer;
+  background:linear-gradient(#ffebaf,#f6cc79 75%,#ce934e); color:#263b51; font-size:16px; font-weight:700;
+  box-shadow:inset 0 2px 0 #fff5cd,0 3px 0 #8f5b30; touch-action:manipulation;
+}
+.sa-pan-btn:disabled{ opacity:.4; cursor:default; }
+.sa-pan-btn:focus-visible{ outline:3px solid #ffe78b; outline-offset:2px; }
+
+/* ---------- 3. Téléphone à l’horizontale ---------- */
+@media (orientation:landscape) and (max-height:560px) and (max-width:1100px){
+  header.top{ padding-top:4px!important; padding-bottom:4px!important; min-height:0!important; }
+  header.top .brand-sub{ display:none!important; }
+  header.top .brand .brand-ico.brand-new-logo .brand-app-icon{ width:38px!important; height:38px!important; }
+  header.top .brand-name{ font-size:20px!important; }
+  header.top .shortcut-toggle, header.top .sound-toggle, header.top .icon-btn, header.top .loot{ min-height:36px!important; height:36px!important; }
+  .hotbar{ top:calc(52px + env(safe-area-inset-top,0px))!important; }
+
+  /* Menu du bas compact, centré, qui ne mange plus l’écran */
+  body > #mainTabs.rpg-bottom-nav, .v44-home > #mainTabs.rpg-bottom-nav, #mainTabs.rpg-bottom-nav{
+    position:fixed!important; left:0!important; right:0!important; top:auto!important;
+    transform:none!important; margin:0 auto!important;
+    width:min(calc(100% - 12px), 540px)!important; max-width:540px!important;
+    bottom:calc(4px + env(safe-area-inset-bottom,0px))!important;
+  }
+  body, body:has(.v44-home){ padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))!important; }
+  .toast{ bottom:calc(72px + env(safe-area-inset-bottom,0px))!important; }
+
+  /* Accueil : toute la carte tient dans l’écran */
+  body:has(.v44-home) #view{ padding:8px 10px 0!important; }
+  .v44-home{ width:auto!important; max-width:none!important; }
+  .v44-home .v44-world-map{
+    width:min(calc(100vw - 24px), calc((100vh - 140px) * 1.7554))!important;
+    width:min(calc(100vw - 24px), calc((100svh - 140px) * 1.7554))!important;
+    height:auto!important; max-width:none!important; aspect-ratio:1536/875!important;
+  }
+  .v44-home .v44-zone-label{
+    display:inline-grid!important; place-items:center; min-width:32px; height:22px; position:absolute;
+    background:#0f3158; border:2px solid #ffd47f; border-radius:5px; box-shadow:0 2px #081c2b; color:#fff1b5;
+    font-family:'Fredoka',system-ui,sans-serif; font-size:13px; font-weight:700; pointer-events:none;
+  }
+  .v44-home .map-hit.hit-6 .v44-zone-label{ left:15%; top:12%; }
+  .v44-home .map-hit.hit-5 .v44-zone-label{ left:8%; top:12%; }
+  .v44-home .map-hit.hit-4 .v44-zone-label{ left:18%; top:15%; }
+  .v44-home .map-hit.hit-3 .v44-zone-label{ left:12%; top:12%; }
+
+  /* Fiche appli : tient dans la hauteur */
+  .overlay .sheet{ max-height:calc(100vh - 16px)!important; max-height:calc(100svh - 16px)!important; overflow:auto!important; }
+  .v42-detail{ grid-template-columns:minmax(0,.55fr) minmax(0,1.45fr)!important; gap:14px!important; padding-top:10px!important; }
+}
+/* Menu compact en paysage étroit (version à boutons, moins de 761 px de large) */
+@media (orientation:landscape) and (max-height:560px) and (max-width:760px){
+  body > #mainTabs.rpg-bottom-nav, .v44-home > #mainTabs.rpg-bottom-nav, #mainTabs.rpg-bottom-nav{ height:58px!important; padding:4px!important; }
+  .rpg-nav-button .nav-icon{ width:26px!important; height:26px!important; }
+  .rpg-nav-button .nav-caption{ font-size:10px!important; }
+}
+
+/* ---------- 4. Sac : poches en ruban sur téléphone ---------- */
+@media (max-width:600px), (orientation:landscape) and (max-height:560px) and (max-width:1100px){
+  .pack .pack-body .pockets{
+    display:flex!important; flex-wrap:nowrap!important; overflow-x:auto!important; overflow-y:hidden!important;
+    grid-template-columns:none!important; gap:8px!important; padding:2px 2px 8px!important;
+    scroll-snap-type:x proximity; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch;
+  }
+  .pack .pack-body .pockets .pocket,
+  .pack .pack-body .pockets .pocket[data-p]:not([data-p="tout"]){
+    flex:0 0 auto!important; width:96px!important; min-width:96px!important; max-width:96px!important;
+    min-height:96px!important; padding:6px 4px!important; scroll-snap-align:start;
+  }
+  .pack .pack-body .pockets .pocket[data-p]:not([data-p="tout"]) img.sac-category-icon{
+    width:46px!important; height:46px!important; min-width:46px!important; min-height:46px!important; max-width:46px!important; max-height:46px!important;
+  }
+  .pack .pack-body .pockets .pocket[data-p="tout"]{ justify-content:center!important; }
+}
+
+/* ---------- 5. Fiche d’une appli sur téléphone ---------- */
+@media (max-width:600px){
+  .v42-detail{ grid-template-columns:1fr!important; gap:12px!important; }
+  .v42-detail-cover{ width:min(100%, 34vh)!important; width:min(100%, 34svh)!important; margin:0 auto!important; }
+}
+
+@media (prefers-reduced-motion:reduce){ .v44-home{ scroll-behavior:auto!important; } }
+
+/* V172 — La jaquette remplit réellement son cadre dans les fiches d'applications. */
+.sheet .v42-detail-cover{
+  box-sizing:border-box;
+  padding:0!important;
+  aspect-ratio:1/1;
+  overflow:hidden;
+}
+.sheet .v42-detail-cover img.pixel-modal-poster{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+@media (max-width:600px){
+  .sheet .v42-detail-cover{
+    width:100%!important;
+    max-width:min(100%,420px)!important;
+    margin:0 auto!important;
+  }
+}
+
+/* ==========================================================================
+   V6 — corrections d'interface
+   ========================================================================== */
+
+/* « Mon sac » : bouton pour passer de tout le sac à son monde et inversement */
+.v6-scope{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:9px 14px;min-height:44px;
+  border:2px solid #e5b674;border-radius:10px;background:linear-gradient(#263e5c,#132843);color:#ffe4a0;
+  font:inherit;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 3px #061222;}
+.v6-scope:hover{filter:brightness(1.12);}
+.v6-scope:focus-visible{outline:3px solid #ffeb9b;outline-offset:2px;}
+
+/* Carte : repère « Ton île » sur le monde de l'élève */
+.v4-map-panel .map-hit.is-mine{box-shadow:inset 0 0 0 3px #ffd56b,0 0 22px rgba(255,214,107,.55);background:rgba(255,234,143,.08)!important;}
+.v6-mine{position:absolute;left:50%;top:5%;transform:translateX(-50%);white-space:nowrap;pointer-events:none;
+  padding:4px 10px;border-radius:999px;background:#fff1d1;color:#273c53;border:2px solid #dcae66;
+  box-shadow:0 3px 0 #111f30;font-weight:700;font-size:13px;line-height:1.2;animation:v6-bob 2.4s ease-in-out infinite;}
+@keyframes v6-bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}
+.calme .v6-mine{animation:none;}
+@media (prefers-reduced-motion:reduce){.v6-mine{animation:none;}}
+@media (max-width:540px){.v6-mine{font-size:11px;padding:3px 8px;}}
+
+/* Bulles d'information : ne bloquent jamais un clic */
+.toast{pointer-events:none;}
+
+/* En-tête mobile : zone tactile élargie à ~46 px sans changer la mise en page */
+header.top .shortcut-toggle,header.top .sound-toggle,header.top .icon-btn{position:relative;}
+header.top .shortcut-toggle::after,header.top .sound-toggle::after,header.top .icon-btn::after{content:'';position:absolute;inset:-4px;}
