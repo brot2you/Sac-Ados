@@ -61,3 +61,28 @@ body:has(.v44-home) #view{
   }
 }
 @media(prefers-reduced-motion:reduce){.v44-home .map-hit{transition:none!important;}}
+
+/* V168 — Sélection À la une sous la carte. Respecte le menu RPG et le mode calme. */
+.sac-featured{width:100%;max-width:1220px;margin:28px auto 4px;color:#fff5df;font-family:'Fredoka',system-ui,sans-serif}
+.sac-featured-heading{text-align:center;margin:0 0 18px}
+.sac-featured-kicker{display:inline-block;color:#f9d78a;font-size:.85rem;font-weight:800;letter-spacing:.14em}
+.sac-featured-heading h2{font-size:clamp(23px,3.2vw,38px);line-height:1.15;margin:7px 0;color:#ffe6a7;text-shadow:0 3px #09213d}
+.sac-featured-heading p{font-family:'Nunito',system-ui,sans-serif;color:#e6edfa;font-size:1rem;margin:5px 0}
+.sac-featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sac-featured-card{min-width:0;display:flex;align-items:stretch;gap:14px;border:3px solid #e3b966;border-radius:14px;background:linear-gradient(135deg,#183857,#0b2342);padding:12px;text-align:left;color:#fff9eb;box-shadow:0 5px 0 #745025,0 10px 20px #02091470;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.sac-featured-card:hover{transform:translateY(-3px);box-shadow:0 8px 0 #745025,0 14px 20px #02091470}
+.sac-featured-card:focus-visible{outline:4px solid #fff2a9;outline-offset:4px}
+.sac-featured-art{flex:0 0 38%;min-width:0;align-self:center;display:block;aspect-ratio:1/1;border:2px solid #f7ca73;border-radius:9px;overflow:hidden;background:#16253c;box-shadow:2px 3px #050f1c}
+.sac-featured-img{display:block;width:100%;height:100%;object-fit:cover;image-rendering:auto}
+.sac-featured-info{min-width:0;display:flex;flex:1;flex-direction:column;justify-content:center;gap:5px}
+.sac-featured-topic{font:800 .75rem 'Nunito',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.045em;color:#f2cf89}
+.sac-featured-info strong{font-size:clamp(17px,1.6vw,23px);line-height:1.13;color:#fff5cc;overflow-wrap:anywhere}
+.sac-featured-text{font:600 .88rem/1.45 'Nunito',system-ui,sans-serif;color:#e4eaf1}
+.sac-featured-cta{font:800 .88rem 'Nunito',system-ui,sans-serif;color:#ffdb88;margin-top:6px}
+.sac-featured-edit{background:#f8efd9;border:2px solid #bc9154;border-radius:12px;padding:14px;margin:12px 0;color:#14233c}
+.sac-featured-edit label{display:block;margin:6px 0;font-weight:800}
+.sac-featured-edit select,.sac-featured-edit textarea{display:block;width:100%;max-width:100%;box-sizing:border-box;padding:10px;border:2px solid #b6a481;border-radius:8px;background:white;color:#15283f;font:600 15px/1.4 system-ui,sans-serif}
+.sac-featured-edit textarea{resize:vertical;min-height:84px}
+@media(max-width:1050px){.sac-featured-grid{gap:12px}.sac-featured-card{flex-direction:column}.sac-featured-art{width:100%;max-width:240px;align-self:center;flex:auto}.sac-featured-info{width:100%}}
+@media(max-width:620px){.sac-featured{margin:24px auto 16px;padding:0 5px}.sac-featured-grid{grid-template-columns:1fr;gap:14px}.sac-featured-card{flex-direction:row;gap:12px;padding:10px}.sac-featured-art{width:34%;max-width:125px;flex:0 0 34%}.sac-featured-info{width:auto}.sac-featured-info strong{font-size:19px}.sac-featured-text{font-size:13px}.sac-featured-heading p{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.sac-featured-card{transition:none}}
