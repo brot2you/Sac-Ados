@@ -532,23 +532,38 @@
   }
 
   /* ---------- Journal & découvertes ---------- */
+  function renderDaily(q, n, w) {
+    var where = '<span class="daily-world">Monde '+n+'e · '+esc(w.nom)+'</span>';
+    if (!q) {
+      return '<section class="daily-card daily-empty" aria-labelledby="daily-title"><div class="daily-body">' +
+        '<div class="daily-top"><span class="daily-pill">✦ Découverte du jour</span>'+where+'</div>' +
+        '<h2 id="daily-title">Pas encore d’appli ici</h2><p class="daily-desc">Aucune application de ce monde n’a encore de lien. Fouille dans ton sac en attendant !</p>' +
+        '<button type="button" class="daily-cta" data-act="bag">Ouvrir mon sac →</button></div></section>';
+    }
+    var d = discById[q.disc] || {nom:'', emoji:''}, t = typeById[q.type] || {nom:'', emoji:''}, seen = !!state.seen[q.id];
+    return '<section class="daily-card'+(seen?' is-seen':'')+'" aria-labelledby="daily-title">' +
+      '<button type="button" class="daily-art" data-act="item" data-id="'+esc(q.id)+'" tabindex="-1" aria-hidden="true">'+appArt(q, 'daily-img')+'</button>' +
+      '<div class="daily-body">' +
+        '<div class="daily-top"><span class="daily-pill">✦ Découverte du jour</span>'+where+'</div>' +
+        '<h2 id="daily-title">'+esc(q.nom)+'</h2>' +
+        '<ul class="daily-chips" aria-label="Infos">' +
+          (d.nom ? '<li>'+d.emoji+' '+esc(d.nom)+'</li>' : '') +
+          (t.nom ? '<li>'+t.emoji+' '+esc(t.nom)+'</li>' : '') +
+          (q.duree ? '<li>⏱ '+esc(q.duree)+'</li>' : '') +
+          (seen ? '<li class="daily-seen">✓ Déjà ouverte</li>' : '') +
+        '</ul>' +
+        '<p class="daily-desc">'+esc(q.desc)+'</p>' +
+        '<button type="button" class="daily-cta" data-act="item" data-id="'+esc(q.id)+'">'+(seen ? 'Y retourner →' : 'Je découvre →')+'</button>' +
+      '</div></section>';
+  }
+
   function renderQuests() {
     var n=state.classe || 6, q=questFor(n), w=worldByN[n];
     var html='<div class="page-intro"><span class="eyebrow">JOURNAL DE L’AVENTURIER</span>' +
       '<h1 class="h1">Mes quêtes</h1><p class="lede">Chaque jour, une application à explorer dans ton monde. Une application ouverte n’est pas un exercice validé.</p></div>';
     html += renderFeatured();
-    html+='<div class="journal-card"><div class="journal-icon">' + uiIcon('quest', 'pixel-journal-icon') + '</div><div class="journal-body">' +
-      '<span class="eyebrow">DÉCOUVERTE DU JOUR · '+n+'e</span><h2>'+esc(w.nom)+'</h2>';
-    if(q){
-      html+='<div class="quest-daily-art" role="img" aria-label="Illustration de '+esc(q.nom)+'">'+appArt(q, 'quest-daily-image')+'</div>';
-      html+='<p>' + (state.seen[q.id] ? 'Tu as déjà ouvert cette application :' : 'Ta suggestion pour aujourd’hui :') + '</p>' +
-        '<h3>'+esc(q.nom)+'</h3><p>'+esc(q.desc)+'</p></div>' +
-        '<button class="btn primary" data-act="item" data-id="'+q.id+'">Voir l’application →</button>';
-    } else {
-      html+='<p>Aucune application avec un lien disponible pour ce monde actuellement.</p></div>' +
-        '<button class="btn primary" data-act="bag">Voir le sac</button>';
-    }
-    html+='</div><div class="section-line"><div><span class="eyebrow">AUTRES AVENTURES</span><h2>Explorer un autre monde</h2></div></div><div class="mini-worlds">';
+    html += renderDaily(q, n, w);
+    html+='<div class="section-line"><div><span class="eyebrow">AUTRES AVENTURES</span><h2>Explorer un autre monde</h2></div></div><div class="mini-worlds">';
     WORLDS.forEach(function(ww){
       html+='<button class="mini-world" data-act="world" data-n="'+ww.n+'"><img src="assets/worlds/'+worldArtwork(ww.n)+'.webp" alt="" loading="lazy">' +
         '<strong>'+ww.n+'e</strong><span>'+esc(ww.nom)+'</span> →</button>';
