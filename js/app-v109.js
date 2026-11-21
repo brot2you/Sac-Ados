@@ -346,7 +346,7 @@
       html += '<button type="button" class="map-hit hit-' + w.n + '" data-act="world" data-n="' + w.n + '" aria-label="Entrer dans le monde de ' + w.n + 'e : ' + esc(w.nom) + ' ; ' + pr.seen + ' applications découvertes sur ' + pr.total + '">' +
         '<span class="v44-zone-label" aria-hidden="true">' + w.n + 'e</span></button>';
     });
-    html += '</section><p class="sr" id="mapHelp">Choisis une île sur la carte pour explorer ses applications, ou touche Mon sac dans le menu inférieur.</p>'+renderFeatured()+'</div>';
+    html += '</section><p class="sr" id="mapHelp">Choisis une île sur la carte pour explorer ses applications, ou touche Mon sac dans le menu inférieur.</p></div>';
     $('view').innerHTML = html;
   }
 
@@ -452,6 +452,7 @@
       '<div class="pack-body">';
     var q=ui.allMode ? null : questFor(n);
     if(q) html+='<div class="v4-quest-inline"><span>★ &nbsp; QUÊTE DU JOUR : '+esc(q.nom)+'</span><button type="button" data-act="item" data-id="'+q.id+'">DÉCOUVRIR →</button></div>';
+    html += renderFeatured();
     html+='<div class="pockets" role="tablist" aria-label="Types d’applications">'+
       '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="'+(ui.pocket==='tout')+'">Toutes <span class="n">'+all.length+'</span></button>';
     TYPES.forEach(function(t){var count=all.filter(function(a){return a.type===t.id;}).length;
