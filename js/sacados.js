@@ -282,8 +282,27 @@
 
   /* Sélection éditoriale : valeurs publiques dans le catalogue, aperçu local facultatif. */
   function featuredItems() {
-    var source = Array.isArray(state.featuredLocal) ? state.featuredLocal : (DATA.a_la_une || []);
-    return source.filter(function(x){return x && byId[x.id] && !!urlOf(byId[x.id]);}).slice(0, 3);
+    // Automatic: newest catalog entries come first and push the last featured card out.
+    // The public editorial selection is the starting point; older catalog entries are not recycled.
+    // A local preview, when explicitly saved in Settings, can override this on one device.
+    var source;
+    if (Array.isArray(state.featuredLocal)) {
+      source = state.featuredLocal;
+    } else {
+      var initial = DATA.a_la_une || [];
+      var marker = DATA.a_la_une_auto_depuis;
+      var markerIndex = APPS.findIndex(function(a){ return a.id === marker; });
+      var newcomers = markerIndex < 0 ? [] : APPS.slice(markerIndex + 1).reverse().map(function(a){
+        return { id:a.id, texte:a.desc };
+      });
+      source = newcomers.concat(initial);
+    }
+    var used = {};
+    return source.filter(function(x){
+      if(!x || !byId[x.id] || !urlOf(byId[x.id]) || used[x.id]) return false;
+      used[x.id] = true;
+      return true;
+    }).slice(0, 3);
   }
   function renderFeatured() {
     var list = featuredItems();
@@ -305,7 +324,7 @@
   function showFeaturedEditor() {
     var list = featuredItems(), html = '<button class="close-x" data-act="close" aria-label="Fermer">✕</button>' +
       '<h3>Applications à la une</h3><p>Choisis jusqu’à trois applications et écris une accroche pour donner envie de les découvrir. ' +
-      '« Prévisualiser ici » enregistre les changements sur cet appareil seulement. Pour publier les mêmes choix pour tous, utilise le bouton d’export du catalogue.</p>';
+      'Par défaut, les nouvelles applications ajoutées au catalogue passent automatiquement en première position. « Prévisualiser ici » remplace temporairement cette sélection sur cet appareil seulement. Utilise « Revenir à la sélection publique » pour réactiver la rotation automatique.</p>';
     for (var i=0;i<3;i++) {
       var item=list[i] || {id:'',texte:''};
       html += '<div class="sac-featured-edit"><label for="feature-app-'+i+'"><b>À la une '+(i+1)+'</b></label>' +
