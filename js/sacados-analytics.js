@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  var WEBSITE_ID = ''; // À renseigner après création du site Sac’Ados dans Umami.
+  var WEBSITE_ID = 'd77ddf12-31e2-43ad-b953-7a5203c03b76'; // À renseigner après création du site Sac’Ados dans Umami.
   var ID_FORMAT = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   var enabled = ID_FORMAT.test(WEBSITE_ID);
   var pending = [];
