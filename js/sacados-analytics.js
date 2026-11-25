@@ -35,6 +35,14 @@
       var key = cleanId(id);
       if (key) emit('lancement_application', { application: key });
     },
+    favoriteChanged: function(id, added) {
+      var key = cleanId(id);
+      if (key) emit(added ? 'favori_ajoute' : 'favori_retire', { application: key });
+    },
+    shortcutChanged: function(id, added) {
+      var key = cleanId(id);
+      if (key) emit(added ? 'raccourci_ajoute' : 'raccourci_retire', { application: key });
+    },
     sectionViewed: function(section) {
       var key = cleanId(section);
       if (key) emit('section_visitee', { section: key });
