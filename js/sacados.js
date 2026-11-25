@@ -389,7 +389,8 @@
     return '<button type="button" class="slot" data-act="item" data-id="'+a.id+'" style="'+discStyle(a)+'" aria-label="Voir '+esc(a.nom)+', '+esc(d.nom)+'">'+
       '<span class="slot-art">'+appArt(a,'pixel-poster')+'</span>'+
       fav+tag+'<span class="slot-card-info"><span class="slot-name">'+esc(a.nom)+'</span>'+
-      '<span class="slot-sub">'+esc(d.nom)+' · '+esc(a.duree)+'</span></span></button>';
+      '<span class="slot-sub">'+esc(d.nom)+' · '+esc(a.duree)+'</span>' +
+      (a.brevet ? '<span class="brevet-card-label">🎓 SPÉCIAL BREVET</span>' : '') + '</span></button>';
   }
 
   /* V130 — recherche globale, tolérante aux accents, mots multiples et synonymes. */
@@ -437,7 +438,8 @@
     var words=searchWords(ui.query);
     if(words.length) return APPS.filter(function(a){return searchMatches(a,words);});
     return (ui.allMode ? APPS : worldApps(ui.world)).filter(function(a){
-      if(ui.pocket!=='tout' && a.type!==ui.pocket)return false;
+      if(ui.pocket==='brevet' && !a.brevet)return false;
+      if(ui.pocket!=='tout' && ui.pocket!=='brevet' && a.type!==ui.pocket)return false;
       if(ui.disc!=='tout' && a.disc!==ui.disc)return false;
       return true;
     });
@@ -447,6 +449,14 @@
     var list = filtered(), html = '';
     if (!list.length) {
       html = ui.query.trim() ? '<div class="empty"><b>Aucun résultat pour « '+esc(ui.query)+' »</b>Essaie un autre mot, une matière ou un nom d’application.</div>' : '<div class="empty"><b>Cette poche est vide</b>Choisis une autre poche ou une autre matière.</div>';
+    } else if (ui.pocket === 'brevet') {
+      html += '<div class="brevet-results-head"><span class="brevet-kicker">🎓 OBJECTIF BREVET</span><h2>Prépare ton DNB, une mission à la fois !</h2><p>Révise les matières du brevet et découvre des outils pour mémoriser et t’organiser. Une application ouverte ne signifie pas qu’un exercice est réussi.</p></div>';
+      var brevetSubjects = [{id:'toutes',nom:'Toutes matières'},{id:'francais',nom:'Français'},{id:'maths',nom:'Mathématiques'},{id:'histoire',nom:'Histoire'},{id:'geo',nom:'Géographie'}];
+      brevetSubjects.forEach(function(sub) {
+        var part = sortApps(list.filter(function(a){return a.disc===sub.id;}));
+        if (!part.length) return;
+        html += '<h3 class="sec-h">🎓 '+esc(sub.nom)+'</h3><div class="grid">'+part.map(slotHTML).join('')+'</div>';
+      });
     } else if (ui.pocket === 'tout') {
       TYPES.forEach(function (t) {
         var part = sortApps(list.filter(function (a) { return a.type === t.id; }));
@@ -480,8 +490,13 @@
       '<div class="pack-body">';
     var q=ui.allMode ? null : questFor(n);
     if(q) html+='<div class="v4-quest-inline"><span>★ &nbsp; QUÊTE DU JOUR : '+esc(q.nom)+'</span><button type="button" data-act="item" data-id="'+q.id+'">DÉCOUVRIR →</button></div>';
+    if(n===3) html+='<div class="brevet-promo"><span class="brevet-promo-icon">🎓</span><div><strong>Objectif Brevet</strong><p>Prépare le DNB avec des outils de révision choisis pour toi.</p></div><button type="button" data-act="brevet-open">Découvrir →</button></div>';
     html+='<div class="pockets" role="tablist" aria-label="Types d’applications">'+
       '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="'+(ui.pocket==='tout')+'">Toutes <span class="n">'+all.length+'</span></button>';
+    if(ui.allMode || n===3){
+      var brevetCount=all.filter(function(a){return !!a.brevet;}).length;
+      html+='<button class="pocket brevet-pocket" role="tab" data-act="pocket" data-p="brevet" aria-selected="'+(ui.pocket==='brevet')+'">🎓 <span>Objectif Brevet</span><span class="n">'+brevetCount+'</span></button>';
+    }
     TYPES.forEach(function(t){var count=all.filter(function(a){return a.type===t.id;}).length;
       if(count)html+='<button class="pocket" role="tab" data-act="pocket" data-p="'+t.id+'" aria-selected="'+(ui.pocket===t.id)+'">'+typeIcon(t.id)+'<span>'+esc(t.nom)+'</span><span class="n">'+count+'</span></button>';
     });
@@ -831,7 +846,10 @@
       ui.view='world'; ui.world=state.classe||6; ui.pocket=category;ui.disc='tout';ui.query='';
       render();window.scrollTo(0,0);
     }
-    else if (act === 'pocket') { ui.pocket = t.getAttribute('data-p'); renderWorld(); }
+    else if (act === 'brevet-open') {
+      ui.view='world';ui.world=3;ui.allMode=true;ui.pocket='brevet';ui.disc='tout';ui.query='';render();window.scrollTo(0,0);
+    }
+    else if (act === 'pocket') { ui.pocket = t.getAttribute('data-p'); ui.disc='tout'; renderWorld(); }
     else if (act === 'disc') { ui.disc = t.getAttribute('data-d'); renderWorld(); }
     else if (act === 'item') {
       if (window.SacAdosStats) window.SacAdosStats.appViewed(id);
