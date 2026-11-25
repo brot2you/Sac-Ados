@@ -771,7 +771,7 @@
     }
     playSfx(act === 'launch' ? 'open' : (act === 'fav' || act === 'quickfav' ? 'star' : (act === 'map' || act === 'close' ? 'back' : 'tap')));
 
-    if (act === 'remove-shortcut') { var pos=state.favs.indexOf(id);if(pos!==-1){state.favs.splice(pos,1);save();renderHotbar();toast('Raccourci supprimé');}return; }
+    if (act === 'remove-shortcut') { var pos=state.favs.indexOf(id);if(pos!==-1){state.favs.splice(pos,1);if(window.SacAdosStats)window.SacAdosStats.shortcutChanged(id,false);save();renderHotbar();toast('Raccourci supprimé');}return; }
     if (act === 'hot-toggle') {
       var panel=$('hotbar'), trigger=$('shortcutToggle');
       var open=panel.getAttribute('data-open') !== 'true';
@@ -794,8 +794,10 @@
       ui.view='world';ui.world=state.classe||6;ui.disc=t.getAttribute('data-d');ui.pocket='tout';ui.query='';render();window.scrollTo(0,0);return;
     }
     if (act === 'quickfav') {
-      if(isFav(id))state.favorites.splice(state.favorites.indexOf(id),1);
+      var wasFavorite = isFav(id);
+      if(wasFavorite)state.favorites.splice(state.favorites.indexOf(id),1);
       else state.favorites.push(id);
+      if (window.SacAdosStats) window.SacAdosStats.favoriteChanged(id, !wasFavorite);
       save();render();
       var pane=$('v4Feature');if(pane)pane.innerHTML=featuredCard(id);
       if(modalOpen())showItem(id);
@@ -830,11 +832,15 @@
     }
     else if (act === 'fav') {
       if (isShortcut(id)) {
-        state.favs.splice(state.favs.indexOf(id), 1); save(); toast('Retiré de tes raccourcis');
+        state.favs.splice(state.favs.indexOf(id), 1);
+        if (window.SacAdosStats) window.SacAdosStats.shortcutChanged(id, false);
+        save(); toast('Retiré de tes raccourcis');
       } else if (state.favs.length >= MAXFAV) {
         toast('Ta barre est pleine : retire d’abord un raccourci.'); return;
       } else {
-        state.favs.push(id); save(); toast('Ajouté à tes raccourcis ⭐');
+        state.favs.push(id);
+        if (window.SacAdosStats) window.SacAdosStats.shortcutChanged(id, true);
+        save(); toast('Ajouté à tes raccourcis ⭐');
       }
       render(); showItem(id);
     }
