@@ -26,9 +26,12 @@
       }
     } catch (e) {}
     if (!(d.favs instanceof Array)) { d.favs = []; }
-    d.favs = d.favs.filter(function (id) { return !!byId[id]; });
+    // Fusion locale, sans perte : anciens raccourcis migrés vers les favoris.
+    d.favs = d.favs.filter(function(id){return !!byId[id];});
     if (!(d.favorites instanceof Array)) d.favorites=[];
-    d.favorites=d.favorites.filter(function(id){return !!byId[id];});
+    d.favorites = d.favorites.concat(d.favs).filter(function(id, i, all){
+      return !!byId[id] && all.indexOf(id) === i;
+    });
     return d;
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
@@ -78,7 +81,6 @@
 
   function urlOf(a) { if (a.id === 'agora') return 'https://brot2you.github.io/Agora/#home'; return (state.urls && state.urls[a.id]) || a.url || ''; }
   function isFav(id) { return state.favorites.indexOf(id) > -1; }
-  function isShortcut(id) { return state.favs.indexOf(id) > -1; }
   function worldApps(n) { return APPS.filter(function (a) { return a.niveaux.indexOf(n) > -1; }); }
   function progress(list) {
     var av = list.filter(function (a) { return !!urlOf(a); });
@@ -495,19 +497,20 @@
 
   /* ---------- Barre de raccourcis ---------- */
   function renderHotbar() {
-    var html = '<div class="hb-inner"><span class="hb-label">Mes raccourcis</span>';
+    var html = '<div class="hb-inner"><span class="hb-label">Mes favoris · '+state.favorites.length+'</span>';
     for (var i = 0; i < MAXFAV; i++) {
-      var id = state.favs[i], a = id ? byId[id] : null;
+      var id = state.favorites[i], a = id ? byId[id] : null;
       if (a && urlOf(a)) {
-        html += '<button class="hb-remove" data-act="remove-shortcut" data-id="' + a.id + '" aria-label="Retirer ' + esc(a.nom) + ' des raccourcis" title="Retirer ce raccourci">×</button>';
+        html += '<button class="hb-remove" data-act="remove-shortcut" data-id="' + a.id + '" aria-label="Retirer ' + esc(a.nom) + ' des favoris" title="Retirer ce favori">×</button>';
         html += '<a class="hb-slot lnk" href="' + esc(urlOf(a)) + '" target="_blank" rel="noopener" data-act="launch" data-id="' + a.id + '" title="Lancer ' + esc(a.nom) + '" aria-label="Lancer ' + esc(a.nom) + '">' + appArt(a, 'pixel-shortcut-art') + '</a>';
       } else if (a) {
-        html += '<button class="hb-remove" data-act="remove-shortcut" data-id="' + a.id + '" aria-label="Retirer ' + esc(a.nom) + ' des raccourcis" title="Retirer ce raccourci">×</button>';
+        html += '<button class="hb-remove" data-act="remove-shortcut" data-id="' + a.id + '" aria-label="Retirer ' + esc(a.nom) + ' des favoris" title="Retirer ce favori">×</button>';
         html += '<button class="hb-slot" data-act="item" data-id="' + a.id + '" title="' + esc(a.nom) + '" aria-label="' + esc(a.nom) + '">' + appArt(a, 'pixel-shortcut-art') + '</button>';
       } else {
         html += '<button class="hb-slot empty-s" data-act="hot-empty" aria-label="Emplacement libre">＋</button>';
       }
     }
+    if (state.favorites.length > MAXFAV) html += '<button type="button" class="hb-more-favs" data-act="discoveries" aria-label="Voir tous mes favoris">+'+(state.favorites.length-MAXFAV)+' autres ★</button>';
     html += '</div>';
     $('hotbar').innerHTML = html;
   }
@@ -610,6 +613,11 @@
       '<div class="discover-totals"><strong>'+p.seen+' <small>/ '+p.total+'</small></strong>' +
       '<div><h2>Applications ouvertes</h2><span class="bar" aria-hidden="true"><i style="width:'+pct(p)+'%"></i></span>' +
       '<p>Le compteur indique les applications lancées, pas les activités terminées.</p></div></div>';
+    var favList=state.favorites.map(function(id){return byId[id];}).filter(function(a){return a && !!urlOf(a);});
+    html+='<div class="section-line"><div><span class="eyebrow">MA SÉLECTION</span><h2>⭐ Mes favoris ('+favList.length+')</h2></div></div>';
+    html+='<p class="lede">Ajoute autant d’applications que tu veux avec l’étoile. Les six premiers favoris sont dans la barre rapide.</p>';
+    if(favList.length) html+='<div class="grid">'+favList.map(slotHTML).join('')+'</div>';
+    else html+='<div class="empty pixel-empty"><b>Pas encore de favoris !</b>Ouvre une fiche et sélectionne « Mettre en favori ».</div>';
     html+='<div class="section-line"><div><span class="eyebrow">MON ALBUM</span><h2>'+(seen.length?'Mes trouvailles':'Aucune découverte pour le moment')+'</h2></div></div>';
     if(seen.length) html+='<div class="grid">'+seen.map(slotHTML).join('')+'</div>';
     else html+='<div class="empty pixel-empty"><b>Ton album attend ses premières découvertes !</b>Ouvre une application depuis ton sac pour la retrouver ici.</div>';
@@ -650,7 +658,7 @@
       html += '<button type="button" class="v42-play" disabled>'+(a.bientot?'Bientôt disponible':'Lien à venir')+'</button>';
     }
     html += '<button type="button" class="v42-favorite" data-act="quickfav" data-id="'+a.id+'">'+(isFav(a.id)?'★ Retirer des favoris':'☆ Mettre en favori')+'</button>';
-    html += '<button type="button" class="v42-favorite" data-act="fav" data-id="'+a.id+'">'+(isShortcut(a.id)?'✕ Retirer des raccourcis':'＋ Ajouter aux raccourcis')+'</button>'; 
+    html += '<p class="v42-favorite-hint">★ Favoris illimités · les 6 premiers apparaissent dans la barre rapide.</p>';
     if (state.seen[a.id]) html += '<p class="v42-opened">✓ Application déjà ouverte</p>';
     html += '</div></div>';
     openModal(html);
@@ -683,7 +691,7 @@
       '<button class="switch" role="switch" data-act="toggle" data-k="calme" aria-checked="' + !!state.calme + '" aria-label="Mode calme"></button></div>';
     html += '<div class="row"><span><b>Sons de jeux vidéo</b><small>Petites notes rétro au clic</small></span>' +
       '<button class="switch" role="switch" data-act="toggle" data-k="sound" aria-checked="' + !!state.sound + '" aria-label="Sons de jeux vidéo"></button></div>';
-    html += '<div class="row"><span><b>Recommencer</b><small>Efface tes découvertes et tes raccourcis</small></span>' +
+    html += '<div class="row"><span><b>Recommencer</b><small>Efface tes découvertes et tes favoris</small></span>' +
       '<button class="btn" data-act="reset">Tout effacer</button></div>';
     html += '<div class="row"><span><b>À la une</b><small>Choisir les applications mises en avant et leurs accroches</small></span>' +
       '<button class="btn dark" data-act="featured-edit">Configurer</button></div>';
@@ -771,7 +779,15 @@
     }
     playSfx(act === 'launch' ? 'open' : (act === 'fav' || act === 'quickfav' ? 'star' : (act === 'map' || act === 'close' ? 'back' : 'tap')));
 
-    if (act === 'remove-shortcut') { var pos=state.favs.indexOf(id);if(pos!==-1){state.favs.splice(pos,1);if(window.SacAdosStats)window.SacAdosStats.shortcutChanged(id,false);save();renderHotbar();toast('Raccourci supprimé');}return; }
+    if (act === 'remove-shortcut') {
+      var pos=state.favorites.indexOf(id);
+      if(pos!==-1){
+        state.favorites.splice(pos,1);
+        if(window.SacAdosStats)window.SacAdosStats.favoriteChanged(id,false);
+        save();render();toast('Favori retiré');
+      }
+      return;
+    }
     if (act === 'hot-toggle') {
       var panel=$('hotbar'), trigger=$('shortcutToggle');
       var open=panel.getAttribute('data-open') !== 'true';
@@ -830,21 +846,7 @@
         if (first) { toast('Nouvel objet découvert : ' + byId[id].nom + ' 🏅'); }
       }, 350);
     }
-    else if (act === 'fav') {
-      if (isShortcut(id)) {
-        state.favs.splice(state.favs.indexOf(id), 1);
-        if (window.SacAdosStats) window.SacAdosStats.shortcutChanged(id, false);
-        save(); toast('Retiré de tes raccourcis');
-      } else if (state.favs.length >= MAXFAV) {
-        toast('Ta barre est pleine : retire d’abord un raccourci.'); return;
-      } else {
-        state.favs.push(id);
-        if (window.SacAdosStats) window.SacAdosStats.shortcutChanged(id, true);
-        save(); toast('Ajouté à tes raccourcis ⭐');
-      }
-      render(); showItem(id);
-    }
-    else if (act === 'hot-empty') { toast('Ouvre un objet de ton sac et touche « Ajouter aux raccourcis ».'); }
+    else if (act === 'hot-empty') { toast('Pour remplir cette place, ajoute des favoris depuis les fiches ★'); }
     else if (act === 'close') { closeModal(); }
     else if (act === 'settings') { showSettings(); }
     else if (act === 'setclass') {
@@ -861,7 +863,7 @@
       renderHeader();
     }
     else if (act === 'reset') {
-      state.seen = {}; state.favs = []; save(); closeModal(); render(); toast('Ton sac est comme neuf');
+      state.seen = {}; state.favs = []; state.favorites = []; save(); closeModal(); render(); toast('Ton sac est comme neuf');
     }
     else if (act === 'featured-edit') { showFeaturedEditor(); }
     else if (act === 'featured-save') { state.featuredLocal = readFeaturedEditor(); save(); closeModal(); render(); toast('À la une : aperçu enregistré sur cet appareil'); }
