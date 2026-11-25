@@ -527,6 +527,9 @@
   function render() {
     var viewKey = ui.view + ':' + ui.world + ':' + ui.allMode;
     if (lastView !== null && viewKey !== lastView && $('toast')) { clearTimeout(toastTimer); $('toast').innerHTML = ''; }
+    if (lastView !== null && viewKey !== lastView && window.SacAdosStats) {
+      window.SacAdosStats.sectionViewed(ui.view);
+    }
     lastView = viewKey;
     // Preserve the real RPG navigation between HTML rerenders, including when it
     // lives inside the overworld panel on desktop.
@@ -811,8 +814,12 @@
     }
     else if (act === 'pocket') { ui.pocket = t.getAttribute('data-p'); renderWorld(); }
     else if (act === 'disc') { ui.disc = t.getAttribute('data-d'); renderWorld(); }
-    else if (act === 'item') { showItem(id); }
+    else if (act === 'item') {
+      if (window.SacAdosStats) window.SacAdosStats.appViewed(id);
+      showItem(id);
+    }
     else if (act === 'launch') {
+      if (window.SacAdosStats) window.SacAdosStats.appLaunched(id);
       var first = !state.seen[id];
       state.seen[id] = 1; save();
       setTimeout(function () {
