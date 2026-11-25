@@ -29,9 +29,11 @@
     // Fusion locale, sans perte : anciens raccourcis migrés vers les favoris.
     d.favs = d.favs.filter(function(id){return !!byId[id];});
     if (!(d.favorites instanceof Array)) d.favorites=[];
-    d.favorites = d.favorites.concat(d.favs).filter(function(id, i, all){
+    d.favorites = d.favs.concat(d.favorites).filter(function(id, i, all){
       return !!byId[id] && all.indexOf(id) === i;
     });
+    // Une fois migrés, les anciens raccourcis ne doivent jamais ressusciter après retrait.
+    d.favs = [];
     return d;
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
@@ -510,7 +512,6 @@
         html += '<button class="hb-slot empty-s" data-act="hot-empty" aria-label="Emplacement libre">＋</button>';
       }
     }
-    if (state.favorites.length > MAXFAV) html += '<button type="button" class="hb-more-favs" data-act="discoveries" aria-label="Voir tous mes favoris">+'+(state.favorites.length-MAXFAV)+' autres ★</button>';
     html += '</div>';
     $('hotbar').innerHTML = html;
   }
