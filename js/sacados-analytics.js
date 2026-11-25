@@ -51,21 +51,15 @@
 
   if (!enabled) return;
 
-  // Chargement du traceur uniquement quand un identifiant réel est configuré.
-  var script = document.createElement('script');
-  script.defer = true;
-  script.src = 'https://cloud.umami.is/script.js';
-  script.setAttribute('data-website-id', WEBSITE_ID);
-  script.setAttribute('data-domains', 'brot2you.github.io');
-  script.setAttribute('data-do-not-track', 'true');
-  script.setAttribute('data-exclude-search', 'true');
-  script.onload = function () {
-    if (window.umami && typeof window.umami.track === 'function') {
-      pending.splice(0).forEach(function (e) {
-        try { window.umami.track(e[0], e[1]); } catch (error) {}
-      });
-    }
-  };
-  script.onerror = function() { pending.length = 0; };
-  document.head.appendChild(script);
+  // Le traceur Umami est chargé de manière officielle via une balise statique
+  // dans index.html ; ce module ne fait qu'envoyer les événements personnalisés.
+  // Le garde-fou conserve au maximum 30 événements tant que le traceur charge.
+  function flushPending() {
+    if (!window.umami || typeof window.umami.track !== 'function') return;
+    pending.splice(0).forEach(function(e) {
+      try { window.umami.track(e[0], e[1]); } catch (error) {}
+    });
+  }
+  if (document.readyState === 'complete') flushPending();
+  else window.addEventListener('load', flushPending);
 })();
