@@ -78,6 +78,7 @@
     return '<img class="pixel-small-icon sac-disc-icon" src="'+discIcon.cache[id]+'" alt="" aria-hidden="true">';
   }
   function typeIcon(id) { return pixelImg('assets/premium/categories/' + id + '-v51.webp', 'pixel-small-icon sac-category-icon'); }
+  function brevetIcon(cls) { return pixelImg('assets/ui/objectif-brevet-1.webp?v=72', cls || 'pixel-small-icon sac-category-icon'); }
   function uiIcon(id, cls) { return pixelImg(id === 'quest' ? 'assets/premium/icons/quest-gold-v49.webp?v=6' : 'assets/premium/icons/' + id + '.webp', cls || 'pixel-small-icon'); }
   function worldIcon(n) { return uiIcon('world' + n, 'pixel-world-icon'); }
 
@@ -490,12 +491,12 @@
       '<div class="pack-body">';
     var q=ui.allMode ? null : questFor(n);
     if(q) html+='<div class="v4-quest-inline"><span>★ &nbsp; QUÊTE DU JOUR : '+esc(q.nom)+'</span><button type="button" data-act="item" data-id="'+q.id+'">DÉCOUVRIR →</button></div>';
-    if(n===3) html+='<div class="brevet-promo"><span class="brevet-promo-icon">🎓</span><div><strong>Objectif Brevet</strong><p>Prépare le DNB avec des outils de révision choisis pour toi.</p></div><button type="button" data-act="brevet-open">Découvrir →</button></div>';
+    if(n===3) html+='<div class="brevet-promo"><span class="brevet-promo-icon">'+brevetIcon('brevet-promo-image')+'</span><div><strong>Objectif Brevet</strong><p>Prépare le DNB avec des outils de révision choisis pour toi.</p></div><button type="button" data-act="brevet-open">Découvrir →</button></div>';
     html+='<div class="pockets" role="tablist" aria-label="Types d’applications">'+
       '<button class="pocket" role="tab" data-act="pocket" data-p="tout" aria-selected="'+(ui.pocket==='tout')+'">Toutes <span class="n">'+all.length+'</span></button>';
     if(ui.allMode || n===3){
       var brevetCount=all.filter(function(a){return !!a.brevet;}).length;
-      html+='<button class="pocket brevet-pocket" role="tab" data-act="pocket" data-p="brevet" aria-selected="'+(ui.pocket==='brevet')+'">🎓 <span>Objectif Brevet</span><span class="n">'+brevetCount+'</span></button>';
+      html+='<button class="pocket brevet-pocket" role="tab" data-act="pocket" data-p="brevet" aria-selected="'+(ui.pocket==='brevet')+'">'+brevetIcon('pixel-small-icon sac-category-icon')+'<span>Objectif Brevet</span><span class="n">'+brevetCount+'</span></button>';
     }
     TYPES.forEach(function(t){var count=all.filter(function(a){return a.type===t.id;}).length;
       if(count)html+='<button class="pocket" role="tab" data-act="pocket" data-p="'+t.id+'" aria-selected="'+(ui.pocket===t.id)+'">'+typeIcon(t.id)+'<span>'+esc(t.nom)+'</span><span class="n">'+count+'</span></button>';
