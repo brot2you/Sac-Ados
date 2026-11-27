@@ -1837,7 +1837,7 @@ img.sac-disc-individual{
 
 /* V124 — smartphone: prevent the world/catalogue from widening and sliding sideways. */
 @media(max-width:650px){
- html,body{width:100%!important;max-width:100%!important;overflow-x:clip!important;}
+ html,body{width:100%!important;max-width:100%!important;}
  *,*::before,*::after{box-sizing:border-box;}
  main,#view,.pack,.pack-body,.v4-world-intro,.v4-inventory-banner,.v4-inventory-controls{width:100%!important;max-width:100%!important;min-width:0!important;}
  main{padding-left:10px!important;padding-right:10px!important;margin:0 auto!important;}
@@ -2124,3 +2124,26 @@ header.top .shortcut-toggle::after,header.top .sound-toggle::after,header.top .i
 .brevet-promo-icon{display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;flex:none}
 .brevet-promo-image{display:block;width:100%;height:100%;object-fit:contain}
 @media(max-width:600px){.brevet-promo-icon{width:48px;height:48px}}
+
+/* ==========================================================================
+   V7.1 — Anti-« écran flottant » sur iPhone / iPad (Safari iOS)
+   Causes corrigées :
+   1. Champ de recherche en 15 px : iOS zoome automatiquement (×1,07) au toucher
+      et ne dézoome jamais → la page reste agrandie et glisse dans tous les sens.
+      Tout champ passe à 16 px minimum sur écran tactile.
+   2. Double-tap rapide sur les boutons (navigation) : iOS zoome aussi.
+      touch-action:manipulation supprime ce zoom, garde le défilement et le pincement.
+   3. overflow-x:clip sur <html>/<body> n’est pas fiable sous Safari iOS : la page
+      pouvait encore partir de côté. <html> en hidden (transmis à la fenêtre, l’en-tête
+      collant reste collant) + contenu de <main> contenu dans sa largeur.
+   Le zoom par pincement reste autorisé (accessibilité).
+   ========================================================================== */
+html{ overflow-x:hidden; touch-action:manipulation; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body{ overflow-x:visible; position:relative; }
+@media (max-width:930px){
+  main, #view{ width:100%; max-width:100%; min-width:0; overflow-x:hidden; overflow-x:clip; }
+}
+@media (pointer:coarse), (max-width:1024px){
+  input, select, textarea,
+  input[type="search"], input[type="url"], input[type="text"]{ font-size:16px!important; }
+}
