@@ -2124,3 +2124,56 @@ header.top .shortcut-toggle::after,header.top .sound-toggle::after,header.top .i
 .brevet-promo-icon{display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;flex:none}
 .brevet-promo-image{display:block;width:100%;height:100%;object-fit:contain}
 @media(max-width:600px){.brevet-promo-icon{width:48px;height:48px}}
+
+/* V73 — stabilisation horizontale sur smartphone.
+   La page et la carte ne peuvent plus glisser latéralement.
+   Seul le ruban des catégories est défilable de façon indépendante. */
+@media(max-width:650px){
+  html{width:100%!important;max-width:100%!important;overflow-x:clip!important;}
+  body{width:100%!important;max-width:100%!important;overflow-x:clip!important;position:relative;}
+  main,#view,.v4-worldside,.v44-home,.pack,.pack-body,
+  .v4-world-intro,.v4-inventory-banner,.v4-inventory-controls{
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  #view{overflow-x:clip!important;}
+  .pack{overflow-x:clip!important;}
+  .pack .pack-body .pockets{
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    overscroll-behavior-x:contain;
+    touch-action:pan-x pan-y;
+  }
+  .brevet-pocket{min-width:0!important;}
+  .brevet-promo,.brevet-results-head{min-width:0!important;max-width:100%!important;}
+}
+@media(max-width:650px) and (orientation:portrait){
+  body:has(.v44-home) #view{overflow-x:clip!important;}
+  .v44-home{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:clip!important;
+    overflow-y:visible!important;
+    align-items:center!important;
+    padding:6px 0 16px!important;
+  }
+  .v44-home .v44-world-map{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    flex:0 1 auto!important;
+    aspect-ratio:1536/875!important;
+  }
+  .v44-home .v44-world-map>img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:1536/875!important;
+    object-fit:fill!important;
+  }
+}
